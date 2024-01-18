@@ -14,7 +14,14 @@ class Ipo extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('home');
+	$upcoming = $this->db->where('Type', 'Upcoming')->get('recents')->result_array();
+	$sme = $this->db->where('Type', 'SME')->get('recents')->result_array();
+
+	$data = [
+		'upcoming' => $upcoming,
+		'sme' => $sme
+	];
+	$this->load->view('home', $data);
 	}
 
 	public function error()
