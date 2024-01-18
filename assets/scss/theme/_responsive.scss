@@ -1,0 +1,158 @@
+@media only screen and (max-width: 1434px) {
+  .market-pairs tbody {
+    height: 760px;
+  }
+  .no-fluid .market-pairs tbody {
+    height: 815px;
+  }
+  .settings-profile .custom-file {
+    width: 25%;
+  }
+}
+@media only screen and (max-width: 1300px) {
+  .market-pairs tbody {
+    height: 740px;
+  }
+  .no-fluid .market-pairs tbody {
+    height: 755px;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .markets-capital-item {
+    height: 289px;
+  }
+}
+@media only screen and (max-width: 991px) {
+  footer.landing-footer-two h3 {
+    margin-top: 30px;
+  }
+  .tradingview-tecnical-analys {
+    margin-top: 50px;
+  }
+  .btn-1,
+  .btn-2 {
+    margin: 8px;
+    text-align: center;
+  }
+  .mtb100 {
+    margin: 50px 0;
+  }
+  .landing-hero {
+    margin: 50px 0;
+  }
+  .landing-number p {
+    margin-bottom: 40px;
+  }
+  .landing-number {
+    padding: 40px 0 0;
+  }
+  .tradingview-gain-and-loser {
+    margin-bottom: 50px;
+  }
+  .landing-feature {
+    padding: 50px 0 30px;
+  }
+  .landing-sub {
+    padding: 50px 0;
+  }
+  .landing-sub-content h2 {
+    font-size: 26px;
+  }
+  .landing-number h2 {
+    font-size: 40px;
+  }
+  .visible-mobile {
+    display: block;
+    margin-top: 50px;
+  }
+  .landing-hero h2 {
+    font-size: 36px;
+  }
+  .landing-feature-item {
+    margin-bottom: 30px;
+  }
+  .landing-info-one-bg,
+  #dark .landing-info-one-bg {
+    background: none;
+  }
+  .settings-nav {
+    margin-bottom: 15px;
+  }
+  .settings-profile .custom-file {
+    width: 35%;
+  }
+}
+@media only screen and (max-width: 918px) {
+  .market-history tbody {
+    height: 274px;
+  }
+}
+@media only screen and (max-width: 792px) {
+  .market-pairs tbody {
+    height: 699px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  footer.landing-footer {
+    text-align: center;
+  }
+
+  footer.landing-footer img {
+    margin-bottom: 10px;
+  }
+
+  footer.landing-footer .d-flex {
+    display: block !important;
+  }
+  .settings-profile .custom-file {
+    width: 45%;
+  }
+  header button.navbar-toggler i {
+    font-size: 30px;
+    color: #4a4a4a;
+  }
+  header button.navbar-toggler:focus {
+    outline: none;
+  }
+  .navbar-collapse .dropdown.menu-avatar-icon {
+    margin-top: 10px;
+  }
+  .no-fluid .market-pairs {
+    margin-bottom: 15px;
+  }
+  .no-fluid .order-book {
+    margin-top: 15px;
+  }
+  .circle-pulse {
+    left: 27px;
+    right: inherit;
+  }
+  .dropdown-menu::before {
+    right: inherit;
+    left: 5%;
+  }
+  .wallet .nav {
+    margin-bottom: 30px;
+  }
+  .wallet-address img {
+    margin-top: 40px;
+  }
+  #dark header button.navbar-toggler i {
+    color: #c5cbce;
+  }
+  .market-order-item {
+    padding: 5px 5px;
+    overflow: hidden;
+  }
+  .market-order-item li {
+    font-size: 12px;
+  }
+  .markets-capital-item {
+    height: 304px;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .markets-capital-item {
+    height: 91.4%;
+  }
+}

@@ -1,0 +1,149 @@
+.markets-chart > div {
+  width: 110%;
+  margin-left: -16px;
+}
+.markets-container {
+  position: relative;
+  overflow: hidden;
+  height: 159px;
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.04);
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+.markets-chart {
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  left: 0;
+}
+
+.markets-content span.green,
+.markets-content span.red {
+  position: absolute;
+  right: 0;
+  background: #26a69a;
+  color: #fff;
+  top: 15px;
+  padding: 3px 12px;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  font-weight: 600;
+}
+.markets-content span.red {
+  background: #ef5350;
+}
+.markets-content h2 {
+  font-size: 14px;
+  top: 14px;
+  position: absolute;
+  left: 15px;
+  color: #4a4a4a;
+}
+
+.markets-content p {
+  position: absolute;
+  top: 32px;
+  left: 15px;
+  font-size: 16px;
+}
+
+.markets-pair-list tr {
+  cursor: pointer;
+}
+.markets-pair-list th,
+.markets-pair-list td {
+  padding: 15px !important;
+  width: 16%;
+  font-size: 14px;
+}
+
+.markets-pair-list tbody tr td i {
+  color: #75869696;
+}
+
+.markets-pair-list .nav-link.active {
+  color: #007bff;
+  background: transparent;
+}
+
+.markets-pair-list .nav-link {
+  color: #4a4a4a;
+}
+
+.markets-pair-list .nav {
+  background: #f5f9fc;
+  padding: 7px 0;
+}
+
+.markets-pair-list th {
+  font-weight: 400;
+}
+
+.markets-pair-list td img {
+  width: 18px;
+  vertical-align: text-top;
+  margin-right: 5px;
+}
+
+.markets-pair-list .load-more {
+  border: 1px solid #e0e3eb;
+  display: inline-block;
+  padding: 11px 30px 8px;
+  color: #4a4a4a;
+  margin-top: 50px;
+  transition: 0.3s;
+}
+
+.markets-pair-list .load-more i {
+  margin-left: 10px;
+}
+
+.markets-pair-list .load-more:hover {
+  background: #007bff;
+  color: #fff;
+  border: 1px solid #007bff;
+}
+.markets-item {
+  margin-bottom: 30px;
+}
+
+.markets-capital-item {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 14px -6px;
+  padding: 40px 0 0 0;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid #f2f4f9;
+  height: 311px;
+  margin-bottom: 30px;
+}
+
+.markets-capital-chart {
+  margin-left: -10px;
+}
+
+.markets-capital-item img {
+  width: 25px;
+  margin-top: -3px;
+  margin-right: 2px;
+}
+
+.markets-capital-item h4 {
+  margin-top: 16px;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+.markets-capital-item h2 {
+  font-size: 26px;
+}
+
+.markets-capital-details h3 {
+  font-size: 18px;
+  margin-bottom: 40px;
+}
+
+.market-capital-ticker .markets-capital-item {
+  height: 96.2%;
+  margin-bottom: 5px;
+}
