@@ -56,6 +56,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 
 $route['Ipo'] = 'Ipo';
+$route['greyMarketIpo'] = 'Ipo/greyMarketIpo';
 
 
 

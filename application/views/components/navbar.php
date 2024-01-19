@@ -14,8 +14,13 @@
                         Ipo
                     </a> 
                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/landing-page-dark">Landing One</a>
-                        <a class="dropdown-item" href="/landing-page-dark-two">Landing Two</a>
+                        <a class="dropdown-item" href="<?php echo base_url('')?>">Upcoming Ipo</a>
+                        <a class="dropdown-item" href="<?php echo base_url('')?>">ForthComing Ipo</a>
+                        <a class="dropdown-item" href="<?php echo base_url('greyMarketIpo')?>">GMP of Ipo</a>
+                        <a class="dropdown-item" href="<?php echo base_url('')?>">SME of Ipo</a>
+                        <a class="dropdown-item" href="<?php echo base_url('')?>">Subscription Status</a>
+                        <a class="dropdown-item" href="<?php echo base_url('')?>">Ipo Forms</a>
+                        <a class="dropdown-item" href="<?php echo base_url('')?>">Ipo Buyback</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -24,8 +29,8 @@
                         Crypto
                     </a> 
                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/landing-page-dark">Landing One</a>
-                        <a class="dropdown-item" href="/landing-page-dark-two">Landing Two</a>
+                        <a class="dropdown-item" href="<?php echo base_url('')?>">Landing One</a>
+                        <a class="dropdown-item" href="<?php echo base_url('')?>">Landing Two</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -34,8 +39,8 @@
                         Other Tools
                     </a> 
                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/landing-page-dark">Landing One</a>
-                        <a class="dropdown-item" href="/landing-page-dark-two">Landing Two</a>
+                        <a class="dropdown-item" href="<?php echo base_url('')?>">Landing One</a>
+                        <a class="dropdown-item" href="<?php echo base_url('')?>">Landing Two</a>
                     </div>
                 </li>
             </ul>
