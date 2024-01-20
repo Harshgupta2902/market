@@ -14,13 +14,12 @@
                         Ipo
                     </a> 
                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="<?php echo base_url('')?>">Upcoming Ipo</a>
-                        <a class="dropdown-item" href="<?php echo base_url('')?>">ForthComing Ipo</a>
+                        <a class="dropdown-item" href="<?php echo base_url('upcomingIpo')?>">Upcoming Ipo</a>
                         <a class="dropdown-item" href="<?php echo base_url('greyMarketIpo')?>">GMP of Ipo</a>
-                        <a class="dropdown-item" href="<?php echo base_url('')?>">SME of Ipo</a>
-                        <a class="dropdown-item" href="<?php echo base_url('')?>">Subscription Status</a>
-                        <a class="dropdown-item" href="<?php echo base_url('')?>">Ipo Forms</a>
-                        <a class="dropdown-item" href="<?php echo base_url('')?>">Ipo Buyback</a>
+                        <a class="dropdown-item" href="<?php echo base_url('smeMarketIpo')?>">SME of Ipo</a>
+                        <a class="dropdown-item" href="<?php echo base_url('subscriptionStatus')?>">Subscription Status</a>
+                        <a class="dropdown-item" href="<?php echo base_url('ipoForms')?>">Ipo Forms</a>
+                        <a class="dropdown-item" href="<?php echo base_url('sharesBuyBack')?>">Ipo Buyback</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -29,7 +28,7 @@
                         Crypto
                     </a> 
                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="<?php echo base_url('')?>">Landing One</a>
+                        <a class="dropdown-item" href="<?php echo base_url('Crypto')?>">Home</a>
                         <a class="dropdown-item" href="<?php echo base_url('')?>">Landing Two</a>
                     </div>
                 </li>

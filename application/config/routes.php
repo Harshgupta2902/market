@@ -56,7 +56,13 @@ $route['translate_uri_dashes'] = FALSE;
 
 
 $route['Ipo'] = 'Ipo';
+$route['upcomingIpo'] = 'Ipo/upcomingIpo';
 $route['greyMarketIpo'] = 'Ipo/greyMarketIpo';
+$route['smeMarketIpo'] = 'Ipo/smeMarketIpo';
+$route['subscriptionStatus'] = 'Ipo/subscriptionStatus';
+$route['ipoForms'] = 'Ipo/ipoForms';
+$route['sharesBuyBack'] = 'Ipo/sharesBuyBack';
+
 
 
 

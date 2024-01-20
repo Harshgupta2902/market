@@ -8,8 +8,6 @@
 <body id="dark">
   <?php $this->load->view('components/navbar')?>
 
-
-
   <div class="container">
     <div class="row landing-hero">
       <div class="col-6">
@@ -83,6 +81,7 @@
 
   <?php $this->load->view('components/footer')?>
   <?php $this->load->view('components/script')?>
+
 </body>
 
 </html>

@@ -77,37 +77,25 @@
                 <thead>
                   <tr>
                     <th>IPO Name</th>
-                    <th>Date</th>
-                    <th>Type</th>
-                    <th>IPO GMP	</th>
                     <th>Price</th>
-                    <th>Gain</th>
-                    <th>Kostak</th>
+                    <th>IPO GMP</th>
+                    <th>Listed</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach ($gmp as $gmp) { ?>
+                  <?php foreach ($oldGmp as $oldGmp) { ?>
                   <tr>
                     <td>
-                      <?php echo $gmp['ipo_name'] ?>
+                      <?php echo $oldGmp['ipo_name'] ?>
                     </td>
                     <td>
-                      <?php echo $gmp['date'] ?>
+                      <?php echo $oldGmp['price'] ?>
                     </td>
                     <td>
-                      <?php echo $gmp['type'] ?>
+                      <?php echo $oldGmp['ipo_gmp'] ?>
                     </td>
                     <td>
-                      <?php echo $gmp['ipo_gmp'] ?>
-                    </td>
-                    <td>
-                      <?php echo $gmp['price'] ?>
-                    </td>
-                    <td>
-                      <?php echo $gmp['gain'] ?>
-                    </td>
-                    <td>
-                      <?php echo $gmp['kostak'] ?>
+                      <?php echo $oldGmp['listed'] ?>
                     </td>
                   </tr>
                   <?php } ?>
@@ -120,8 +108,14 @@
     </div>
   </div>
 
+<!-- FAQ's -->
+  <?php $this->load->view('components/faq')?>
   <?php $this->load->view('components/footer')?>
   <?php $this->load->view('components/script')?>
 </body>
+
+
+
+
 
 </html>

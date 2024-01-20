@@ -15,13 +15,12 @@
                 <div class="col-md-3">
                     <h3>IPO</h3>
                     <ul>
-                        <li><a href="<?php echo base_url() ?>">Upcoming Ipo</a></li>
-                        <li><a href="<?php echo base_url() ?>">ForthComing Ipo</a></li>
+                        <li><a href="<?php echo base_url('upcomingIpo') ?>">Upcoming Ipo</a></li>
                         <li><a href="<?php echo base_url('greyMarketIpo') ?>">GMP of Ipo</a></li>
-                        <li><a href="<?php echo base_url('') ?>">SME of IPO</a></li>
-                        <li><a href="<?php echo base_url('') ?>">Subscription Status</a></li>
-                        <li><a href="<?php echo base_url('') ?>">Ipo Forms</a></li>
-                        <li><a href="<?php echo base_url('') ?>">Ipo Buyback</a></li>
+                        <li><a href="<?php echo base_url('smeMarketIpo') ?>">SME of IPO</a></li>
+                        <li><a href="<?php echo base_url('subscriptionStatus') ?>">Subscription Status</a></li>
+                        <li><a href="<?php echo base_url('ipoForms') ?>">Ipo Forms</a></li>
+                        <li><a href="<?php echo base_url('sharesBuyBack') ?>">Ipo Buyback</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3">
