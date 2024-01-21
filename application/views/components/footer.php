@@ -37,8 +37,8 @@
                 <div class="col-md-2">
                     <h3>Tools</h3>
                     <ul>
-                        <li><a href="<?php echo base_url('') ?>">Find Pincode</a></li>
-                        <li><a href="<?php echo base_url('') ?>">Find Bank</a></li>
+                        <li><a href="<?php echo base_url('Pincode') ?>">Find Pincode</a></li>
+                        <li><a href="<?php echo base_url('Ifsc') ?>">Find Bank</a></li>
                     </ul>
                 </div>
                 

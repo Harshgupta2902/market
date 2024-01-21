@@ -38,8 +38,8 @@
                         Other Tools
                     </a> 
                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="<?php echo base_url('')?>">Landing One</a>
-                        <a class="dropdown-item" href="<?php echo base_url('')?>">Landing Two</a>
+                        <a class="dropdown-item" href="<?php echo base_url('Pincode')?>">Find Pincode</a>
+                        <a class="dropdown-item" href="<?php echo base_url('Ifsc')?>">Find Bank</a>
                     </div>
                 </li>
             </ul>

@@ -571,7 +571,7 @@ header .nav-link.btn {
 
 .landing-feature {
     text-align: center;
-    border-top: 1px solid #e0e3eb;
+    /* border-top: 1px solid #e0e3eb; */
     padding: 100px 0;
 }
 
@@ -1799,7 +1799,7 @@ tbody.ob-heading {
 #dark .market-pairs .table td,
 #dark .market-pairs .table th,
 #dark .landing-feature {
-    border-top: 1px solid #2a2e39;
+    /* border-top: 1px solid #2a2e39; */
 }
 
 #dark .market-history .table td,

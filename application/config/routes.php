@@ -71,4 +71,10 @@ $route['Crypto'] = 'Crypto';
 
 
 
-$route['Ifsc'] = 'Ifsc';
+$route['Ifsc'] = 'Ifsc/home';
+$route['search'] = 'Ifsc/search';
+
+
+$route['Pincode'] = 'Pincode/home';
+$route['find'] = 'Pincode/search';
+$route['details'] = 'Pincode/details';
