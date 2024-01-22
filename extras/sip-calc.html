@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIP Calculator</title>
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>SIP Calculator</h1>
+
+    <label for="rate">Annual Rate of Interest (%):</label>
+    <input type="number" id="rate" placeholder="Enter annual rate of interest">
+
+    <label for="time">Time Period (in years):</label>
+    <input type="number" id="time" placeholder="Enter time period in years">
+
+    <label for="sipAmount">Monthly SIP Amount:</label>
+    <input type="number" id="sipAmount" placeholder="Enter monthly SIP amount">
+
+    <button onclick="calculateSIP()">Calculate</button>
+
+    <canvas id="sipChart" width="400" height="200"></canvas>
+
+    <div id="result">
+        <h2>Result:</h2>
+        <p id="futureValue">Future Value: ₹ 0.00</p>
+        <p id="totalEarnings">Total Earnings: ₹ 0.00</p>
+        <p id="totalDeposited">Total Amount Deposited: ₹ 0.00</p>
+    </div>
+
+    <script>
+        function calculateSIP() {
+            // Get input values
+            var rate = parseFloat(document.getElementById('rate').value);
+            var time = parseFloat(document.getElementById('time').value);
+            var sipAmount = parseFloat(document.getElementById('sipAmount').value);
+
+            // Perform SIP calculations
+            var periods = Array.from({ length: time * 12 }, (_, i) => i + 1);
+            var futureValues = periods.map(month => {
+                return sipAmount * ((Math.pow(1 + rate / (12 * 100), month) - 1) / (rate / (12 * 100)));
+            });
+
+            // Calculate result values
+            var futureValue = futureValues[futureValues.length - 1];
+            var totalEarnings = futureValue - (sipAmount * periods.length);
+            var totalDeposited = sipAmount * periods.length;
+
+            // Display result values
+            document.getElementById('futureValue').innerText = 'Future Value: ₹ ' + futureValue.toFixed(2);
+            document.getElementById('totalEarnings').innerText = 'Total Earnings: ₹ ' + totalEarnings.toFixed(2);
+            document.getElementById('totalDeposited').innerText = 'Total Amount Deposited: ₹ ' + totalDeposited.toFixed(2);
+
+            // Create a chart
+            var ctx = document.getElementById('sipChart').getContext('2d');
+            var sipChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: periods,
+                    datasets: [{
+                        label: 'Future Value',
+                        data: futureValues,
+                        borderColor: 'blue',
+                        borderWidth: 2,
+                        fill: false,
+                        pointRadius: 5,  // Add point markers
+                        pointBackgroundColor: 'red',  // Marker color
+                        pointHoverRadius: 7  // Marker hover size
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: { title: { display: true, text: 'Months' } },
+                        y: { title: { display: true, text: 'Future Value' } }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
