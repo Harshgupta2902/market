@@ -40,6 +40,12 @@
                         <li><a href="<?php echo base_url('Pincode') ?>">Find Pincode</a></li>
                         <li><a href="<?php echo base_url('Ifsc') ?>">Find Bank</a></li>
                     </ul>
+                    <br>
+                    <h3>Calculators</h3>
+                    <ul>
+                        <li><a href="<?php echo base_url('sip_calculator') ?>">SIP Calculator</a></li>
+                        <li><a href="<?php echo base_url('lumpsum_calculator') ?>">Lumpsum Calculator</a></li>
+                    </ul>
                 </div>
                 
             </div>

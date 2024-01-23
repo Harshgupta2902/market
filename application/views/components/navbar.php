@@ -42,6 +42,16 @@
                         <a class="dropdown-item" href="<?php echo base_url('Ifsc')?>">Find Bank</a>
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Calculators
+                    </a> 
+                     <div class="dropdown-menu">
+                        <a class="dropdown-item" href="<?php echo base_url('sip_calculator')?>">SIP Calculator</a>
+                        <a class="dropdown-item" href="<?php echo base_url('lumpsum_calculator')?>">Lumpsum Calculator</a>
+                    </div>
+                </li>
             </ul>
         </div>
     </nav>

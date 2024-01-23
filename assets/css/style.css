@@ -646,9 +646,15 @@ header .nav-link.btn {
     z-index: 1;
 }
 
+
+
 .landing-sub-content h2 {
     color: #fff;
     font-size: 36px;
+}
+
+.landing-sub-content p {
+    color: #fff;
 }
 
 .landing-sub:after {

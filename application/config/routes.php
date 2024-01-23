@@ -78,3 +78,7 @@ $route['search'] = 'Ifsc/search';
 $route['Pincode'] = 'Pincode/home';
 $route['find'] = 'Pincode/search';
 $route['details'] = 'Pincode/details';
+
+
+$route['sip_calculator'] = 'Tools/sip_calculator';
+$route['lumpsum_calculator'] = 'Tools/lumpsum_calculator';
