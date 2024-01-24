@@ -81,4 +81,8 @@ $route['details'] = 'Pincode/details';
 
 
 $route['sip_calculator'] = 'Tools/sip_calculator';
+$route['calculate_sip'] = 'Tools/calculate_sip';
+
+
 $route['lumpsum_calculator'] = 'Tools/lumpsum_calculator';
+$route['calculate_lumpsum'] = 'Tools/calculate_lumpsum';

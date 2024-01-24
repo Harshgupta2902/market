@@ -16,8 +16,14 @@ class Ipo extends CI_Controller {
 	{
 		$upcoming = $this->db->where('Type', 'Upcoming')->get('recents')->result_array();
 		$sme = $this->db->where('Type', 'SME')->get('recents')->result_array();
-
+		$metaData = array(
+			'title' => 'Mainboard and SME Upcoming IPOs',
+			'metaDescription' => 'Explore the upcoming IPOs on the Mainboard and SME markets',
+			'metaKeywords' => 'upcoming ipo, ipo, pre ipo investing, pre ipo investing, upcoming ipos, new ipo stocks, new ipo, ipos this week, upcoming ipos 2024, best ipo stocks',
+			'canonicals' => base_url(),	
+		);
 		$data = [
+			'metaData' => $metaData,
 			'upcoming' => $upcoming,
 			'sme' => $sme,
 		];
@@ -29,8 +35,14 @@ class Ipo extends CI_Controller {
 		$gmp = $this->db->get('gmp')->result_array();
 		$oldGmp = $this->db->get('old_gmp')->result_array();
 		$faq = $this->db->where('type', 'GMP')->get('faq')->result_array();
-
+		$metaData = array(
+			'title' => 'Live Grey Market Premium of IPOs',
+			'metaDescription' => 'Explore the upcoming IPOs on the Mainboard and SME markets',
+			'metaKeywords' => 'gmp, ipo, grey market premium, cgmp, ipo investment, new ipo stocks, new ipo, ipos this week, upcoming ipos 2024, best ipo stocks',
+			'canonicals' => base_url(),	
+		);
 		$data = [
+			'metaData' => $metaData,
 			'gmp' => $gmp,
 			'oldGmp' => $oldGmp,
 			'faq' => $faq,

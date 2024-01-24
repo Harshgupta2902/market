@@ -6,7 +6,9 @@
 </head>
 
 <body id="dark">
-  <?php $this->load->view('components/navbar')?>
+
+
+  <?php $this->load->view('components/navbar', $metaData)?>
 
   <div class="container">
     <div class="row landing-hero">
@@ -84,4 +86,5 @@
 
 </body>
 
+</html> 
 </html>

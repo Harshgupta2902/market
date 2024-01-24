@@ -82,93 +82,101 @@
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> <!-- Include jQuery -->
 
   <script>
-        function calculateLumpsum() {
-            // Get input values
-            var rate = parseFloat(document.getElementById('rate').value);
-            var time = parseFloat(document.getElementById('time').value);
-            var lumpsumAmount = parseFloat(document.getElementById('lumpsumAmount').value);
-            document.getElementById('resultSection').style.display = 'block';
-        
-            // Perform AJAX call to the CodeIgniter controller
-            $.ajax({
-                url: "<?php echo site_url('Tools/calculate'); ?>",
-                type: "GET",
-                data: { rate: rate, time: time, lumpsumAmount: lumpsumAmount },
-                dataType: 'json',
-                success: function (response) {
-                    displayYearlyReports(response.yearlyReports);
-                    document.getElementById('futureValue').innerText = 'Future Value: ₹ ' + response.futureValue;
-                    document.getElementById('totalEarnings').innerText = 'Total Earnings: ₹ ' + response.totalEarnings;
-                    document.getElementById('totalInvested').innerText = 'Total Amount Invested: ₹ ' + response.totalInvested;
-                    createChart(response);
-                    document.getElementById('resultSection').style.display = 'block';
-                }
-            });
-        }
-
-        function displayYearlyReports(yearlyReports) {
-            var yearlyReportsTable = document.getElementById('yearlyReports');
-            yearlyReportsTable.innerHTML = '';
-
-            for (var i = 0; i < yearlyReports.length; i++) {
-                var row = document.createElement('tr');
-                row.innerHTML = '<td>' + yearlyReports[i].year + '</td>' +
-                    '<td>₹ ' + yearlyReports[i].futureValue + '</td>' +
-                    '<td>₹ ' + yearlyReports[i].totalEarnings + '</td>';
-
-                yearlyReportsTable.appendChild(row);
+    function calculateLumpsum() {
+        // Get input values
+        var rate = parseFloat(document.getElementById('rate').value);
+        var time = parseFloat(document.getElementById('time').value);
+        var lumpsumAmount = parseFloat(document.getElementById('lumpsumAmount').value);
+        document.getElementById('resultSection').style.display = 'block';
+    
+        // Perform AJAX call to the CodeIgniter controller
+        $.ajax({
+            url: "<?php echo site_url('calculate_lumpsum'); ?>",
+            type: "GET",
+            data: { rate: rate, time: time, lumpsumAmount: lumpsumAmount },
+            dataType: 'json',
+            success: function (response) {
+                displayYearlyReports(response.yearlyReports);
+                document.getElementById('futureValue').innerText = 'Future Value: ₹ ' + response.futureValue;
+                document.getElementById('totalEarnings').innerText = 'Total Earnings: ₹ ' + response.totalEarnings;
+                document.getElementById('totalInvested').innerText = 'Total Amount Invested: ₹ ' + response.totalInvested;
+                createChart(response);
+                document.getElementById('resultSection').style.display = 'block';
             }
+        });
+    }
+
+    function displayYearlyReports(yearlyReports) {
+        var yearlyReportsTable = document.getElementById('yearlyReports');
+        yearlyReportsTable.innerHTML = '';
+
+        for (var i = 0; i < yearlyReports.length; i++) {
+            var row = document.createElement('tr');
+            row.innerHTML = '<td>' + yearlyReports[i].year + '</td>' +
+                '<td>₹ ' + yearlyReports[i].futureValue + '</td>' +
+                '<td>₹ ' + yearlyReports[i].totalEarnings + '</td>';
+
+            yearlyReportsTable.appendChild(row);
+        }
+    }
+
+    function createChart(data) {
+        var labels = [];
+        var values = [];
+
+        for (var i = 0; i < data.yearlyReports.length; i++) {
+            labels.push(data.yearlyReports[i].year);
+
+            // Convert the futureValue to a numerical value
+            var numericValue = parseFloat(data.yearlyReports[i].futureValue.replace(",", ""));
+            values.push(isNaN(numericValue) ? 0 : numericValue);
         }
 
-        function createChart(data) {
-            var labels = [];
-            var values = [];
-            for (var i = 0; i < data.yearlyReports.length; i++) {
-                labels.push(data.yearlyReports[i].year);
-                values.push(data.yearlyReports[i].futureValue.replace(",", ""));
-            }
-            var ctx = document.getElementById('lumpsumChart').getContext('2d');
-            var lumpsumChart = new Chart(ctx, {
-                type: 'line',
-                data: { 
-                    labels: labels,
-                    datasets: [{
-                        label: 'Future Value',
-                        data: values,
-                        backgroundColor: 'red',
-                        borderColor: 'white',
-                        borderWidth: 2,
-                        fill: false,
-                        pointRadius: 2,
-                        pointBackgroundColor: 'WHITE',
-                        pointHoverRadius: 7
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                      x: { 
-                          title: { display: true, text: 'Years' },
-                          ticks: {
-                              color: 'white' // Set x-axis label color to white
-                          }
-                      },
-                      y: { 
-                          title: { display: true, text: 'Returns' },
-                          ticks: {
-                              color: 'white' // Set y-axis label color to white
-                          }
-                      }
-                  }
+        // Get the existing canvas element
+        var existingCanvas = document.getElementById('lumpsumChart');
+
+        // Create a new canvas element
+        var newCanvas = document.createElement('canvas');
+        newCanvas.id = 'lumpsumChart';
+        existingCanvas.parentNode.replaceChild(newCanvas, existingCanvas);
+
+        var ctx = newCanvas.getContext('2d');
+
+        // Create a new chart
+        window.lumpsumChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Future Value',
+                    data: values,
+                    backgroundColor: 'red',
+                    borderColor: 'white',
+                    borderWidth: 2,
+                    fill: false,
+                    pointRadius: 2,
+                    pointBackgroundColor: 'WHITE',
+                    pointHoverRadius: 7
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Years' },
+                        ticks: { color: 'white' }
+                    },
+                    y: {
+                        title: { display: true, text: 'Returns' },
+                        ticks: { color: 'white' }
+                    }
                 }
-            }); 
-        }
-
-
-
-    </script>
+            }
+        });
+    }
+  </script>
  
- 
+  <?php $this->load->view('components/faq')?>
   <?php $this->load->view('components/footer')?>
   <?php $this->load->view('components/script')?>
 

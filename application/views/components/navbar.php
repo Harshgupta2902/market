@@ -1,6 +1,6 @@
 <header class="dark-bb">
     <nav class="navbar navbar-expand-lg center">
-        <a class="navbar-brand" href="/exchange-dark"><img src="assets/img/logo-light.svg" alt="logo" /></a>
+        <a class="navbar-brand" href="<?= base_url() ?>"><img src="assets/img/logo-light.svg" alt="logo" /></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerMenu"
             aria-controls="headerMenu" aria-expanded="false" aria-label="Toggle navigation">
             <i class="icon ion-md-menu"></i>
