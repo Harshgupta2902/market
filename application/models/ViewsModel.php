@@ -58,3 +58,14 @@ class ViewsModel extends CI_Model {
 		}
 	}
 }
+
+
+
+// CREATE TABLE page_views (
+//     id INT AUTO_INCREMENT PRIMARY KEY,
+//     page VARCHAR(255) NOT NULL,
+//     daily_count INT NOT NULL DEFAULT 0,
+//     monthly_count INT NOT NULL DEFAULT 0,
+//     yearly_count INT NOT NULL DEFAULT 0,
+//     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+// );
