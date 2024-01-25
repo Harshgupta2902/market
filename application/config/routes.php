@@ -64,11 +64,7 @@ $route['ipoForms'] = 'Ipo/ipoForms';
 $route['sharesBuyBack'] = 'Ipo/sharesBuyBack';
 
 
-
-
 $route['Crypto'] = 'Crypto';
-
-
 
 
 $route['Ifsc'] = 'Ifsc/home';
@@ -86,3 +82,9 @@ $route['calculate_sip'] = 'Tools/calculate_sip';
 
 $route['lumpsum_calculator'] = 'Tools/lumpsum_calculator';
 $route['calculate_lumpsum'] = 'Tools/calculate_lumpsum';
+
+
+$route['login'] = 'Admin/login';
+$route['dashboard'] = 'Admin/dashboard';
+$route['addnavbarform'] = 'Admin/addnavbarform';
+$route['allnavs'] = 'Admin/allnavs';

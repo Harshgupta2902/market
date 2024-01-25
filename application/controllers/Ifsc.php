@@ -9,62 +9,16 @@ class Ifsc extends CI_Controller {
         $this->load->database();
         $this->load->helper('url');
         $this->load->helper('form');
+        $this->load->model('ViewsModel');
 
     }
 
 	public function home()
 	{
-        // $banks = $this->getUniqueBankNames();
-        // $state = $this->getUniqueStates();
-        // $data = [
-		// 	'banks' => $banks,
-        //     'state' => $state
-		// ];
-		// $this->load->view('ifsc/ifsc', $data);
+		$this->ViewsModel->updatePageViews('Ifsc');
 		$this->load->view('ifsc/ifsc');
 	}
 
-
-    // public function search() {
-    //     $ifsc = $this->input->get('ifsc');
-    //     $bank = $this->input->get('bank');
-    //     $state = $this->input->get('state');
-    
-    //     // Validate input
-    //     if (empty($ifsc) && ($bank === 'Select Bank' || $state === 'Select State')) {
-    //         echo "IFSC code or dropdowns not provided!";
-    //         return;
-    //     }
-    
-    //     // Build the search query based on the provided parameters
-    //     $this->db->select('*')->from('banks');
-        
-    //     if (!empty($ifsc)) {
-    //         $this->db->where('Ifsc', $ifsc);
-    //     }
-    
-    //     if ($bank !== 'Select Bank') {
-    //         $this->db->where('Bank', $bank);
-    //     }
-    
-    //     if ($state !== 'Select State') {
-    //         $this->db->where('State', $state);
-    //     }
-    
-    //     $result = $this->db->get()->result_array();
-    
-    //     // Pass the result to the view
-    //     $banks = $this->getUniqueBankNames();
-    //     $states = $this->getUniqueStates();
-    //     $data = [
-    //         'ifsc' => $result,
-    //         'banks' => $banks,
-    //         'state' => $states
-    //     ];
-    
-    //     $this->load->view('ifsc/ifsc', $data);
-    // }
-    
 
 
     public function search() {
@@ -75,14 +29,11 @@ class Ifsc extends CI_Controller {
             return;
         }
 		$ifsc = $this->db->where('Ifsc', $ifsc)->get('banks')->result_array();
-        // $banks = $this->getUniqueBankNames();
-        // $state = $this->getUniqueStates();
         $data = [
 			'ifsc' => $ifsc[0],
-			// 'banks' => $banks,
-            // 'state' => $state
 
 		];
+		$this->ViewsModel->updatePageViews('search');
 		$this->load->view('ifsc/ifsc',$data);
     }
 

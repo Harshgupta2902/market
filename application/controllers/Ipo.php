@@ -9,7 +9,7 @@ class Ipo extends CI_Controller {
         $this->load->database();
         $this->load->helper('url');
         $this->load->helper('form');
-
+        $this->load->model('ViewsModel');
     }
 
 	public function index()
@@ -26,7 +26,8 @@ class Ipo extends CI_Controller {
 			'metaData' => $metaData,
 			'upcoming' => $upcoming,
 			'sme' => $sme,
-		];
+		];        
+		$this->ViewsModel->updatePageViews('home');
 		$this->load->view('home', $data);
 	}
 
@@ -48,6 +49,7 @@ class Ipo extends CI_Controller {
 			'faq' => $faq,
 			'faqTitle' => "Grey Market Premium FAQ's",
 		];
+		$this->ViewsModel->updatePageViews('greyMarketIpo');
 		$this->load->view('ipo/gme', $data);
 	}
 
@@ -61,6 +63,7 @@ class Ipo extends CI_Controller {
 			'faq' => $faq,
 			'faqTitle' => "SME FAQ's",
 		];
+		$this->ViewsModel->updatePageViews('smeMarketIpo');
 		$this->load->view('ipo/sme', $data);
 	}
 
@@ -76,6 +79,7 @@ class Ipo extends CI_Controller {
 			'faq' => $faq,
 			'faqTitle' => "IPO Subscription FAQ's",
 		];
+		$this->ViewsModel->updatePageViews('subscriptionStatus');
 		$this->load->view('ipo/subs', $data);
 	}
 
@@ -85,6 +89,7 @@ class Ipo extends CI_Controller {
 		$data = [
 			'forms' => $forms,
 		];
+		$this->ViewsModel->updatePageViews('ipoForms');
 		$this->load->view('ipo/forms', $data);
 	}
 	
@@ -97,6 +102,7 @@ class Ipo extends CI_Controller {
 			'faq' => $faq,
 			'faqTitle' => "IPO Buy Back FAQ's",
 		];
+		$this->ViewsModel->updatePageViews('sharesBuyBack');
 		$this->load->view('ipo/buyBack', $data);
 	}
 	
@@ -109,12 +115,19 @@ class Ipo extends CI_Controller {
 			'faq' => $faq,
 			'faqTitle' => "FAQ's about IPO's",
 		];
+		$this->ViewsModel->updatePageViews('upcomingIpo');
 		$this->load->view('ipo/upcoming', $data);
 	}
 
 	
 	public function error()
 	{
+		// $this->ViewsModel->updatePageViews('404');
 		$this->load->view('errors/html/error_404');
 	}
+
+
+	
+	
+
 }

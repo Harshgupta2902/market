@@ -8,6 +8,7 @@ class Tools extends CI_Controller {
         parent::__construct();
         $this->load->database();
         $this->load->helper('url');
+        $this->load->model('ViewsModel');
 
     }
 
@@ -25,6 +26,7 @@ class Tools extends CI_Controller {
 			'faq' => $faq,
 			'faqTitle' => "SIP Calculator FAQ's",
 		];
+		$this->ViewsModel->updatePageViews('sip_calculator');
 		$this->load->view('tools/sip_calculator',$data);
 	}
 
@@ -42,35 +44,31 @@ class Tools extends CI_Controller {
 			'faq' => $faq,
 			'faqTitle' => "Lumpsum Calculator FAQ's",
 		];
+		$this->ViewsModel->updatePageViews('lumpsum_calculator');
 		$this->load->view('tools/lumpsum_calculator',$data);
 	}
 
     public function calculate_sip() {
-        // Get parameters from the URL
         $rate = $this->input->get('rate');
         $time = $this->input->get('time');
         $sipAmount = $this->input->get('sipAmount');
 
-        // Validate input parameters (add more validation as needed)
         if (!is_numeric($rate) || !is_numeric($time) || !is_numeric($sipAmount)) {
-            // Handle invalid input
             $result = ['error' => 'Invalid input parameters'];
         } else {
-            // Perform SIP calculations
             $periods = range(1, $time * 12);
             $futureValues = array_map(function ($month) use ($sipAmount, $rate) {
                 return $sipAmount * ((pow(1 + $rate / (12 * 100), $month) - 1) / ($rate / (12 * 100)));
             }, $periods);
 
-            // Prepare result data
             $result = [
                 'futureValues' => array_map('number_format', $futureValues, array_fill(0, count($futureValues), 2)),
                 'totalEarnings' => number_format(end($futureValues) - ($sipAmount * count($periods)), 2),
                 'totalDeposited' => number_format($sipAmount * count($periods), 2),
             ];
         }
+		$this->ViewsModel->updatePageViews('calculate_sip');
 
-        // Return results as JSON
         echo json_encode($result);
     }
 
