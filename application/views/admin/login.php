@@ -33,16 +33,16 @@
                   <p class="mb-0">Enter your email and password to sign in</p>
                 </div>
                 <div class="card-body">
-                <?php echo form_open('Admin/process_login'); ?>
-                  <div class="mb-3">
-                      <?php echo form_input(['name' => 'email', 'class' => 'form-control form-control-lg', 'placeholder' => 'Email', 'aria-label' => 'Email', 'required' => 'required']); ?>
-                  </div>
-                  <div class="mb-3">
-                      <?php echo form_password(['name' => 'password', 'class' => 'form-control form-control-lg', 'placeholder' => 'Password', 'aria-label' => 'Password', 'required' => 'required']); ?>
-                  </div>
-                  <div class="text-center">
-                      <?php echo form_submit(['class' => 'btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0', 'value' => 'Sign in']); ?>
-                  </div>
+                  <?php echo form_open(base_url('process_login')); ?>
+                    <div class="mb-3">
+                        <?php echo form_input(['name' => 'email', 'class' => 'form-control form-control-lg', 'placeholder' => 'Email', 'aria-label' => 'Email', 'required' => 'required']); ?>
+                    </div>
+                    <div class="mb-3">
+                        <?php echo form_password(['name' => 'password', 'class' => 'form-control form-control-lg', 'placeholder' => 'Password', 'aria-label' => 'Password', 'required' => 'required']); ?>
+                    </div>
+                    <div class="text-center">
+                        <?php echo form_submit(['class' => 'btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0', 'value' => 'Sign in']); ?>
+                    </div>
                   <?php echo form_close(); ?>
 
                   <?php if (isset($error)) : ?>

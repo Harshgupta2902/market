@@ -17,9 +17,9 @@
 
 <meta property="og:title" content="<?= $metaData['title'] ?>">
 <meta property="og:description" content="<?= $metaData['metaDescription'] ?>">
-<meta property="og:url" content="<?= $metaData['canonicals'] ?>">
+<meta property="og:url" content="<?= base_url($metaData['canonicals'])?>">
 
-<link rel="canonical" href="<?= $metaData['canonicals'] ?>">
+<link rel="canonical" href="<?= base_url($metaData['canonicals'])?>">
 
 <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css') ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/css/accordion.css') ?>">

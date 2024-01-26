@@ -21,11 +21,8 @@
     <script src="<?= base_url('assets/admin/js/plugins/chartjs.min.js') ?>"></script>
     <script src="<?= base_url('assets/admin/js/plugins/threejs.js') ?>"></script>
     <script src="<?= base_url('assets/admin/js/plugins/orbit-controls.js') ?>"></script>
-    <script src="<?= base_url('assets/admin/js/plugins/orbit-controls.js') ?>"></script>
-    <script src="<?= base_url('assets/admin/js/plugins/orbit-controls.js') ?>"></script>
-    <script src="<?= base_url('assets/admin/js/plugins/orbit-controls.js') ?>"></script>
  
-            <!-- <script>
+<!-- <script>
         var ctx = document.getElementById("chart-bars").getContext("2d");
 
         new Chart(ctx, {

@@ -84,7 +84,14 @@ $route['lumpsum_calculator'] = 'Tools/lumpsum_calculator';
 $route['calculate_lumpsum'] = 'Tools/calculate_lumpsum';
 
 
+$route['process_login'] = 'Admin/process_login';
 $route['login'] = 'Admin/login';
 $route['dashboard'] = 'Admin/dashboard';
 $route['addnavbarform'] = 'Admin/addnavbarform';
 $route['allnavs'] = 'Admin/allnavs';
+$route['addseodetails'] = 'Admin/addseodetails';
+$route['seolist'] = 'Admin/seolist';
+$route['pageview'] = 'Admin/pageview';
+$route['ipolist'] = 'Admin/ipolist';
+
+

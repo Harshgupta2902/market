@@ -9,7 +9,7 @@
                </div>
                <div class="ms-auto my-auto mt-lg-0 mt-4">
                   <div class="ms-auto my-auto">
-                     <a href="<?= base_url('addnavbarform') ?>" class="btn bg-gradient-primary btn-sm mb-0" >+&nbsp; Add New Nav</a>
+                     <a href="<?= base_url('addseodetails') ?>" class="btn bg-gradient-primary btn-sm mb-0" >+&nbsp; Add New Page Seo</a>
                   </div>
                </div>
             </div>
@@ -21,33 +21,31 @@
                      <table class="table table-flush dataTable-table" id="products-list">
                         <thead class="thead-light">
                            <tr>
-                              <th>Page Name</th>
-                              <th>Category</th>
-                              <th>Route</th>
-                              <th>Enable</th>
-                              <th>Action</th>
+                              <th>Seo Title</th>
+                              <th>Seo Description</th>
+                              <th>Seo Keywords</th>
+                              <th>Seo canonicals</th>
+                              <th>Actions</th>
                            </tr>
                         </thead>
                         <tbody>
-                           <?php foreach ($data as $data) {?>
+                           <?php foreach ($seo_details as $data) {?>
                               <tr>
                                  <td>
                                     <div class="d-flex">
-                                       <h6 class="my-auto"><?= $data['subnav'] ?></h6>
+                                       <h6 class="my-auto"><?= $data['seo_title'] ?></h6>
                                     </div>
                                  </td>
-                                 <td class="text-sm"><?= $data['nav'] ?></td>
+                                 <td class="text-sm"><?= $data['seo_desc'] ?></td>
                                  
                                  <td class="text-sm">
-                                    <?= $data['url'] ?>
-                                 </td>
-                                 <td>
-                                 <div class="custom-control custom-switch">
-                                    <input <?= $data['status'] == 1 ? 'checked' : ''; ?> name="status" type="checkbox" class="custom-control-input" id="notification1">
-                                 </div>
+                                    <?= $data['seo_keys'] ?>
                                  </td>
                                  <td class="text-sm">
-                                    <a href="<?= base_url($data['url']) ?>" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
+                                    <?= $data['seo_canonicals'] ?>
+                                 </td>
+                                 <td class="text-sm">
+                                    <a href="<?= $data['seo_canonicals']?>" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
                                        <i class="me-2 fas fa-eye text-secondary" aria-hidden="true"></i>
                                     </a>
                                     <a href="javascript:;" data-bs-toggle="tooltip" data-bs-original-title="Delete product">
