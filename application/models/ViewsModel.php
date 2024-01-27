@@ -10,8 +10,7 @@ class ViewsModel extends CI_Model {
 
     }
 
-    public function updatePageViews($page)
-	{
+    public function updatePageViews($page){
 		$today = date('Y-m-d');
 		$thisMonth = date('Y-m');
 		$thisYear = date('Y');
@@ -57,15 +56,31 @@ class ViewsModel extends CI_Model {
 			]);
 		}
 	}
+
+	public function getSeoDetails($page){
+		return $this->db->where('seo_page', $page)->get('seo_details')->row_array(0);
+	}
+
+	public function getRecentsByType($type){
+		return $this->db->where('Type', $type)->get('recents')->result_array();
+	}
+
+	public function get($table){
+		return $this->db->get($table)->result_array();
+	}
+
+	public function getWhere($table, $col, $type){
+		return $this->db->where($col, $type)->get($table)->result_array();
+	}
+
+	public function nav(){
+		$nav['Ipo'] = $this->getWhere('nav', 'nav', 'Ipo');
+		$nav['Crypto'] = $this->getWhere('nav', 'nav', 'Crypto');
+		$nav['Calculators'] = $this->getWhere('nav', 'nav', 'Calculators');
+		$nav['Tools'] = $this->getWhere('nav', 'nav', 'Tools');
+		return $nav;
+	}
+
+
+
 }
-
-
-
-// CREATE TABLE page_views (
-//     id INT AUTO_INCREMENT PRIMARY KEY,
-//     page VARCHAR(255) NOT NULL,
-//     daily_count INT NOT NULL DEFAULT 0,
-//     monthly_count INT NOT NULL DEFAULT 0,
-//     yearly_count INT NOT NULL DEFAULT 0,
-//     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-// );

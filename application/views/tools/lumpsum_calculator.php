@@ -27,13 +27,20 @@
                 <div class="col-md-4">
                   <input required type="text" class="form-control" id="lumpsumAmount" placeholder="Enter lumpsum amount">
                 </div>
-                <button class ="btn btn-primary" onclick="calculateLumpsum()">Calculate</button>
+                <div class="col-sm-12 mt-4" >
+                  <button class="btn btn-primary" onclick="calculateLumpsum()">Calculate</button>
+                </div>
+                  <div id="errorSection" class="col-md-12 mt-4" style="display:none;">
+                    <p class="white" id="errorMessage"></p>
+                  </div>
               </div>
             </div>
         </div>
       </div>
     </div>
   </div>
+
+ 
 
   <!-- Display calculated data -->
   <div class="container mt-4" id="resultSection" style="display:none;">
@@ -91,17 +98,25 @@
     
         // Perform AJAX call to the CodeIgniter controller
         $.ajax({
-            url: "<?php echo site_url('calculate_lumpsum'); ?>",
+            url: "<?php echo base_url('calculate_lumpsum'); ?>",
             type: "GET",
             data: { rate: rate, time: time, lumpsumAmount: lumpsumAmount },
             dataType: 'json',
             success: function (response) {
+              if(response['error'] == 'Invalid input parameters'){
+                document.getElementById('resultSection').style.display = 'none';
+                document.getElementById('errorMessage').innerText = 'Invalid input parameters. Please check your inputs.';
+                document.getElementById('errorSection').style.display = 'block';
+              }
+              else{
                 displayYearlyReports(response.yearlyReports);
                 document.getElementById('futureValue').innerText = 'Future Value: ₹ ' + response.futureValue;
                 document.getElementById('totalEarnings').innerText = 'Total Earnings: ₹ ' + response.totalEarnings;
                 document.getElementById('totalInvested').innerText = 'Total Amount Invested: ₹ ' + response.totalInvested;
                 createChart(response);
                 document.getElementById('resultSection').style.display = 'block';
+              }
+                
             }
         });
     }

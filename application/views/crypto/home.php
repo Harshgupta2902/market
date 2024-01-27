@@ -6,19 +6,65 @@
    
 </head>
 <body id="dark">
+    <!-- ////////////////////////        CONTINUE TAPE                     ///////////////////////////////////// -->
+
+
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+  {
+  "symbols": [
+    {
+      "description": "",
+      "proName": "BINANCE:BTCUSDT"
+    },
+    {
+      "description": "",
+      "proName": "BITSTAMP:BTCUSD"
+    },
+    {
+      "description": "",
+      "proName": "OANDA:XAUUSD"
+    },
+    {
+      "description": "",
+      "proName": "CRYPTOCAP:USDT"
+    },
+    {
+      "description": "",
+      "proName": "BITSTAMP:ETHUSD"
+    },
+    {
+      "description": "",
+      "proName": "CRYPTOCAP:DOGE"
+    }
+  ],
+  "showSymbolLogo": true,
+  "isTransparent": true,
+  "displayMode": "regular",
+  "colorTheme": "dark",
+  "locale": "en"
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
+
+
+    
     <?php $this->load->view('components/navbar')?>
     <div class="landing-hero">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h2>A trusted and secure cryptocurrency exchange.</h2>
-                    <p>Crypo is the most advanced UI kit for making the Blockchain platform. This kit comes with 4 different exchange page, market, wallet and many more</p>
-                    <div class="input-group">
+                    <h2>Explore Real-time Cryptocurrency Price.</h2>
+                    <p>Discover the latest trends and prices in the cryptocurrency market. Our platform provides real-time data, advanced charts, and a secure trading experience.</p>
+                    <!-- <div class="input-group">
                         <input type="text" class="form-control" placeholder="Enter Your Email" aria-label="Enter Your Email" aria-describedby="button-addon2">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="button" id="button-addon2">Get Started</button>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="offset-md-1 col-md-5">
                     <!-- TradingView Widget BEGIN -->
@@ -42,241 +88,50 @@
             </div>
         </div>
     </div>
-
-    <div class="container-fluid no-fluid">
-        <div class="row sm-gutters">
-            <!-- TradingView Widget BEGIN -->
-            <div class="tradingview-widget-container">
-                <div class="tradingview-widget-container__widget"></div>
-                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
-                    {
-                        "width": "100%",
-                        "height": 490,
-                        "defaultColumn": "overview",
-                        "screener_type": "crypto_mkt",
-                        "displayCurrency": "USD",
-                        "colorTheme": "dark",
-                        "locale": "en"
-                    }
-                </script>
-            </div>
-            <!-- TradingView Widget END -->
-        </div>
-    </div>
-
-
-    <!-- TradingView Widget BEGIN -->
-            <div class="tradingview-widget-container" style="height:100%;width:100%">
-            <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
-            <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
-            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-            {
-            "autosize": true,
-            "symbol": "NSE:NIFTY",
-            "interval": "15",
-            "timezone": "Etc/UTC",
-            "theme": "light",
-            "style": "1",
-            "locale": "en",
-            "enable_publishing": false,
-            "allow_symbol_change": true,
-            "support_host": "https://www.tradingview.com"
-            }
-            </script>
-            </div>
-<!-- TradingView Widget END -->
-
     <div class="landing-feature landing-coin-price bt-none">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Check your favorite coin price <br> within a glance</h2>
-                </div>
-                <div class="col-md-3 mb30">
-                    <!-- TradingView Widget BEGIN -->
-                    <div class="tradingview-widget-container">
-                        <div class="tradingview-widget-container__widget"></div>
-                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-                            {
-                                "symbol": "BINANCE:BTCUSD",
-                                "width": "100%",
-                                "height": 220,
-                                "locale": "en",
-                                "dateRange": "12M",
-                                "colorTheme": "dark",
-                                "trendLineColor": "rgba(41, 98, 255, 1)",
-                                "underLineColor": "rgba(41, 98, 255, 0.3)",
-                                "underLineBottomColor": "rgba(41, 98, 255, 0)",
-                                "isTransparent": false,
-                                "autosize": false,
-                                "largeChartUrl": ""
-                            }
-                        </script>
-                    </div>
-                    <!-- TradingView Widget END -->
-                </div>
-                <div class="col-md-3 mb30">
-                    <!-- TradingView Widget BEGIN -->
-                    <div class="tradingview-widget-container">
-                        <div class="tradingview-widget-container__widget"></div>
-                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-                            {
-                                "symbol": "BINANCE:ETHUSDT",
-                                "width": "100%",
-                                "height": 220,
-                                "locale": "en",
-                                "dateRange": "12M",
-                                "colorTheme": "dark",
-                                "trendLineColor": "rgba(41, 98, 255, 1)",
-                                "underLineColor": "rgba(41, 98, 255, 0.3)",
-                                "underLineBottomColor": "rgba(41, 98, 255, 0)",
-                                "isTransparent": false,
-                                "autosize": false,
-                                "largeChartUrl": ""
-                            }
-                        </script>
-                    </div>
-                    <!-- TradingView Widget END -->
-                </div>
-                <div class="col-md-3 mb30">
-                    <!-- TradingView Widget BEGIN -->
-                    <div class="tradingview-widget-container">
-                        <div class="tradingview-widget-container__widget"></div>
-                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-                            {
-                                "symbol": "BINANCE:XRPUSDT",
-                                "width": "100%",
-                                "height": 220,
-                                "locale": "en",
-                                "dateRange": "12M",
-                                "colorTheme": "dark",
-                                "trendLineColor": "rgba(41, 98, 255, 1)",
-                                "underLineColor": "rgba(41, 98, 255, 0.3)",
-                                "underLineBottomColor": "rgba(41, 98, 255, 0)",
-                                "isTransparent": false,
-                                "autosize": false,
-                                "largeChartUrl": ""
-                            }
-                        </script>
-                    </div>
-                    <!-- TradingView Widget END -->
-                </div>
-                <div class="col-md-3 mb30">
-                    <!-- TradingView Widget BEGIN -->
-                    <div class="tradingview-widget-container">
-                        <div class="tradingview-widget-container__widget"></div>
-                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-                            {
-                                "symbol": "BINANCE:BNBUSDT",
-                                "width": "100%",
-                                "height": 220,
-                                "locale": "en",
-                                "dateRange": "12M",
-                                "colorTheme": "dark",
-                                "trendLineColor": "rgba(41, 98, 255, 1)",
-                                "underLineColor": "rgba(41, 98, 255, 0.3)",
-                                "underLineBottomColor": "rgba(41, 98, 255, 0)",
-                                "isTransparent": false,
-                                "autosize": false,
-                                "largeChartUrl": ""
-                            }
-                        </script>
-                    </div>
-                    <!-- TradingView Widget END -->
-                </div>
-                <div class="col-md-3 mb30">
-                    <!-- TradingView Widget BEGIN -->
-                    <div class="tradingview-widget-container">
-                        <div class="tradingview-widget-container__widget"></div>
-                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-                            {
-                                "symbol": "BINANCE:ADAUSDT",
-                                "width": "100%",
-                                "height": 220,
-                                "locale": "en",
-                                "dateRange": "12M",
-                                "colorTheme": "dark",
-                                "trendLineColor": "rgba(41, 98, 255, 1)",
-                                "underLineColor": "rgba(41, 98, 255, 0.3)",
-                                "underLineBottomColor": "rgba(41, 98, 255, 0)",
-                                "isTransparent": false,
-                                "autosize": false,
-                                "largeChartUrl": ""
-                            }
-                        </script>
-                    </div>
-                    <!-- TradingView Widget END -->
-                </div>
-                <div class="col-md-3 mb30">
-                    <!-- TradingView Widget BEGIN -->
-                    <div class="tradingview-widget-container">
-                        <div class="tradingview-widget-container__widget"></div>
-                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-                            {
-                                "symbol": "BINANCE:DOGEUSDT",
-                                "width": "100%",
-                                "height": 220,
-                                "locale": "en",
-                                "dateRange": "12M",
-                                "colorTheme": "dark",
-                                "trendLineColor": "rgba(41, 98, 255, 1)",
-                                "underLineColor": "rgba(41, 98, 255, 0.3)",
-                                "underLineBottomColor": "rgba(41, 98, 255, 0)",
-                                "isTransparent": false,
-                                "autosize": false,
-                                "largeChartUrl": ""
-                            }
-                        </script>
-                    </div>
-                    <!-- TradingView Widget END -->
-                </div>
-                <div class="col-md-3 mb30">
-                    <!-- TradingView Widget BEGIN -->
-                    <div class="tradingview-widget-container">
-                        <div class="tradingview-widget-container__widget"></div>
-                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-                            {
-                                "symbol": "BINANCE:DOTUSDT",
-                                "width": "100%",
-                                "height": 220,
-                                "locale": "en",
-                                "dateRange": "12M",
-                                "colorTheme": "dark",
-                                "trendLineColor": "rgba(41, 98, 255, 1)",
-                                "underLineColor": "rgba(41, 98, 255, 0.3)",
-                                "underLineBottomColor": "rgba(41, 98, 255, 0)",
-                                "isTransparent": false,
-                                "autosize": false,
-                                "largeChartUrl": ""
-                            }
-                        </script>
-                    </div>
-                    <!-- TradingView Widget END -->
-                </div>
-                <div class="col-md-3 mb30">
-                    <!-- TradingView Widget BEGIN -->
-                    <div class="tradingview-widget-container">
-                        <div class="tradingview-widget-container__widget"></div>
-                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-                            {
-                                "symbol": "BINANCE:SOLUSDT",
-                                "width": "100%",
-                                "height": 220,
-                                "locale": "en",
-                                "dateRange": "12M",
-                                "colorTheme": "dark",
-                                "trendLineColor": "rgba(41, 98, 255, 1)",
-                                "underLineColor": "rgba(41, 98, 255, 0.3)",
-                                "underLineBottomColor": "rgba(41, 98, 255, 0)",
-                                "isTransparent": false,
-                                "autosize": false,
-                                "largeChartUrl": ""
-                            }
-                        </script>
-                    </div>
-                    <!-- TradingView Widget END -->
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Check your favorite coin price <br> within a glance</h2>
             </div>
+
+            <?php
+            $coinSymbols = [
+                'BINANCE:BTCUSD',
+                'BINANCE:ETHUSDT',
+                'BINANCE:XRPUSDT',
+                'BINANCE:BNBUSDT',
+                'BINANCE:ADAUSDT',
+                'BINANCE:DOGEUSDT',
+                'BINANCE:DOTUSDT',
+                'BINANCE:SOLUSDT'
+            ];
+            foreach ($coinSymbols as $symbol) :
+            ?>
+                <div class="col-md-3 mb30">
+                    <!-- TradingView Widget BEGIN -->
+                    <div class="tradingview-widget-container">
+                        <div class="tradingview-widget-container__widget"></div>
+                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                            {
+                                "symbol": "<?= $symbol ?>",
+                                "width": "100%",
+                                "height": 220,
+                                "locale": "en",
+                                "dateRange": "12M",
+                                "colorTheme": "dark",
+                                "trendLineColor": "rgba(41, 98, 255, 1)",
+                                "underLineColor": "rgba(41, 98, 255, 0.3)",
+                                "underLineBottomColor": "rgba(41, 98, 255, 0)",
+                                "isTransparent": false,
+                                "autosize": false,
+                                "largeChartUrl": "<?= base_url('symbols')?>"
+                            }
+                        </script>
+                    </div>
+                    <!-- TradingView Widget END -->
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
 

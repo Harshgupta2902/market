@@ -21,6 +21,7 @@
                      <table class="table table-flush dataTable-table" id="products-list">
                         <thead class="thead-light">
                            <tr>
+                              <th>S.No.</th>
                               <th>Page Name</th>
                               <th>Category</th>
                               <th>Route</th>
@@ -29,8 +30,13 @@
                            </tr>
                         </thead>
                         <tbody>
-                           <?php foreach ($data as $data) {?>
+                           <?php foreach ($data as $index => $data) {?>
                               <tr>
+                              <td>
+                                    <div class="d-flex">
+                                       <h6 class="my-auto"><?= $index + 1 ?></h6>
+                                    </div>
+                                 </td>
                                  <td>
                                     <div class="d-flex">
                                        <h6 class="my-auto"><?= $data['subnav'] ?></h6>
@@ -47,7 +53,7 @@
                                  </div>
                                  </td>
                                  <td class="text-sm">
-                                    <a href="<?= base_url($data['url']) ?>" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
+                                    <a href="<?= base_url($data['url']) ?>" target="_blank" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
                                        <i class="me-2 fas fa-eye text-secondary" aria-hidden="true"></i>
                                     </a>
                                     <a href="javascript:;" data-bs-toggle="tooltip" data-bs-original-title="Delete product">

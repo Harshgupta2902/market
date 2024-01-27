@@ -7,12 +7,9 @@ class Admin extends CI_Controller {
 	{
         parent::__construct();
         $this->load->database();
-        $this->load->helper('url');
-        $this->load->helper('form');
-        $this->load->library('session');
-        $this->load->library('form_validation'); 
+        $this->load->library(array('session', 'form_validation'));
+        $this->load->helper(array('url', 'form'));
         $this->load->model('AdminModel');
-
     }
 
 	public function login()
@@ -45,34 +42,17 @@ class Admin extends CI_Controller {
     }
 
     public function dashboard() {
-        if (!$this->session->userdata('name')) {
-            redirect('admin/login');
-        }
+        $this->check_admin_session();
         $this->load->view('admin/dashboard');
     }
 
     public function addnavbarform() {
-        if (!$this->session->userdata('name')) {
-            redirect('admin/login');
-        }
-
-
+        $this->check_admin_session();
         if ($this->input->post()) {
-            // Form validation rules can be added here
-            $this->form_validation->set_rules('subnav', 'Page Name', 'required');
-            $this->form_validation->set_rules('url', 'Page Route', 'required');
-            $this->form_validation->set_rules('nav', 'Main Nav', 'required');
-
+            $this->set_navbar_form_validation();
             if ($this->form_validation->run() == TRUE) {
-                $data = array(
-                    'subnav' => $this->input->post('subnav'),
-                    'url' => $this->input->post('url'),
-                    'nav' => $this->input->post('nav'),
-                    'status' => 1
-                );
-
+                $data = $this->get_navbar_form_data();
                 $insert_id = $this->AdminModel->insert_nav_data($data);
-
                 if ($insert_id) {
                     redirect('allnavs');
                 } else {
@@ -80,78 +60,113 @@ class Admin extends CI_Controller {
                 }
             }
         }
-
         $this->load->view('admin/addnav');
     }
 
+
+    
+
     public function allnavs() {
-        if (!$this->session->userdata('name')) {
-            redirect('login');
-        }
-        $data = $this->AdminModel->get_nav_data();
-        $data['data'] = $data;
+        $this->check_admin_session();
+        $data['data'] = $this->AdminModel->get_nav_data();
         $this->load->view('admin/allnav', $data);
     }
 
    
     public function addseodetails() {
-        if (!$this->session->userdata('name')) {
-            redirect('admin/login');
-        }
-
+        $this->check_admin_session();
         if ($this->input->post()) {
+            $this->set_seo_form_validation();
 
-            $this->form_validation->set_rules('seo_title', 'SEO Title', 'required');
-            $this->form_validation->set_rules('seo_desc', 'SEO Description', 'required');
-            $this->form_validation->set_rules('seo_keys', 'SEO Keywords', 'required');
-            $this->form_validation->set_rules('seo_canonicals', 'SEO Canonicals', 'required');
-    
             if ($this->form_validation->run() == TRUE) {
-                $canonicals = $this->input->post('seo_canonicals');
-                $seoData = array(
-                    'seo_title' => $this->input->post('seo_title'),
-                    'seo_desc' => $this->input->post('seo_desc'),
-                    'seo_keys' => $this->input->post('seo_keys'),
-                    'seo_canonicals' => base_url($canonicals)
-                );
+                $seoData = $this->get_seo_form_data();
 
                 $insert_id = $this->db->insert('seo_details', $seoData);
-
                 if ($insert_id) {
                     redirect('seolist');
                 } else {
-                    echo 'Error inserting data into the database.';
+                    $this->show_error_message('Error inserting data into the database.');
                 }
             }
         }
         $data['page_url'] =  $this->db->get('nav')->result_array();
         $this->load->view('admin/addseo',$data);
     }
+
 	
     public function seolist() {
-        if (!$this->session->userdata('name')) {
-            redirect('login');
-        }
-        $data = $this->AdminModel->get_seo_data();
-        $data['seo_details'] = $data;
+        $this->check_admin_session();
+        $data['seo_details'] = $this->AdminModel->get_seo_data();
         $this->load->view('admin/seolist', $data);
     }
     
     public function pageview() {
-        if (!$this->session->userdata('name')) {
-            redirect('login');
-        }
-        $data = $this->AdminModel->get_page_view_data();
-        $data['page'] = $data;
+        $this->check_admin_session();
+        $data['page']= $this->AdminModel->get_page_view_data();
         $this->load->view('admin/pageview', $data);
     }
 
     public function ipolist() {
-        if (!$this->session->userdata('name')) {
-            redirect('login');
-        }
+        $this->check_admin_session();
         $data = $this->AdminModel->get_ipo_data();
         $this->load->view('admin/ipodata', $data);
     }
 
+
+
+
+
+
+
+
+// ////////////////         PRIVATE FUNCTIONS         //////////////////////////
+
+
+
+
+
+    private function set_seo_form_validation()
+    {
+        $this->form_validation->set_rules('seo_title', 'SEO Title', 'required');
+        $this->form_validation->set_rules('seo_desc', 'SEO Description', 'required');
+        $this->form_validation->set_rules('seo_keys', 'SEO Keywords', 'required');
+        $this->form_validation->set_rules('seo_canonicals', 'SEO Canonicals', 'required');
+    }
+    
+    private function get_seo_form_data()
+    {
+        $canonicals = $this->input->post('seo_canonicals');
+        return array(
+            'seo_title' => $this->input->post('seo_title'),
+            'seo_desc' => $this->input->post('seo_desc'),
+            'seo_keys' => $this->input->post('seo_keys'),
+            'seo_canonicals' => base_url($canonicals),
+            'seo_page' => $canonicals
+        );
+    }
+
+    private function check_admin_session()
+    {
+        if (!$this->session->userdata('name')) {
+            redirect('admin/login');
+        }
+    }
+
+    private function set_navbar_form_validation()
+    {
+        $this->form_validation->set_rules('subnav', 'Page Name', 'required');
+        $this->form_validation->set_rules('url', 'Page Route', 'required');
+        $this->form_validation->set_rules('nav', 'Main Nav', 'required');
+    }
+
+    private function get_navbar_form_data()
+    {
+        return array(
+            'subnav' => $this->input->post('subnav'),
+            'url' => $this->input->post('url'),
+            'nav' => $this->input->post('nav'),
+            'status' => 1
+        );
+    }
+    
 }

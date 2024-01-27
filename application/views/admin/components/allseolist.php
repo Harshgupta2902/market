@@ -4,7 +4,7 @@
          <div class="card-header pb-0">
             <div class="d-lg-flex">
                <div>
-                  <h5 class="mb-0">All Navs</h5>
+                  <h5 class="mb-0">All Seo Tags</h5>
                
                </div>
                <div class="ms-auto my-auto mt-lg-0 mt-4">
@@ -21,6 +21,8 @@
                      <table class="table table-flush dataTable-table" id="products-list">
                         <thead class="thead-light">
                            <tr>
+                              <th>S.No.</th>
+                              <th>Page</th>
                               <th>Seo Title</th>
                               <th>Seo Description</th>
                               <th>Seo Keywords</th>
@@ -29,8 +31,18 @@
                            </tr>
                         </thead>
                         <tbody>
-                           <?php foreach ($seo_details as $data) {?>
+                           <?php foreach ($seo_details as  $index => $data) {?>
                               <tr>
+                              <td>
+                                    <div class="d-flex">
+                                       <h6 class="my-auto"><?= $index + 1 ?></h6>
+                                    </div>
+                                 </td>
+                                 <td>
+                                    <div class="d-flex">
+                                       <h6 class="my-auto"><?= $data['seo_page'] ?></h6>
+                                    </div>
+                                 </td>
                                  <td>
                                     <div class="d-flex">
                                        <h6 class="my-auto"><?= $data['seo_title'] ?></h6>

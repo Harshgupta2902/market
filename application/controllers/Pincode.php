@@ -10,13 +10,20 @@ class Pincode extends CI_Controller {
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->model('ViewsModel');
+        $this->nav = $this->ViewsModel->nav();
+
 
     }
 
 	public function home()
 	{
 		$this->ViewsModel->updatePageViews('Pincode');
-		$this->load->view('pincode/pincode');
+		$metaData = $this->ViewsModel->getSeoDetails('Pincode'); 
+        $data = [
+            'metaData' => $metaData,
+            'nav' => $this->nav,
+        ];
+		$this->load->view('pincode/pincode', $data);
 	}
 
 
@@ -30,6 +37,7 @@ class Pincode extends CI_Controller {
 		$pincode = $this->db->where('PinCode', $pincode)->get('pincode_details1')->result_array();
         $data = [
 			'pincode' => $pincode,
+            'nav' => $this->nav,
 
 		];
 		$this->ViewsModel->updatePageViews('find');
@@ -46,7 +54,10 @@ class Pincode extends CI_Controller {
                            ->get('pincode_details1')
                            ->result_array();
     
-        $data = ['details' => $details[0]];
+        $data = [
+            'details' => $details[0],
+            'nav' => $this->nav,
+        ];
 		$this->ViewsModel->updatePageViews('details');
         $this->load->view('pincode/pincode', $data);
     }

@@ -19,6 +19,12 @@ class AdminModel extends CI_Model {
         return $this->db->get('nav')->result_array();
     }
 
+
+    public function get_page_view_data() {
+        return $this->db->get('page_views')->result_array();
+    }
+    
+
     public function get_seo_data() {
         return $this->db->get('seo_details')->result_array();
     }

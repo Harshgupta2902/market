@@ -5,7 +5,7 @@
              <div class="col-12 col-lg-8 m-auto">
                 <form class="multisteps-form__form mb-8" style="height: 406px;" action="<?= base_url('addnavbarform') ?>" method="post" >
                    <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
-                      <h5 class="font-weight-bolder">Product Information</h5>
+                      <h5 class="font-weight-bolder">Add NavBar</h5>
                       <div class="multisteps-form__content">
                          <div class="row mt-3">
                             <div class="col-12 col-sm-6">

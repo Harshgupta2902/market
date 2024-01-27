@@ -23,17 +23,6 @@
                         <li><a href="<?php echo base_url('sharesBuyBack') ?>">Ipo Buyback</a></li>
                     </ul>
                 </div>
-                <div class="col-md-3">
-                    <h3>Crypto</h3>
-                    <ul>
-                        <li><a href="<?php echo base_url('') ?>">Buy & sell</a></li>
-                        <li><a href="<?php echo base_url('') ?>">Earn free crypto</a></li>
-                        <li><a href="<?php echo base_url('') ?>">Wallet</a></li>
-                        <li><a href="<?php echo base_url('') ?>">Card</a></li>
-                        <li><a href="<?php echo base_url('') ?>">Payment methods</a></li>
-                        <li><a href="<?php echo base_url('') ?>">Account access</a></li>
-                    </ul>
-                </div>
                 <div class="col-md-2">
                     <h3>Tools</h3>
                     <ul>
@@ -47,7 +36,13 @@
                         <li><a href="<?php echo base_url('lumpsum_calculator') ?>">Lumpsum Calculator</a></li>
                     </ul>
                 </div>
-                
+                <div class="col-md-3">
+                    <h3>Crypto</h3>
+                    <ul>
+                        <li><a href="<?php echo base_url('Crypto') ?>">Crypto - Home Page </a></li>
+                        <li><a href="<?php echo base_url('screener') ?>">Screener</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </footer>

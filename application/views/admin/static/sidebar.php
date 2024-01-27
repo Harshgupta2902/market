@@ -79,9 +79,9 @@
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="<?= base_url('addseodetails') ?>">   
-                                <span class="sidenav-mini-icon"> A </span>
-                                <span class="sidenav-normal"> Home </span>
+                                <a class="nav-link " href="<?= base_url('scrap') ?>">   
+                                <span class="sidenav-mini-icon"> S </span>
+                                <span class="sidenav-normal"> Scrap </span>
                                 </a>
                             </li>
                         </ul>

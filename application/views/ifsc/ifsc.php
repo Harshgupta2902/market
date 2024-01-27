@@ -28,7 +28,6 @@
     </div>
   </div>
 
-
 <div class="landing-feature">
     <?php if (isset($ifsc['Bank']) || isset($ifsc['Ifsc']) || isset($ifsc['Branch']) || isset($ifsc['Address']) || isset($ifsc['City']) || isset($ifsc['State']) || isset($ifsc['Phone'])) : ?>
         <div class="container">

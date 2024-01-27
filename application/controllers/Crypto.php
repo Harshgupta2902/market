@@ -10,14 +10,27 @@ class Crypto extends CI_Controller {
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->model('ViewsModel');
+        $this->nav = $this->ViewsModel->nav();
 
     }
 
-	public function index()
-	{
-		$this->ViewsModel->updatePageViews('crypto');
-		$this->load->view('crypto/home');
+	public function index(){
+        $data['metaData'] = $this->ViewsModel->getSeoDetails('Crypto');
+        $data['nav'] = $this->nav;
+		$this->load->view('crypto/home', $data);
 	}
 
+    public function symbols(){
+        $data['metaData'] = $this->ViewsModel->getSeoDetails('symbols');
+        $data['symbol'] = $this->input->get('tvwidgetsymbol');
+        $data['nav'] = $this->nav;
+		$this->load->view('crypto/details', $data);
+    }
+
+    public function screener(){
+        $data['metaData'] = $this->ViewsModel->getSeoDetails('screener');
+        $data['nav'] = $this->nav;
+		$this->load->view('crypto/screener', $data);
+    }
 	
 }

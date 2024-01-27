@@ -9,22 +9,20 @@ class Tools extends CI_Controller {
         $this->load->database();
         $this->load->helper('url');
         $this->load->model('ViewsModel');
+        $this->nav = $this->ViewsModel->nav();
+
 
     }
 
 	public function sip_calculator()
 	{
-        $faq = $this->db->where('type', 'lumpsum')->get('faq')->result_array();
-        $metaData = array(
-			'title' => 'SIP Calculator: Easy Tool for Estimating Your Total',
-			'metaDescription' => 'Easily determine your lump sum value using our convenient and precise lump sum calculator',
-			'metaKeywords' => 'lumpsum calculator, lump sum sip calculator, sip lumpsum calculator, lump sum investment calculator, lumpsum investment, lumpsum investment calculator, Lumpsum calc, calculator',
-			'canonicals' => base_url(),	
-		);
+        $faq = $this->db->where('type', 'sip')->get('faq')->result_array();
+        $metaData = $this->ViewsModel->getSeoDetails('sip_calculator');
 		$data = [
 			'metaData' => $metaData,
 			'faq' => $faq,
 			'faqTitle' => "SIP Calculator FAQ's",
+            'nav' => $this->nav,
 		];
 		$this->ViewsModel->updatePageViews('sip_calculator');
 		$this->load->view('tools/sip_calculator',$data);
@@ -33,16 +31,12 @@ class Tools extends CI_Controller {
 	public function lumpsum_calculator()
 	{
         $faq = $this->db->where('type', 'lumpsum')->get('faq')->result_array();
-        $metaData = array(
-			'title' => 'Lumpsum Calculator: Easy Tool for Estimating Your Total',
-			'metaDescription' => 'Easily determine your lump sum value using our convenient and precise lump sum calculator',
-			'metaKeywords' => 'lumpsum calculator, lump sum sip calculator, sip lumpsum calculator, lump sum investment calculator, lumpsum investment, lumpsum investment calculator, Lumpsum calc, calculator',
-			'canonicals' => base_url(),	
-		);
+        $metaData = $this->ViewsModel->getSeoDetails('sip_calculator');
 		$data = [
 			'metaData' => $metaData,
 			'faq' => $faq,
 			'faqTitle' => "Lumpsum Calculator FAQ's",
+            'nav' => $this->nav,
 		];
 		$this->ViewsModel->updatePageViews('lumpsum_calculator');
 		$this->load->view('tools/lumpsum_calculator',$data);
@@ -70,6 +64,52 @@ class Tools extends CI_Controller {
 		$this->ViewsModel->updatePageViews('calculate_sip');
 
         echo json_encode($result);
+    }
+
+
+	public function calculate_lumpsum() {
+        // Get parameters from the URL
+        $rate = $this->input->get('rate');
+        $time = $this->input->get('time');
+        $lumpsumAmount = $this->input->get('lumpsumAmount');
+
+        // Validate input parameters (add more validation as needed)
+        if (!is_numeric($rate) || !is_numeric($time) || !is_numeric($lumpsumAmount)) {
+            // Handle invalid input
+            $result = ['error' => 'Invalid input parameters'];
+        } else {
+            // Perform lumpsum calculations
+            $futureValue = $lumpsumAmount * pow((1 + $rate / 100), $time);
+            $totalEarnings = $futureValue - $lumpsumAmount;
+
+            // Prepare result data
+            $result = [
+                'futureValue' => number_format($futureValue, 2),
+                'totalEarnings' => number_format($totalEarnings, 2),
+                'totalInvested' => number_format($lumpsumAmount, 2),
+                'yearlyReports' => $this->calculateYearlyReports($time, $lumpsumAmount, $rate),
+            ];
+        }
+
+        // Return results as JSON
+        echo json_encode($result);
+    }
+
+    private function calculateYearlyReports($time, $lumpsumAmount, $rate) {
+        $yearlyReports = [];
+
+        for ($year = 1; $year <= $time; $year++) {
+            $futureValueYearly = $lumpsumAmount * pow((1 + $rate / 100), $year);
+            $totalEarningsYearly = $futureValueYearly - $lumpsumAmount;
+
+            $yearlyReports[] = [
+                'year' => $year,
+                'futureValue' => number_format($futureValueYearly, 2),
+                'totalEarnings' => number_format($totalEarningsYearly, 2),
+            ];
+        }
+
+        return $yearlyReports;
     }
 
 }
