@@ -1,4 +1,3 @@
-const cron = require('node-cron');
 const ipo = require('./ipo');
 const forms = require('./forms');
 const subs = require('./subs');
@@ -9,50 +8,37 @@ const sme = require('./sme');
 const gmp = require('./gmp');
 // const details = require('./details');
 
-// Schedule scripts to run at specific intervals
-cron.schedule('0 0 * * *', () => {
-  console.log('Running IPO script');
-  ipo(); // Assuming each script is a function
-});
+async function insertData() {
+    try {
+        // Create a single database connection pool
+        const pool = await mysql.createPool({
+            host: 'localhost',
+            user: 'root',
+            password: '',
+            database: 'ipo',
+            waitForConnections: true,
+            connectionLimit: 10,
+            queueLimit: 0
+        });
 
-cron.schedule('0 1 * * *', () => {
-  console.log('Running Forms script');
-  forms();
-});
+        // Execute scripts sequentially
+        await main.insertData(pool);
+        await ipo.insertData(pool);
+        await forms.insertData(pool);
+        await subs.insertData(pool);
+        await buyback.insertData(pool);
+        await faq.insertData(pool);
+        await sme.insertData(pool);
+        await gmp.insertData(pool);
+        // await details.insertData(pool);
 
-cron.schedule('0 2 * * *', () => {
-  console.log('Running Subs script');
-  subs();
-});
+        // Close the connection pool
+        await pool.end();
 
-cron.schedule('0 3 * * *', () => {
-  console.log('Running Main script');
-  main();
-});
+        console.log("All data inserted successfully");
+    } catch (error) {
+        console.error("Error inserting data:", error);
+    }
+}
 
-cron.schedule('0 4 * * *', () => {
-  console.log('Running Buyback script');
-  buyback();
-});
-
-cron.schedule('0 5 * * *', () => {
-  console.log('Running FAQ script');
-  faq();
-});
-
-cron.schedule('0 6 * * *', () => {
-  console.log('Running SME script');
-  sme();
-});
-
-cron.schedule('0 7 * * *', () => {
-  console.log('Running GMP script');
-  gmp();
-});
-
-// cron.schedule('0 8 * * *', () => {
-//   console.log('Running Details script');
-//   details();
-// });
-
-console.log('Scheduler is running');
+insertData();
