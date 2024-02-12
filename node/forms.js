@@ -28,7 +28,7 @@ connection.connect((err) => {
     CREATE TABLE IF NOT EXISTS forms (
       id INT AUTO_INCREMENT PRIMARY KEY,
       name VARCHAR(255),
-      name_link VARCHAR(255),
+      link VARCHAR(255),
       date VARCHAR(255),
       date_link VARCHAR(255),
       bse VARCHAR(255),
@@ -84,7 +84,7 @@ function fetchDataAndInsertData() {
 
             // Insert data into the 'forms' table
             tableData.forEach(rowData => {
-              const sql = 'INSERT INTO forms (name, name_link, date, date_link, bse, bse_link, nse, nse_link) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+              const sql = 'INSERT INTO forms (name, link, date, date_link, bse, bse_link, nse, nse_link) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
               connection.query(sql, rowData, (err, result) => {
                 if (err) {
                   console.error('Error inserting into database:', err.message);
@@ -110,3 +110,4 @@ function fetchDataAndInsertData() {
 
 
 }
+

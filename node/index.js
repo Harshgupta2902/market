@@ -6,7 +6,6 @@ const buyback = require('./buyback');
 const faq = require('./faq');
 const sme = require('./sme');
 const gmp = require('./gmp');
-// const details = require('./details');
 
 async function insertData() {
     try {

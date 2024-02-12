@@ -10,53 +10,46 @@ const pool = mysql.createPool({
   user: 'root',
   password: '',
   database: 'ipo',
-  connectionLimit: 10,
 });
 
 async function fetchData() {
   let connection;
 
   try {
-    // Fetch HTML content from the website
     const { data } = await axios.get(url);
 
-    // Load HTML content into Cheerio
     const $ = cheerio.load(data);
 
-    // Extract data from table with id tablepress-1
     const table1Data = extractTableData($, $('#tablepress-1'), 'Upcoming');
-
-    // Extract data from table with id tablepress-2
     const table2Data = extractTableData($, $('#tablepress-2'), 'SME');
 
-    // Print the extracted data
+
     console.log('Table 1 Data:', table1Data);
     console.log('Table 2 Data:', table2Data);
 
-    // Get a connection from the pool
     connection = await getConnectionFromPool();
 
-    // Create 'recents' table
     await createTable(connection, 'recents');
     await truncateTable(connection, 'recents');
 
-    // Insert data into 'recents' table
     await insertDataIntoTable(connection, 'recents', table1Data);
     await insertDataIntoTable(connection, 'recents', table2Data);
+
 
     console.log('Data Inserted Successfully');
   } catch (error) {
     console.error('Error fetching data:', error);
   } finally {
-    // Release the connection back to the pool
     if (connection) {
       connection.release();
     }
-
-    // End the server gracefully
     process.exit();
   }
 }
+
+
+
+
 
 
 async function truncateTable(connection, tableName) {
@@ -73,18 +66,41 @@ function extractTableData($, table, type) {
     headers.push($(el).text().trim());
   });
 
-  // Extract rows
-  table.find('tbody tr').each((i, row) => {
-    const rowData = { Type: type };
-    $(row)
-      .find('td')
-      .each((j, cell) => {
+ // Extract rows
+ table.find('tbody tr').each((i, row) => {
+  const rowData = { Type: type };
+  $(row)
+    .find('td')
+    .each((j, cell) => {
+      // Check if the cell contains an anchor tag
+      const anchor = $(cell).find('a');
+      if (anchor.length > 0) {
+        const anchorText = anchor.text().trim();
+        const anchorLink = anchor.attr('href').trim();
+        rowData[headers[j]] =  anchorText;
+        // const cleanLink = anchorLink ? (anchorLink.startsWith('https://ipowatch.in') ? anchorLink.substring('https://ipowatch.in'.length) : anchorLink) : null;
+        rowData['link'] =  anchorLink;
+      } else {
         rowData[headers[j]] = $(cell).text().trim();
-      });
-    rows.push(rowData);
-  });
+      }
+    });
+  rows.push(rowData);
+});
 
-  return rows;
+return rows;
+
+  // // Extract rows
+  // table.find('tbody tr').each((i, row) => {
+  //   const rowData = { Type: type };
+  //   $(row)
+  //     .find('td')
+  //     .each((j, cell) => {
+  //       rowData[headers[j]] = $(cell).text().trim();
+  //     });
+  //   rows.push(rowData);
+  // });
+
+  // return rows;
 }
 
 function createTable(connection, tableName) {

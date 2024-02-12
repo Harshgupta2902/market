@@ -17,6 +17,8 @@ async function scrapeIPOData() {
         if (anchor.length > 0) {
           const anchorText = anchor.text().trim();
           const anchorLink = anchor.attr('href').trim();
+          // const cleanLink = anchorLink ? (anchorLink.startsWith('https://ipowatch.in') ? anchorLink.substring('https://ipowatch.in'.length) : anchorLink) : null;
+
           rowData['link'] = anchorLink;
           rowData[`Column_${i + 1}`] = anchorText;
         } else {
@@ -66,3 +68,5 @@ async function scrapeIPOData() {
 
 // Call the function to initiate the scraping
 scrapeIPOData();
+
+

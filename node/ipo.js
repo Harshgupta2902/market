@@ -59,28 +59,35 @@ function fetchAndInsertData() {
 
         const columns = $(row).find("td");
         const companyName = columns.eq(0).text().trim();
-        const link = columns.eq(0).find('a').attr('href');
+        let link = columns.eq(0).find('a').attr('href');
         const date = columns.eq(1).text().trim();
         const size = columns.eq(2).text().trim();
         const price = columns.eq(3).text().trim();
         const status = "Upcoming";
-        // Remove the "https://ipowatch.in" prefix from the link or set to null
-        const cleanLink = link ? (link.startsWith('https://ipowatch.in') ? link.substring('https://ipowatch.in'.length) : link) : null;
-        console.log(cleanLink);
+        
+        if (link) { 
+          if (link.startsWith('/')) {
+            link = link.substring(1);
+            fullLink = `https://ipowatch.in/${link}`;
+          }
+          fullLink = link.startsWith('http') ? link : `https://ipowatch.in/${link}`;
+        }
 
-        const ipoEntry = [companyName, date, size, price, status, cleanLink];
+        const ipoEntry = [companyName, date, size, price, status, fullLink];
         ipos.push(ipoEntry);
       });
-console.log(ipos);
-      insertData(ipos);
+      
+      insertData(ipos); // Insert fetched IPO data into the database
     })
     .catch((error) => {
       console.error('Error fetching data:', error.message);
       connection.end();
     });
 }
+async function insertData(ipos) {
+  // Truncate the gmp table to clear existing data
+  // await connection.query('TRUNCATE TABLE ipos');
 
-function insertData(ipos) {
   const insertQuery = 'INSERT INTO ipos (companyName, date, size, price, status, link) VALUES ?';
   connection.query(insertQuery, [ipos], (error, results) => {
     if (error) {
@@ -89,11 +96,11 @@ function insertData(ipos) {
       console.log(`${results.affectedRows} rows inserted into the database.`);
     }
 
-    // Close the database connection after inserting data
     connection.end();
   });
 }
 
-// Call the function to create the table and fetch/insert data
+
 connection.connect();
 createTable();
+

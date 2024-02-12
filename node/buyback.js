@@ -24,6 +24,7 @@ async function createTableAndInsertData(rows) {
         company_name VARCHAR(255),
         record_date VARCHAR(255),
         open VARCHAR(255),
+        link VARCHAR(255) NULL,
         close VARCHAR(255),
         price VARCHAR(255)
       );
@@ -32,12 +33,27 @@ async function createTableAndInsertData(rows) {
     await connection.query('TRUNCATE TABLE buyback;');
 
     for (const row of rows) {
-      const [company, recordDate, open, close, price] = row;
+      // Access data directly using keys
+      const company = row['Column_1'];
+      const recordDate = row['Column_2'];
+      let open = row['Column_3'];
+      let link = row['link']; // Access link directly
+      const close = row['Column_4'];
+      const price = row['Column_5'];
+
+      // Check if open is undefined or empty, and replace with null
+      if (open === undefined || open.trim() === '') {
+        open = null;
+      }
+
+      if (link === undefined || link.trim() == '') {
+        link = null;
+      }
 
       // Insert data into the database
       await connection.execute(
-        'INSERT INTO buyback (company_name, record_date, open, close, price) VALUES (?, ?, ?, ?, ?)',
-        [company, recordDate, open, close, price]
+        'INSERT INTO buyback (company_name, record_date, open, link, close, price) VALUES (?, ?, ?, ?, ?, ?)',
+        [company, recordDate, open, link, close, price]
       );
     }
 
@@ -48,6 +64,8 @@ async function createTableAndInsertData(rows) {
     await connection.end();
   }
 }
+
+
 
 axios.get(url)
   .then(response => {
@@ -61,15 +79,27 @@ axios.get(url)
       // Extracting table rows
       const rows = [];
       table.find('tbody tr').each((i, row) => {
-        const rowData = [];
+        const rowData = {};
         $(row).find('td').each((j, cell) => {
-          rowData.push($(cell).text().trim());
+          const anchor = $(cell).find('a');
+          if (anchor.length > 0) {
+            // If an anchor tag is found, extract its text and href
+            const anchorText = anchor.text().trim();
+            const anchorLink = anchor.attr('href').trim();
+            rowData[`Column_${j + 1}`] = anchorText;
+            rowData['link'] = anchorLink == null ? null : anchorLink;
+          } else {
+            rowData[`Column_${j + 1}`] = $(cell).text().trim();
+            // rowData['link'] = null;
+
+          }      
+
         });
         rows.push(rowData);
+        console.log(rowData['link']);
       });
-
       // Create table and insert data into the database
-      createTableAndInsertData(rows);
+      createTableAndInsertData(rows.slice(1));
     } else {
       console.error('Failed to fetch the page. Status:', response.status);
     }

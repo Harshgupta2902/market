@@ -4,6 +4,35 @@ const mysql = require('mysql2/promise');
 
 const url = 'https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/';
 
+// axios.get(url)
+//   .then(async (response) => {
+//     if (response.status === 200) {
+//       const $ = cheerio.load(response.data);
+//       const targetDiv = $('[data-id="107e3c99"]');
+//       const stopCondition = ['IPO Name', 'Price', 'IPO GMP', 'Listed'];
+//       const table = targetDiv.find('table');
+//       const tableData = [];
+//       const additionalList = [];
+//       let stopScraping = false;
+
+//       table.find('tr').each((index, row) => {
+//         const rowData = [];
+//         $(row).find('td').each((index, column) => {
+//           rowData.push($(column).text().trim());
+//         });
+
+//         if (JSON.stringify(rowData) === JSON.stringify(stopCondition)) {
+//           stopScraping = true;
+//           return;
+//         }
+
+//         if (!stopScraping && index !== 0) {
+//           tableData.push(rowData);
+//         } else if (stopScraping && index !== 0) {
+//           additionalList.push(rowData);
+//         }
+//       });
+
 axios.get(url)
   .then(async (response) => {
     if (response.status === 200) {
@@ -18,7 +47,28 @@ axios.get(url)
       table.find('tr').each((index, row) => {
         const rowData = [];
         $(row).find('td').each((index, column) => {
-          rowData.push($(column).text().trim());
+          // Check if the cell contains an anchor tag
+          const anchor = $(column).find('a');
+          if (anchor.length > 0) {
+            // If an anchor tag is found, extract its text and href
+            const anchorText = anchor.text().trim();
+            const anchorLink = anchor.attr('href').trim();
+            rowData.push(anchorText);
+            rowData.push(anchorLink);
+            // const cleanLink = anchorLink.split('/').pop();
+            // if (cleanLink == "") {
+            //   const cleanLink = anchorLink ? (anchorLink.startsWith('https://ipowatch.in') ? anchorLink.substring('https://ipowatch.in'.length) : anchorLink) : null;
+            //   // rowData.push({ text: anchorText, link: cleanLink });
+            //   rowData.push(anchorText);
+            //   rowData.push(cleanLink);
+            // }
+            // else {
+            //   // rowData.push({ text: anchorText, link: cleanLink });
+              
+            // }
+          } else {
+            rowData.push($(column).text().trim());
+          }
         });
 
         if (JSON.stringify(rowData) === JSON.stringify(stopCondition)) {
@@ -33,6 +83,8 @@ axios.get(url)
         }
       });
 
+      console.log(tableData);
+      console.log(additionalList);
       // Create a MySQL connection pool
       const pool = mysql.createPool({
         host: 'localhost',
@@ -57,7 +109,8 @@ axios.get(url)
               ipo_gmp VARCHAR(255),
               price VARCHAR(255),
               gain VARCHAR(255),
-              kostak VARCHAR(255)
+              kostak VARCHAR(255),
+              link VARCHAR(255)
             );
           `);
           await connection.query('TRUNCATE TABLE gmp;');
@@ -77,7 +130,9 @@ axios.get(url)
               ipo_name VARCHAR(255),
               price VARCHAR(255),
               ipo_gmp VARCHAR(255),
-              listed VARCHAR(255)
+              listed VARCHAR(255),
+              link VARCHAR(255)
+
             );
           `);
           await connection.query('TRUNCATE TABLE old_gmp;');
@@ -93,7 +148,7 @@ axios.get(url)
         try {
           for (const data of tableData) {
             const [results] = await connection.query(
-              'INSERT INTO gmp (ipo_name, date, type, ipo_gmp, price, gain, kostak) VALUES (?, ?, ?, ?, ?, ?, ?)',
+              'INSERT INTO gmp (ipo_name,link,  date, type, ipo_gmp, price, gain, kostak) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
               data
             );
           }
@@ -108,7 +163,7 @@ axios.get(url)
         try {
           for (const data of additionalList.slice(1)) {
             const [results] = await connection.query(
-              'INSERT INTO old_gmp (ipo_name, price, ipo_gmp, listed) VALUES (?, ?, ?, ?)',
+              'INSERT INTO old_gmp (ipo_name,link,  price, ipo_gmp, listed ) VALUES (?, ?, ?, ?, ?)',
               data
             );
           }
@@ -128,3 +183,4 @@ axios.get(url)
   .catch((error) => {
     console.error('Error fetching the page:', error);
   });
+
