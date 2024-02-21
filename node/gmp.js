@@ -55,17 +55,6 @@ axios.get(url)
             const anchorLink = anchor.attr('href').trim();
             rowData.push(anchorText);
             rowData.push(anchorLink);
-            // const cleanLink = anchorLink.split('/').pop();
-            // if (cleanLink == "") {
-            //   const cleanLink = anchorLink ? (anchorLink.startsWith('https://ipowatch.in') ? anchorLink.substring('https://ipowatch.in'.length) : anchorLink) : null;
-            //   // rowData.push({ text: anchorText, link: cleanLink });
-            //   rowData.push(anchorText);
-            //   rowData.push(cleanLink);
-            // }
-            // else {
-            //   // rowData.push({ text: anchorText, link: cleanLink });
-              
-            // }
           } else {
             rowData.push($(column).text().trim());
           }
