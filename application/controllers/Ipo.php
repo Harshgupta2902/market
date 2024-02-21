@@ -138,6 +138,20 @@ class Ipo extends CI_Controller
 
     }
 
+    public function details(){
+        $username = 'Entero Healthcare Solutions'; 
+        $data['details'] = $this->ViewsModel->getWhere('details', 'cname', $username);
+        $data['faq'] = $this->ViewsModel->getWhere('faq', 'cname', $username);
+        $data['financial_data'] = $this->ViewsModel->getWhere('financial_data', 'cname', $username);
+        $data['market_lot'] = $this->ViewsModel->getWhere('market_lot', 'cname', $username);
+        $data['price_band'] = $this->ViewsModel->getWhere('price_band', 'cname', $username);
+        $data['timeline'] = $this->ViewsModel->getWhere('timeline', 'cname', $username);
+        $data['valuation'] = $this->ViewsModel->getWhere('valuation', 'cname', $username);
+        echo"<pre>";
+        print_r($data);
+    }
+
+
     public function error()
     {
         $this->load->view('errors/html/error_404');
@@ -147,5 +161,7 @@ class Ipo extends CI_Controller
     {
         $this->load->view($view, $data);
     }
+
+
 
 }

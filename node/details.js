@@ -1,8 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { json } = require('express');
 const mysql = require('mysql2/promise'); // Import mysql2 library
-// const fs = require('fs'); // Import the fs module
+const fs = require('fs'); // Import the fs module
 
 const dbConfig = {
   host: 'localhost',
@@ -16,29 +15,29 @@ async function fetchUrlsFromDatabase() {
     const connection = await mysql.createConnection(dbConfig);
     
     const query = `
-      SELECT link FROM (
-        SELECT link FROM buyback
+      SELECT link, cname FROM (
+        SELECT link,company_name as cname FROM buyback
         UNION
-        SELECT link FROM forms
+        SELECT link, name as cname FROM forms
         UNION
-        SELECT link FROM gmp
+        SELECT link,ipo_name as cname FROM gmp
         UNION
-        SELECT link FROM ipos
+        SELECT link,companyName as cname FROM ipos
         UNION
-        SELECT link FROM recents
+        SELECT link, Company as cname FROM recents
         UNION
-        SELECT link FROM sme
+        SELECT link, name as cname FROM sme
         UNION
-        SELECT link FROM old_gmp
-      ) AS all_links;
+        SELECT link, ipo_name as cname FROM old_gmp
+      ) AS combined_results;;
     `;
     
     const [rows] = await connection.query(query);
-    const allUrls = rows.map(row => row.link);
+    const allData = rows.map(row => ({ link: row.link, cname: row.cname }));
 
     await connection.end();
 
-    return allUrls;
+    return allData;
   } catch (error) {
     console.error(`Error fetching URLs from the tables: ${error.message}`);
     return [];
@@ -60,7 +59,7 @@ async function details(link) {
   }
 }
 
-async function PriceBandtable(link, id) {
+async function PriceBandtable(link, cname) {
   try {
     const response = await axios.get(link);
     const html = response.data;
@@ -87,18 +86,18 @@ async function PriceBandtable(link, id) {
 
       jsonData.push(tableObject);
     });
-    await insertPriceBandData({ data: jsonData[0].data }, id);
-    await insertMarketLotData(jsonData[1].data, id);
-    await insertTimeline(jsonData[2].data, id);
-    await insertRevenueData(jsonData[3].data, id);
-    await insertValuation(jsonData[4].data, id);
+    await insertPriceBandData({ data: jsonData[0].data }, cname);
+    await insertMarketLotData(jsonData[1].data, cname);
+    await insertTimeline(jsonData[2].data, cname);
+    await insertRevenueData(jsonData[3].data, cname);
+    await insertValuation(jsonData[4].data, cname);
     // console.log(jsonData[3].data);
     return jsonData;
   } catch (error) {
     return { error: `Error fetching the page: ${error.message}` };
   }
 }
-async function fetchAllUlAfterHeadings(link) {
+async function fetchAllUlAfterHeadings(link, cname) {
   try {
     const response = await axios.get(link);
     const html = response.data;
@@ -151,18 +150,18 @@ async function getIPOFAQ(link) {
   }
 }
 
-async function insertDetailsData(data, id) {
+async function insertDetailsData(data, cname) {
   try {
     const connection = await mysql.createConnection(dbConfig);
 
-    await connection.query(`DELETE FROM details WHERE ipoid = ?`, [id]);
+    await connection.query(`DELETE FROM details WHERE cname = ?`, [cname]);
 
     // Insert details data
     const [insertDetailsResult] = await connection.query(`
-      INSERT INTO details (ipoid, details, object_of_issue, review, firm_review, peer_group, company_promoters, lead_manager)
+      INSERT INTO details (cname, details, object_of_issue, review, firm_review, peer_group, company_promoters, lead_manager)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?);
     `, [
-      id,
+      cname,
       data.details,
       JSON.stringify(data.object_of_issue),
       JSON.stringify(data.review),
@@ -178,9 +177,9 @@ async function insertDetailsData(data, id) {
     if (data.getIPOFAQ && data.getIPOFAQ.length > 0) {
       for (const faqItem of data.getIPOFAQ) {
         const [insertFAQResult] = await connection.query(`
-          INSERT INTO faq (ipoid, question, answer)
+          INSERT INTO faq (cname, question, answer)
           VALUES (?, ?, ?);
-        `, [id, faqItem.question, faqItem.answer]);
+        `, [cname, faqItem.question, faqItem.answer]);
 
         console.log(`Inserted FAQ with id ${insertFAQResult.insertId} into the faq table.`);
       }
@@ -192,17 +191,17 @@ async function insertDetailsData(data, id) {
   }
 }
 
-async function insertPriceBandData(data, id) {
+async function insertPriceBandData(data, cname) {
   try {
     const connection = await mysql.createConnection(dbConfig);
-    await connection.query(`DELETE FROM price_band WHERE ipoid = ?`, [id]);
+    await connection.query(`DELETE FROM price_band WHERE cname = ?`, [cname]);
 
     // Insert price_band data
     const [insertPriceBandResult] = await connection.query(`
-      INSERT INTO price_band (ipoid, ipo_open, ipo_close, ipo_size, offer_for_sale, face_value, ipo_price_band, ipo_listing_on, retail_quota, qib_quota, nii_quota, drhp_link, rhp_link, anchor_investors_list)
+      INSERT INTO price_band (cname, ipo_open, ipo_close, ipo_size, offer_for_sale, face_value, ipo_price_band, ipo_listing_on, retail_quota, qib_quota, nii_quota, drhp_link, rhp_link, anchor_investors_list)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `, [
-      id,
+      cname,
       data.data[0].col2, // IPO Open
       data.data[1].col2, // IPO Close
       data.data[2].col2, // IPO Size
@@ -226,17 +225,17 @@ async function insertPriceBandData(data, id) {
   }
 }
 
-async function insertMarketLotData(data) {
+async function insertMarketLotData(data, cname) {
   try {
     const connection = await mysql.createConnection(dbConfig);
-    await connection.query(`DELETE FROM market_lot WHERE ipoid = ?`, [id]);
+    await connection.query(`DELETE FROM market_lot WHERE cname = ?`, [cname]);
 
     for (let i = 1; i < data.length; i++) {
       const row = data[i];
       const [insertResult] = await connection.query(`
-        INSERT INTO market_lot (ipoid, application, lot_size, shares, amount)
+        INSERT INTO market_lot (cname, application, lot_size, shares, amount)
         VALUES (?, ?, ?, ?, ?);
-      `, [id, row.col1, row.col2, row.col3, row.col4]);
+      `, [cname, row.col1, row.col2, row.col3, row.col4]);
 
       console.log(`Inserted market_lot data with id ${insertResult.insertId}`);
     }
@@ -247,16 +246,16 @@ async function insertMarketLotData(data) {
   }
 }
 
-async function insertTimeline(data) {
+async function insertTimeline(data, cname) {
   try {
     const connection = await mysql.createConnection(dbConfig);
-    await connection.query(`DELETE FROM timeline WHERE ipoid = ?`, [id]);
+    await connection.query(`DELETE FROM timeline WHERE cname = ?`, [cname]);
 
     const [insertTimelineResult] = await connection.query(`
-      INSERT INTO timeline (ipoid, anchor_investors_allotment, ipo_open_date, ipo_close_date, basis_of_allotment, refunds, credit_to_demat_account, ipo_listing_date)
+      INSERT INTO timeline (cname, anchor_investors_allotment, ipo_open_date, ipo_close_date, basis_of_allotment, refunds, credit_to_demat_account, ipo_listing_date)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?);
     `, [
-      id,
+      cname,
       data[0].col2, // Anchor Investors Allotment
       data[1].col2, // IPO Open Date
       data[2].col2, // IPO Close Date
@@ -273,18 +272,18 @@ async function insertTimeline(data) {
   }
 }
 
-async function insertRevenueData(data) {
+async function insertRevenueData(data, cname) {
   try {
     const connection = await mysql.createConnection(dbConfig);
-    await connection.query(`DELETE FROM financial_data WHERE ipoid = ?`, [id]);
+    await connection.query(`DELETE FROM financial_data WHERE cname = ?`, [cname]);
 
     // Assuming the data array has the required structure
     for (let i = 2; i < data.length; i++) {
       const row = data[i];
       const [insertResult] = await connection.query(`
-        INSERT INTO financial_data (ipoid, year, revenue, expense, pat)
+        INSERT INTO financial_data (cname, year, revenue, expense, pat)
         VALUES (?, ?, ?, ?, ?);
-      `, [id, row.col1, row.col2, row.col3, row.col4]);
+      `, [cname, row.col1, row.col2, row.col3, row.col4]);
 
       console.log(`Inserted revenue data with id ${insertResult.insertId}`);
     }
@@ -295,16 +294,16 @@ async function insertRevenueData(data) {
   }
 }
 
-async function insertValuation(data) {
+async function insertValuation(data, cname) {
   try {
     const connection = await mysql.createConnection(dbConfig);
-    await connection.query(`DELETE FROM valuation WHERE ipoid = ?`, [id]);
+    await connection.query(`DELETE FROM valuation WHERE cname = ?`, [cname]);
 
     const [insertValuationResult] = await connection.query(`
-      INSERT INTO valuation (ipoid, eps, pe_ratio, ronw, nav)
+      INSERT INTO valuation (cname, eps, pe_ratio, ronw, nav)
       VALUES (?, ?, ?, ?, ?);
     `, [
-      id,
+      cname,
       data[0].col2 || null, // Earning Per Share (EPS)
       data[1].col2 || null, // Price/Earning P/E Ratio
       data[2].col2 || null, // Return on Net Worth (RoNW)
@@ -323,20 +322,11 @@ async function createTables() {
   try {
     const connection = await mysql.createConnection(dbConfig);
 
-    // Create ipos table
-    // await connection.query(`
-    //   CREATE TABLE IF NOT EXISTS ipos (
-    //     id INT AUTO_INCREMENT PRIMARY KEY,
-    //     link VARCHAR(255)
-    //   );
-    // `);
-
     // Create details table
     await connection.query(`
       CREATE TABLE IF NOT EXISTS details (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        ipoid INT,
-        slug VARCHAR(255),
+        cname VARCHAR(255),
         details TEXT,
         object_of_issue JSON,
         review JSON,
@@ -351,10 +341,9 @@ async function createTables() {
     await connection.query(`
       CREATE TABLE IF NOT EXISTS faq (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        ipoid INT,
-        slug VARCHAR(255),
-        question TEXT,
-        answer TEXT,
+        cname VARCHAR(255),
+        question TEXT NULL,
+        answer TEXT NULL,
         type VARCHAR(255)
       );
     `);
@@ -363,8 +352,7 @@ async function createTables() {
     await connection.query(`
       CREATE TABLE IF NOT EXISTS price_band (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        ipoid INT,
-        slug VARCHAR(255),
+        cname VARCHAR(255),
         ipo_open VARCHAR(255),
         ipo_close VARCHAR(255),
         ipo_size VARCHAR(255),
@@ -385,8 +373,7 @@ async function createTables() {
     await connection.query(`
       CREATE TABLE IF NOT EXISTS market_lot (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        ipoid INT,
-        slug VARCHAR(255),
+        cname VARCHAR(255),
         application VARCHAR(255),
         lot_size VARCHAR(255),
         shares VARCHAR(255),
@@ -398,8 +385,7 @@ async function createTables() {
     await connection.query(`
       CREATE TABLE IF NOT EXISTS timeline (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        ipoid INT,
-        slug VARCHAR(255),
+        cname VARCHAR(255),
         anchor_investors_allotment VARCHAR(255),
         ipo_open_date VARCHAR(255),
         ipo_close_date VARCHAR(255),
@@ -414,8 +400,7 @@ async function createTables() {
     await connection.query(`
       CREATE TABLE IF NOT EXISTS financial_data (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        ipoid INT,
-        slug VARCHAR(255),
+        cname VARCHAR(255),
         year VARCHAR(255),
         revenue VARCHAR(255),
         expense VARCHAR(255),
@@ -427,8 +412,7 @@ async function createTables() {
     await connection.query(`
       CREATE TABLE IF NOT EXISTS valuation (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        ipoid INT,
-        slug VARCHAR(255),
+        cname VARCHAR(255),
         eps VARCHAR(255),
         pe_ratio VARCHAR(255),
         ronw VARCHAR(255),
@@ -444,29 +428,58 @@ async function createTables() {
   }
 }
 
+async function emptyTables() {
+  try {
+    const connection = await mysql.createConnection(dbConfig);
+
+    // Empty details table
+    await connection.query('TRUNCATE TABLE details');
+
+    // Empty faq table
+    await connection.query('TRUNCATE TABLE faq');
+
+    // Empty price_band table
+    await connection.query('TRUNCATE TABLE price_band');
+
+    // Empty market_lot table
+    await connection.query('TRUNCATE TABLE market_lot');
+
+    // Empty timeline table
+    await connection.query('TRUNCATE TABLE timeline');
+
+    // Empty financial_data table
+    await connection.query('TRUNCATE TABLE financial_data');
+
+    // Empty valuation table
+    await connection.query('TRUNCATE TABLE valuation');
+
+    console.log('Tables emptied successfully.');
+
+    await connection.end();
+  } catch (error) {
+    console.error(`Error emptying tables: ${error.message}`);
+  }
+}
+
+
 async function main() {
   try {
 
     const results = await fetchUrlsFromDatabase();
+    // console.log(results);
+    await emptyTables();
     await createTables();
 
-    const allData = []; 
-
-    for (const link of results) {
-      if (link == null) {
+    for (const { link, cname } of results) {
+      if (!link) {
         continue; 
       }
-      allData.push(link);
-      let slug = link.split('/').pop();
-      console.log(slug);
-
-
-      // Fetch data and process it...
-
+// console.log(link);
+// console.log(cname);
       try {
-        // const detailsResult = await details(link);
-        const priceBandResult = await PriceBandtable(link, id);
-        const ulAfterHeadingsResult = await fetchAllUlAfterHeadings(link);
+        const detailsResult = await details(link);
+        const priceBandResult = await PriceBandtable(link, cname);
+        const ulAfterHeadingsResult = await fetchAllUlAfterHeadings(link, cname);
         const faqResult = await getIPOFAQ(link);
 
         const organizedData = {
@@ -479,27 +492,71 @@ async function main() {
           lead_manager: ulAfterHeadingsResult[5].items,
           getIPOFAQ: faqResult,
         };
-
+        
+        await insertDetailsData(organizedData, cname);
+        console.log("Data inserted successfully.");
         // Push organized data to the array
-        allData.push(organizedData);
-        console.log("Data fetched successfully for IPO with ID:", id);
+        // allData.push(organizedData);
+        console.log("Data fetched successfully for IPO with ID:", cname);
       } catch (error) {
-        console.error(`An error occurred while fetching data for IPO with ID ${id}: ${error.message}`);
+        console.error(`An error occurred while fetching data for IPO with ID ${cname}: ${error.message}`);
       }
-    }
 
-    // // Write allData array to a JSON file
-    // fs.writeFile('ipo_data.json', JSON.stringify(allData, null, 2), (err) => {
-    //   if (err) {
-    //     console.error('Error writing JSON file:', err);
-    //   } else {
-    //     console.log('Data has been written to ipo_data.json');
-    //   }
-    // });
+      await new Promise(resolve => setTimeout(resolve, 3000));
+
+    }
   } catch (error) {
     console.error(`An error occurred: ${error.message}`);
   }
 }
+
+
+
+
+
+
+// async function main() {
+//   try {
+
+//     const results = await fetchUrlsFromDatabase();
+//     // console.log(results[0]['cname']);
+//     await createTables();
+
+//       try {
+//         const priceBandResult = await PriceBandtable(link, id);
+//         const ulAfterHeadingsResult = await fetchAllUlAfterHeadings(link);
+//         const faqResult = await getIPOFAQ(link);
+
+//         const organizedData = {
+//           details: detailsResult,
+//           object_of_issue: ulAfterHeadingsResult[0].items,
+//           review: ulAfterHeadingsResult[1].items,
+//           firm_review: ulAfterHeadingsResult[2].items,
+//           peer_group: ulAfterHeadingsResult[3].items,
+//           company_promoters: ulAfterHeadingsResult[4].items,
+//           lead_manager: ulAfterHeadingsResult[5].items,
+//           getIPOFAQ: faqResult,
+//         };
+
+//         // Push organized data to the array
+//         allData.push(organizedData);
+//         console.log("Data fetched successfully for IPO with ID:", id);
+//       } catch (error) {
+//         console.error(`An error occurred while fetching data for IPO with ID ${id}: ${error.message}`);
+//       }
+
+//     // // Write allData array to a JSON file
+//     // fs.writeFile('ipo_data.json', JSON.stringify(results, null, 2), (err) => {
+//     //   if (err) {
+//     //     console.error('Error writing JSON file:', err);
+//     //   } else {
+//     //     console.log('Data has been written to ipo_data.json');
+//     //   }
+//     // });
+//   } catch (error) {
+//     console.error(`An error occurred: ${error.message}`);
+//   }
+// }
 
 
 
