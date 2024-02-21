@@ -36,7 +36,6 @@ class Api extends CI_Controller {
             ->set_output(json_encode($result));
     }
 
-
     public function insertBuyback() {
         $response = file_get_contents('http://ixorainfotech.in/api/buyback');
         $buyback = json_decode($response, true);
@@ -142,7 +141,6 @@ class Api extends CI_Controller {
             ->set_output(json_encode(array('message' => $responseMessage)));
     }
 
-
     public function insertSme() {
         $response = file_get_contents('http://ixorainfotech.in/api/sme');
         $sme = json_decode($response, true);
@@ -167,7 +165,6 @@ class Api extends CI_Controller {
             ->set_output(json_encode($result));
     }
     
-
     public function insertSubscription() {
         $response = file_get_contents('http://ixorainfotech.in/api/subs');
         $subs = json_decode($response, true);
@@ -228,8 +225,6 @@ class Api extends CI_Controller {
             ->set_output(json_encode(array('message' => $responseMessage)));
     }
 
-
-
     public function insertRecents() {
         $response = file_get_contents('http://ixorainfotech.in/api/main');
         $main = json_decode($response, true);
@@ -277,7 +272,6 @@ class Api extends CI_Controller {
             ->set_content_type('application/json')
             ->set_output(json_encode(array('message' => $responseMessage)));
     }
-
 
     public function insertFaq() {
         $jsonData = '{
@@ -499,6 +493,7 @@ class Api extends CI_Controller {
     
         // Decode JSON data
         $data = json_decode($jsonData, true);
+        $this->db->truncate('faq'); 
     
         // Iterate through each category
         foreach ($data as $category => $questions) {
