@@ -229,9 +229,55 @@ class Api extends CI_Controller {
     }
 
 
+
+    public function insertRecents() {
+        $response = file_get_contents('http://ixorainfotech.in/api/main');
+        $main = json_decode($response, true);
+        $this->db->truncate('recents'); 
+        
+        $responseMessage = array();
     
-
-
-
+        if (!empty($main['table1Data'])) {
+            foreach ($main['table1Data'] as $table1Data) {
+                $insertData = array(
+                    'Type' => $table1Data['Type'],
+                    'Company' => $table1Data["Company"],
+                    'link' => $table1Data["link"],
+                    'Open' => $table1Data["Open"],
+                    'Close' => $table1Data["Close"]
+                );
+                $this->db->insert('recents', $insertData);
+            }
+            
+            $responseMessage[] = 'table1Data inserted into recents table';
+        } else {
+            $responseMessage[] = 'No table1Data to insert into recents table';
+        }
     
+    
+        if (!empty($main['table2Data'])) {
+            foreach ($main['table2Data'] as $table2Data) {
+                $insertData = array(
+                    'Type' => $table2Data['Type'],
+                    'Company' => $table2Data["Company"],
+                    'link' => $table2Data["link"],
+                    'Open' => $table2Data["Open"],
+                    'Close' => $table2Data["Close"]
+                );
+                $this->db->insert('recents', $insertData);
+            }
+            
+            $responseMessage[] = 'table2Data inserted into recents table';
+        } else {
+            $responseMessage[] = 'No table2Data to insert into recents table';
+        }
+    
+        // Output JSON response
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode(array('message' => $responseMessage)));
+    }
+
+
+        
 }

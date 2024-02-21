@@ -13,7 +13,7 @@ connection.connect();
 connection.query(`
   CREATE TABLE IF NOT EXISTS faq (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
+    cname VARCHAR(255),
     question TEXT NULL,
     answer TEXT NULL,
     type VARCHAR(255) NULL
@@ -266,8 +266,8 @@ for (const key in jsonData) {
     const answer = entry.answer || '';
     const typeValue = key;
 
-    const query = `INSERT INTO faq (ipoid, question, answer, type) VALUES (?, ?, ?, ?)`;
-    connection.execute(query, [ipoid, question, answer, typeValue], (error, results, fields) => {
+    const query = `INSERT INTO faq (cname, question, answer, type) VALUES (?, ?, ?, ?)`;
+    connection.execute(query, [null, question, answer, typeValue], (error, results, fields) => {
       if (error) throw error;
       console.log(`Inserted into database: ${key}`);
     });
