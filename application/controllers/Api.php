@@ -511,6 +511,40 @@ class Api extends CI_Controller {
         // Print success message
         echo "Data inserted successfully!";
     }
+
+    public function insertMf() {
+          $apiUrl = 'http://ixorainfotech.in/api/mf/';
+
+          $headers = array(
+              'X-Device-Id: 123456789',
+              'X-Device-Type: web',
+              'User-Agent: ' . $_SERVER['HTTP_USER_AGENT']
+          );
+  
+          $contextOptions = array(
+              'http' => array(
+                  'method' => 'GET',
+                  'header' => implode("\r\n", $headers)
+              )
+          );
+          $context = stream_context_create($contextOptions);
+  
+          $jsonData = file_get_contents($apiUrl, false, $context);
+  
+          if ($jsonData === false) {
+              echo 'Error fetching data from API';
+          } else {
+            //   $data = json_decode($jsonData);
+  
+            //   $this->output
+            //   ->set_content_type('application/json')
+            //   ->set_output(json_encode($data));
+            header('Content-Type: application/json');
+
+            // Output the JSON data directly
+            echo $jsonData;
+          }
+    }
     
-        
+    
 }
