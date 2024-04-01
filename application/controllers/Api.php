@@ -528,23 +528,112 @@ class Api extends CI_Controller {
               )
           );
           $context = stream_context_create($contextOptions);
-  
           $jsonData = file_get_contents($apiUrl, false, $context);
-  
           if ($jsonData === false) {
               echo 'Error fetching data from API';
           } else {
-            //   $data = json_decode($jsonData);
-  
-            //   $this->output
-            //   ->set_content_type('application/json')
-            //   ->set_output(json_encode($data));
             header('Content-Type: application/json');
-
-            // Output the JSON data directly
             echo $jsonData;
           }
     }
     
+    public function insertStocksData() {
+        $data = $this->db->get('symbols')->result_array();
+        
+        foreach ($data as $symbol_data) {
+            $symbol = str_replace(' ', '+', $symbol_data['symbol']);
+            // $symbol = 'TATA';
+            $apiUrl = "http://ixorainfotech.in/api/stocks?key=$symbol";
+    
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $apiUrl);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Disable SSL certificate verification
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+    
+            // Set headers
+            $headers = [
+                'X-Device-Id: 123456789',
+                'X-Device-Type: web',
+                'User-Agent: ' . $_SERVER['HTTP_USER_AGENT'] // Forward user agent from client
+                // Add any other headers if needed
+            ];
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+            $jsonData = curl_exec($ch);
+    
+            if (curl_errno($ch)) {
+                echo 'Error fetching data from API: ' . curl_error($ch);
+            } else {
+                $response = json_decode($jsonData, true);
+                foreach ($response['result'] as $result) {
+                    echo"<pre>";
+                    print_r($result);
+                    // print_r("Expiry:=>". $result['expiry'] ."Company:=>".$result['company']);
+                    $mainData = [
+                        'token' => $result['token'],
+                        'exchange' => $result['exchange'],
+                        'company' => $result['company'],
+                        'symbol' => $result['symbol'],
+                        'trading_symbol' => $result['trading_symbol'],
+                        'display_name' => $result['display_name'],
+                        'score' => $result['score'],
+                        'isin' => $result['isin'],
+                        'close_price' => $result['close_price'],
+                        'is_tradable' => $result['is_tradable'],
+                        'segment' => $result['segment'],
+                        'tag' => $result['tag'],
+                        // 'expiry' => $result['expiry'],
+                        'token' => $result['alternate']['token'],
+                        'exchange' => $result['alternate']['exchange'],
+                        'company' => $result['alternate']['company'],
+                        'symbol' => $result['alternate']['symbol'],
+                        'trading_symbol' => $result['alternate']['trading_symbol'],
+                        'display_name' => $result['alternate']['display_name'],
+                        'isin' => $result['alternate']['isin'],
+                        'close_price' => $result['alternate']['close_price'],
+                        'segment' => $result['alternate']['segment']
+                    ];
+                    $this->db->insert('stock_data', $mainData);
+                }
+                echo 'Data inserted successfully!';
+            }
+    
+            curl_close($ch);
+
+            // break;
+        }
+    
+        // $this->output
+        //     ->set_content_type('application/json')
+        //     ->set_output(json_encode($data));
+    }
     
 }
+
+
+// CREATE TABLE IF NOT EXISTS stock_data (
+//     id INT AUTO_INCREMENT PRIMARY KEY,
+//     token INT NULL,
+//     exchange VARCHAR(50) NULL,
+//     company VARCHAR(255) NULL,
+//     symbol VARCHAR(50) NULL,
+//     trading_symbol VARCHAR(50) NULL,
+//     display_name VARCHAR(100) NULL,
+//     score DECIMAL(10, 6) NULL,
+//     isin VARCHAR(20) NULL,
+//     close_price DECIMAL(10, 2) NULL,
+//     is_tradable BOOLEAN NULL,
+//     segment VARCHAR(50) NULL,
+//     tag VARCHAR(100) NULL,
+//     expiry VARCHAR(50) NULL,
+//     alternate_token INT NULL,
+//     alternate_exchange VARCHAR(50) NULL,
+//     alternate_company VARCHAR(255) NULL,
+//     alternate_symbol VARCHAR(50) NULL,
+//     alternate_trading_symbol VARCHAR(50) NULL,
+//     alternate_display_name VARCHAR(100) NULL,
+//     alternate_isin VARCHAR(20) NULL,
+//     alternate_close_price DECIMAL(10, 2) NULL,
+//     alternate_segment VARCHAR(50) NULL
+// );
