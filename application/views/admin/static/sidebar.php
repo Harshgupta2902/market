@@ -88,8 +88,8 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#applicationsExamples" class="nav-link "
-                        aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                    <a data-bs-toggle="collapse" href="#blogs" class="nav-link "
+                        aria-controls="blogs" role="button" aria-expanded="false">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1"
@@ -115,40 +115,23 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Applications</span>
+                        <span class="nav-link-text ms-1">Blogs</span>
                     </a>
-                    <div class="collapse " id="applicationsExamples">
+                    <div class="collapse " id="blogs">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link " href="../../pages/applications/kanban.html">
+                                <a class="nav-link " href="<?= base_url('allblogs') ?>">
                                     <span class="sidenav-mini-icon"> K </span>
-                                    <span class="sidenav-normal"> Kanban </span>
+                                    <span class="sidenav-normal"> Blogs </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="../../pages/applications/wizard.html">
+                                <a class="nav-link " href="<?= base_url('addblogs') ?>">
                                     <span class="sidenav-mini-icon"> W </span>
-                                    <span class="sidenav-normal"> Wizard </span>
+                                    <span class="sidenav-normal"> Add Blogs </span>
                                 </a>
                             </li>
-                            <li class="nav-item ">
-                                <a class="nav-link " href="../../pages/applications/datatables.html">
-                                    <span class="sidenav-mini-icon"> D </span>
-                                    <span class="sidenav-normal"> DataTables </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link " href="../../pages/applications/calendar.html">
-                                    <span class="sidenav-mini-icon"> C </span>
-                                    <span class="sidenav-normal"> Calendar </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link " href="../../pages/applications/analytics.html">
-                                    <span class="sidenav-mini-icon"> A </span>
-                                    <span class="sidenav-normal"> Analytics </span>
-                                </a>
-                            </li>
+                            
                         </ul>
                     </div>
                 </li>

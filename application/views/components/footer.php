@@ -2,7 +2,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <img src="assets/img/logo-light.svg" alt="">
+                    <img src="<?= base_url('assets/img/logo-light.svg')?>" alt="">
                     <p>Crypo is the most advanced UI kit for making the Blockchain platform. This kit comes with 4 different exchange page, market, wallet and many more</p>
                     <ul class="social-icon">
                         <li><a href="<?php echo base_url('') ?>"><i class="icon ion-logo-facebook"></i></a></li>
@@ -36,13 +36,20 @@
                         <li><a href="<?php echo base_url('lumpsum_calculator') ?>">Lumpsum Calculator</a></li>
                     </ul>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <h3>Crypto</h3>
                     <ul>
                         <li><a href="<?php echo base_url('Crypto') ?>">Crypto - Home Page </a></li>
                         <li><a href="<?php echo base_url('screener') ?>">Screener</a></li>
                     </ul>
+                    <br>
+                    <h3>Blogs</h3>
+                    <ul>
+                        <li><a href="<?php echo base_url('blogs') ?>">Trending Blogs</a></li>
+                        <!-- <li><a href="<?php echo base_url('screener') ?>">Screener</a></li> -->
+                    </ul>
                 </div>
+                
             </div>
         </div>
     </footer>
