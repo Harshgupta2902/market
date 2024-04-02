@@ -58,5 +58,13 @@ $route['seolist'] = 'Admin/seolist';
 $route['pageview'] = 'Admin/pageview';
 $route['ipolist'] = 'Admin/ipolist';
 $route['scrap'] = 'Admin/scrap';
+$route['allblogs'] = 'Admin/allblogs';
+$route['addblogs'] = 'Admin/addblogs';
+$route['createPost'] = 'Admin/createPost';
 
 
+
+
+// ///////////        Blogs Routes     //////////////////////
+$route['blogs/(:any)'] = 'Blog/index/$1';
+$route['blogs'] = 'Blog/blogs';
