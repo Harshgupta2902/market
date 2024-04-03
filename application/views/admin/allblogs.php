@@ -3,14 +3,6 @@
 
 <head>
  <?php $this->load->view('admin/static/header') ?>
- <script src="https://cdn.tiny.cloud/1/c1gvghf9a50nhfs4r15amqmkra3k2nynjejiovp81x7e0g03/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>
-      tinymce.init({
-        selector: '#mytextarea',
-        plugins: 'code typography',
-
-      });
-    </script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -23,7 +15,7 @@
 
         <div class="container-fluid py-4">
             
-            <?php $this->load->view('admin/components/addblogsform') ?>
+            <?php $this->load->view('admin/components/allbloglist') ?>
             <?php $this->load->view('admin/static/footer') ?>
 
         </div>
