@@ -29,6 +29,10 @@ class AdminModel extends CI_Model {
         return $this->db->get('seo_details')->result_array();
     }
 
+    public function get_all_blogs() {
+        return $this->db->get('blogs')->result_array();
+    }
+    
     public function get_ipo_data() {
         $data['main'] = $this->db->get('recents')->result_array();
         $data['upcoming'] = $this->db->get('ipos')->result_array();

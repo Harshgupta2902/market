@@ -63,8 +63,18 @@ class Admin extends CI_Controller {
         $this->load->view('admin/addnav');
     }
 
-
-    
+    public function makeFeatured($postId, $featured) {
+        // $postId = $this->input->post('blogId');
+        // $featured = $this->input->post('featured');
+        if (!empty($postId)) {
+            $data = array('published' => $featured);
+            $this->db->where('id', $postId);
+            $this->db->update('blogs', $data);
+            redirect('allblogs');
+        } else {
+            echo "Post ID is required.";
+        }
+    }
 
     public function allnavs() {
         $this->check_admin_session();
@@ -113,14 +123,16 @@ class Admin extends CI_Controller {
     }
 
 
-
-
     public function allblogs() {
         $this->check_admin_session();
-        // $data = $this->AdminModel->get_ipo_data();
-        $this->load->view('admin/addblog');
+        $data['allBlogs'] = $this->AdminModel->get_all_blogs();
+        $this->load->view('admin/allblogs' ,$data);
     }
 
+    public function addblogs() {
+        $this->check_admin_session();
+        $this->load->view('admin/addblog');
+    }
 
     public function createPost() {
         if ($this->input->post()) {
@@ -130,12 +142,10 @@ class Admin extends CI_Controller {
             $this->form_validation->set_rules('tags', 'Tags', 'required');
             $this->form_validation->set_rules('category', 'Category', 'required');
             $this->form_validation->set_rules('alt_keyword', 'Alt Keyword', 'required');
-            $this->form_validation->set_rules('poll', 'Post Type', 'required');
             $this->form_validation->set_rules('meta_description', 'Meta Description', 'required');
             $this->form_validation->set_rules('robots', 'Robots', 'required');
             $this->form_validation->set_rules('meta_title', 'Meta Title', 'required');
             $this->form_validation->set_rules('meta_keywords', 'Meta Keywords', 'required');
-            $this->form_validation->set_rules('slug', 'Post Slug', 'required');
 			
             if ($this->form_validation->run() == TRUE) {
                 $config['upload_path'] = './uploads/';
@@ -150,38 +160,21 @@ class Admin extends CI_Controller {
 
 					$Blogdata = array(
 						'title' => $this->input->post('post_name'),
-						'type' => $this->input->post('poll'),
 						'description' => $this->input->post('short_description'),
 						'blog' => $this->input->post('description'),
-						'image' => base_url().'uploads/' . $this->input->post('alt_keyword') . $image_data['file_ext'],
+						'image' => base_url().'uploads/' . str_replace(' ', '_', $this->input->post('alt_keyword')). $image_data['file_ext'],
 						'alt_keyword' => $this->input->post('alt_keyword'),
 						'tags' => $this->input->post('tags'),
 						'category' => $this->input->post('category'),
-						'featured' => $this->input->post('featured'),
-                        'slug' => $this->input->post('slug')
-
+                        'slug' => $this->create_slug($this->input->post('post_name')),
+                        'meta_description' => $this->input->post('meta_description'),
+                        'meta_title' => $this->input->post('meta_title'),
+                        'robots' => $this->input->post('robots'),
+                        'meta_keywords' => $this->input->post('meta_keywords'),
 					);
 					$this->db->insert('blogs', $Blogdata);
 					$blog_id = $this->db->insert_id();
-
-					if($blog_id){
-						$meta_description = $this->input->post('meta_description');
-						$meta_title = $this->input->post('meta_title');
-						$robots = $this->input->post('robots');
-						$meta_keywords = $this->input->post('meta_keywords');
-
-						$metaData = array(
-							'meta_description' => $this->input->post('meta_description'),
-							'meta_title' => $this->input->post('meta_title'),
-							'blog_id' => $blog_id,
-							'robots' => $this->input->post('robots'),
-							'meta_keywords' => $this->input->post('meta_keywords'),
-
-						);
-						$this->db->insert('metadata', $metaData);
-
-                        redirect('allBlogs');
-					}
+                    redirect('allblogs');
 
                 } else {
                     $upload_error = $this->upload->display_errors();
@@ -191,7 +184,7 @@ class Admin extends CI_Controller {
                 echo validation_errors();
             }
         } else {
-            redirect('allBlogs');
+            redirect('allblogs');
         }
     }
 
@@ -200,6 +193,12 @@ class Admin extends CI_Controller {
 
 
 
+    private function create_slug($title) {
+        $slug = strtolower($title);
+        $slug = str_replace(' ', '-', $slug);
+        $slug = preg_replace('/[^A-Za-z0-9\-]/', '', $slug);
+        return $slug;
+    }
 
     private function set_seo_form_validation()
     {
@@ -246,3 +245,6 @@ class Admin extends CI_Controller {
     }
     
 }
+
+
+

@@ -17,6 +17,9 @@ class Blog extends CI_Controller {
 	public function index($slug){
         $data['metaData'] = $this->ViewsModel->getSeoDetails('Crypto');
         $data['nav'] = $this->nav;
+        $data['data'] = $this->db->where('slug', $slug)->get('blogs')->row(); 
+        // echo"<pre>";
+        // print_r($data);
 		$this->load->view('blog/details', $data);
 	}
 
@@ -27,7 +30,7 @@ class Blog extends CI_Controller {
 	}
 
 
-    	public function createPost() {
+    public function createPost() {
         if ($this->input->post()) {
             $this->form_validation->set_rules('post_name', 'Post Name', 'required');
             $this->form_validation->set_rules('short_description', 'Short Description', 'required');
