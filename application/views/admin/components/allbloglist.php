@@ -5,7 +5,6 @@
             <div class="d-lg-flex">
                <div>
                   <h5 class="mb-0">All Blogs</h5>
-               
                </div>
                <div class="ms-auto my-auto mt-lg-0 mt-4">
                   <div class="ms-auto my-auto">
@@ -26,6 +25,9 @@
                               <th>Category</th>
                               <th>Published</th>
                               <th>created_at</th>
+                              <th>Views</th>
+                              <th>Action</th>
+
                            </tr>
                         </thead>
                         <tbody>
@@ -45,7 +47,19 @@
                                     <input <?= $data['published'] == 1 ? 'checked' : '' ?> name="status" type="checkbox" class="custom-control-input" data-blog-id="<?= $data['id'] ?>" onchange='updateFeaturedStatus(this)'>
                                  </td>
                                  <td class="text-sm"><?= $data['created_at'] ?></td>
-                                 
+                                 <td class="text-sm"><?= $data['views'] ?></td>
+                                 <td class="text-sm">
+                                    <a href="<?= base_url('blogs/'.$data['slug']) ?>" target="_blank" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
+                                       <i class="me-2 fas fa-eye text-secondary" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="<?= base_url('editblogs?id='.$data['id']) ?>" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
+                                       <i class="ms-4 fas fa-edit"></i>
+                                    </a>
+                                    <a href="<?= base_url('deleteblog?id='.$data['id']) ?>" data-bs-toggle="tooltip" data-bs-original-title="Delete product">
+                                       <i class="ms-4 fas fa-trash text-secondary" aria-hidden="true"></i>
+                                    </a>
+                                   
+                                 </td>
                               </tr>
 
                               <script>

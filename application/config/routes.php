@@ -61,7 +61,9 @@ $route['scrap'] = 'Admin/scrap';
 $route['allblogs'] = 'Admin/allblogs';
 $route['addblogs'] = 'Admin/addblogs';
 $route['createPost'] = 'Admin/createPost';
-
+$route['deleteblog'] = 'Admin/deleteblog';
+$route['editblogs'] = 'Admin/editblogs';
+$route['update'] = 'Admin/updateblog';
 
 
 
