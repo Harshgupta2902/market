@@ -323,7 +323,8 @@
                                             class="cs-meta-author-link url fn n"
                                             href="https://swyft.codesupply.co/marketing/author/liam/"><span
                                                 class="cs-meta-author-name">Harsh Gupta</span></a></div>
-                                    <div class="cs-meta-date"><?= date('M d, Y', strtotime($latestblogs['created_at']))?></div>
+                                    <div class="cs-meta-date">
+                                        <?= date('M d, Y', strtotime($latestblogs['created_at'])) ?></div>
                                 </div>
                                 <h2 class="cs-entry__title"> <?= $latestblogs['title'] ?>
                                 </h2>
@@ -336,48 +337,46 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </div> <a class="cs-overlay-link"
-                                href="<?= base_url('blogs/' . $latestblogs['slug']) ?>"
+                            </div> <a class="cs-overlay-link" href="<?= base_url('blogs/' . $latestblogs['slug']) ?>"
                                 title="<?= $latestblogs['title'] ?>"></a>
                         </div>
                     </article>
                     <?php foreach ($featuredblogs as $blogs) { ?>
-						<article class="cs-entry cs-entry__list">
-							<div class="cs-entry__outer">
-								<div class="cs-entry__inner cs-entry__thumbnail cs-entry__overlay cs-overlay-ratio">
-									<div class="cs-overlay-background"> <img width="512" height="384"
-											src="<?= $blogs['image'] ?>"
-											class="attachment-csco-thumbnail size-csco-thumbnail wp-post-image"
-											alt="Real Estate Investments: The Path to Financial Freedom?" decoding="async"
-											srcset="<?= $blogs['image'] ?> 512w, <?= $blogs['image'] ?> 1024w"
-											sizes="(max-width: 512px) 100vw, 512px"></div> <a class="cs-overlay-link"
-										href="<?= $blogs['slug'] ?>"
-										title="<?= $blogs['title'] ?>"></a>
-								</div>
-								<div class="cs-entry__inner cs-entry__content">
-									<div class="cs-entry__post-meta">
-										<div class="cs-meta-author"><span class="cs-meta-author-by">By</span><a
-												class="cs-meta-author-link url fn n"
-												href="https://swyft.codesupply.co/marketing/author/joanna/"><span
-													class="cs-meta-author-name">Joanna Wellick</span></a></div>
-										<div class="cs-meta-date"><?= date('M d, Y', strtotime($blogs['created_at']))?></div>
+                    <article class="cs-entry cs-entry__list">
+                        <div class="cs-entry__outer">
+                            <div class="cs-entry__inner cs-entry__thumbnail cs-entry__overlay cs-overlay-ratio">
+                                <div class="cs-overlay-background"> <img width="512" height="384"
+                                        src="<?= $blogs['image'] ?>"
+                                        class="attachment-csco-thumbnail size-csco-thumbnail wp-post-image"
+                                        alt="Real Estate Investments: The Path to Financial Freedom?" decoding="async"
+                                        srcset="<?= $blogs['image'] ?> 512w, <?= $blogs['image'] ?> 1024w"
+                                        sizes="(max-width: 512px) 100vw, 512px"></div> <a class="cs-overlay-link"
+                                    href="<?= $blogs['slug'] ?>" title="<?= $blogs['title'] ?>"></a>
+                            </div>
+                            <div class="cs-entry__inner cs-entry__content">
+                                <div class="cs-entry__post-meta">
+                                    <div class="cs-meta-author"><span class="cs-meta-author-by">By</span><a
+                                            class="cs-meta-author-link url fn n"
+                                            href="https://swyft.codesupply.co/marketing/author/joanna/"><span
+                                                class="cs-meta-author-name">Joanna Wellick</span></a></div>
+                                    <div class="cs-meta-date"><?= date('M d, Y', strtotime($blogs['created_at'])) ?>
+                                    </div>
 
-									</div>
-									<h2 class="cs-entry__title"> <a
-											href="<?= $blogs['title'] ?>">
-											<?= $blogs['title'] ?> </a></h2>
-									<div class="cs-entry__post-meta">
-										<div class="cs-meta-category">
-											<ul class="post-categories">
-												<li><a href="https://swyft.codesupply.co/marketing/category/finance/"
-														rel="category tag"><?= $blogs['category'] ?></a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</article>
-					<?php }?>
+                                </div>
+                                <h2 class="cs-entry__title"> <a href="<?= $blogs['title'] ?>">
+                                        <?= $blogs['title'] ?> </a></h2>
+                                <div class="cs-entry__post-meta">
+                                    <div class="cs-meta-category">
+                                        <ul class="post-categories">
+                                            <li><a href="https://swyft.codesupply.co/marketing/category/finance/"
+                                                    rel="category tag"><?= $blogs['category'] ?></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <?php }?>
                 </div>
             </div>
         </section>
@@ -387,61 +386,60 @@
                     <div id="primary" class="cs-content-area">
                         <div class="cs-posts-area cs-posts-area-posts" data-init="true">
                             <div class="cs-posts-area__outer">
-                                <div class="cs-posts-area__main cs-archive-list  cs-posts-area__home cs-posts-area__list">
-								<?php
-									$displayedBlogs = 6; 
-									$totalBlogs = count($otherblogs);
-									?>
-                                   <?php foreach (array_slice($otherblogs, 0, $displayedBlogs) as $allblogs) {?>
-										<article
-											class="post-2246 post type-post status-publish format-standard has-post-thumbnail category-studies cs-entry">
-											<div class="cs-entry__outer">
-												<div class="cs-entry__inner cs-entry__thumbnail cs-entry__overlay cs-overlay-ratio cs-ratio-landscape-16-9"
-													data-scheme="inverse">
-													<div class="cs-overlay-background"> <img width="512"
-															height="288" src="<?= $allblogs['image'] ?>"
-															class="attachment-csco-thumbnail-16x9 size-csco-thumbnail-16x9 wp-post-image"
-															alt="A Parent’s Guide to Supporting Your Child’s Online Learning Journey"
-															decoding="async" loading="lazy"
-															srcset="<?= $allblogs['image'] ?> 512w, <?= $allblogs['image'] ?> 1024w"
-															sizes="(max-width: 512px) 100vw, 512px"></div> <a
-														class="cs-overlay-link"
-														href="https://swyft.codesupply.co/marketing/2023/09/30/a-parents-guide-to-supporting-your-childs-online-learning-journey/"
-														title="A Parent’s Guide to Supporting Your Child’s Online Learning Journey"></a>
-												</div>
-												<div class="cs-entry__inner cs-entry__content">
-													<div class="cs-entry__post-meta">
-														<div class="cs-meta-author"><span
-																class="cs-meta-author-by">By</span><a
-																class="cs-meta-author-link url fn n"
-																href="https://swyft.codesupply.co/marketing/author/joanna/"><span
-																	class="cs-meta-author-name">Joanna
-																	Wellick</span></a></div>
-														<div class="cs-meta-date">Sep 30, 2023</div>
-													</div>
-													<h2 class="cs-entry__title"><a
-															href="https://swyft.codesupply.co/marketing/2023/09/30/a-parents-guide-to-supporting-your-childs-online-learning-journey/"><span>A
-																Parent’s Guide to Supporting Your Child’s Online
-																Learning Journey</span></a></h2>
-													<div class="cs-entry__excerpt"> Anticipating a future where
-														business meets technology, guided by wisdom and inspiration.
-													</div>
-													<div class="cs-entry__post-meta">
-														<div class="cs-meta-category">
-															<ul class="post-categories">
-																<li><a href="https://swyft.codesupply.co/marketing/category/studies/"
-																		rel="category tag">Studies</a></li>
-															</ul>
-														</div>
-													</div>
-												</div>
-											</div>
-										</article>
-								   <?php } ?>
+                                <div
+                                    class="cs-posts-area__main cs-archive-list  cs-posts-area__home cs-posts-area__list">
+                                    <?php
+                                    $displayedBlogs = 6;
+                                    $totalBlogs = count($otherblogs);
+                                    ?>
+                                    <?php foreach (array_slice($otherblogs, 0, $displayedBlogs) as $allblogs) {?>
+                                    <article
+                                        class="post-2246 post type-post status-publish format-standard has-post-thumbnail category-studies cs-entry">
+                                        <div class="cs-entry__outer">
+                                            <div class="cs-entry__inner cs-entry__thumbnail cs-entry__overlay cs-overlay-ratio cs-ratio-landscape-16-9"
+                                                data-scheme="inverse">
+                                                <div class="cs-overlay-background"> <img width="512"
+                                                        height="288" src="<?= $allblogs['image'] ?>"
+                                                        class="attachment-csco-thumbnail-16x9 size-csco-thumbnail-16x9 wp-post-image"
+                                                        alt="<?= $allblogs['alt_keyword'] ?>" decoding="async"
+                                                        loading="lazy"
+                                                        srcset="<?= $allblogs['image'] ?> 512w, <?= $allblogs['image'] ?> 1024w"
+                                                        sizes="(max-width: 512px) 100vw, 512px"></div> <a
+                                                    class="cs-overlay-link"
+                                                    href="<?= base_url('blogs/' . $latestblogs['slug']) ?>"
+                                                    title="<?= $allblogs['title'] ?>"></a>
+                                            </div>
+                                            <div class="cs-entry__inner cs-entry__content">
+                                                <div class="cs-entry__post-meta">
+                                                    <div class="cs-meta-author"><span
+                                                            class="cs-meta-author-by">By</span><a
+                                                            class="cs-meta-author-link url fn n" href="#"><span
+                                                                class="cs-meta-author-name">Admin</span></a></div>
+                                                    <div class="cs-meta-date">
+                                                        <?= date('M d, Y', strtotime($allblogs['created_at'])) ?></div>
+                                                </div>
+                                                <h2 class="cs-entry__title"><a
+                                                        href="<?= base_url('blogs/' . $latestblogs['slug']) ?>"><span>
+                                                            <?= $allblogs['title'] ?>
+                                                        </span></a></h2>
+                                                <div class="cs-entry__excerpt"><?= $allblogs['description'] ?></div>
+                                                <div class="cs-entry__post-meta">
+                                                    <div class="cs-meta-category">
+                                                        <ul class="post-categories">
+                                                            <li><a href="#"
+                                                                    rel="category tag"><?= $allblogs['category'] ?></a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                    <?php } ?>
                                 </div>
                             </div>
                             <div class="cs-posts-area__pagination"><button class="cs-load-more"
-							data-settings='{
+                                    data-settings='{
 									"displayedBlogs": <?php echo $displayedBlogs; ?>,
 									"totalBlogs": <?php echo $totalBlogs; ?>,
 									"nonce": "e031a1ec84",
@@ -454,29 +452,29 @@
 									"translation": {"load_more": "Load More", "loading": "Loading ..."}
 								}'
                                     data-page="2" data-loading="false"
-									data-scroll-handling='{"allow":false,"delay":400}'>Load More</button>
+                                    data-scroll-handling='{"allow":false,"delay":400}'>Load More</button>
 
-									<script>
-										document.addEventListener("DOMContentLoaded", function() {
-											var loadMoreButton = document.querySelector('.cs-load-more');
-											var displayedBlogs = <?php echo $displayedBlogs; ?>;
-											var totalBlogs = <?php echo $totalBlogs; ?>;
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", function() {
+                                        var loadMoreButton = document.querySelector('.cs-load-more');
+                                        var displayedBlogs = <?php echo $displayedBlogs; ?>;
+                                        var totalBlogs = <?php echo $totalBlogs; ?>;
 
-											loadMoreButton.addEventListener('click', function() {
-												// Increment the number of displayed blogs
-												displayedBlogs += 6; // Change this number as needed
+                                        loadMoreButton.addEventListener('click', function() {
+                                            // Increment the number of displayed blogs
+                                            displayedBlogs += 6; // Change this number as needed
 
-												// Check if all blogs are displayed
-												if (displayedBlogs >= totalBlogs) {
-													loadMoreButton.style.display = 'none'; // Hide the button
-												}
+                                            // Check if all blogs are displayed
+                                            if (displayedBlogs >= totalBlogs) {
+                                                loadMoreButton.style.display = 'none'; // Hide the button
+                                            }
 
-												// Execute your AJAX request or other logic to load more blogs here
-												// You can use the data-settings attribute to retrieve the necessary data for the request
-											});
-										});
-									</script>
-							</div>
+                                            // Execute your AJAX request or other logic to load more blogs here
+                                            // You can use the data-settings attribute to retrieve the necessary data for the request
+                                        });
+                                    });
+                                </script>
+                            </div>
                         </div>
                     </div>
                     <aside id="secondary" class="cs-widget-area cs-sidebar__area">
@@ -557,8 +555,7 @@
                                 </div>
                             </div>
                             <div class="widget block-5 widget_block">
-                                <div
-                                    class="wp-block-group is-layout-constrained wp-block-group-is-layout-constrained">
+                                <div class="wp-block-group is-layout-constrained wp-block-group-is-layout-constrained">
                                     <div class="wp-block-group__inner-container">
                                         <h2 class="wp-block-heading">Featured Posts</h2>
                                         <ul
@@ -654,20 +651,14 @@
                                 <div
                                     class="wp-block-group is-style-default is-layout-constrained wp-block-group-is-layout-constrained">
                                     <div class="wp-block-group__inner-container">
-                                        <h2 class="wp-block-heading is-style-default">Explore Categories</h2>
+                                        <h2 class="wp-block-heading is-style-default">Categories</h2>
                                         <ul class="wp-block-categories-list is-style-cs-tiles wp-block-categories">
-                                            <li class="cat-item cat-item-207"><a
-                                                    href="https://swyft.codesupply.co/marketing/category/finance/">Finance
-                                                    <span>10</span></a></li>
-                                            <li class="cat-item cat-item-1"><a
-                                                    href="https://swyft.codesupply.co/marketing/category/strategy/">Strategy
-                                                    <span>10</span></a></li>
-                                            <li class="cat-item cat-item-209"><a
-                                                    href="https://swyft.codesupply.co/marketing/category/studies/">Studies
-                                                    <span>10</span></a></li>
-                                            <li class="cat-item cat-item-208"><a
-                                                    href="https://swyft.codesupply.co/marketing/category/technology/">Technology
-                                                    <span>10</span></a></li>
+                                            <?php foreach ($category as $key => $value) { ?>
+                                                <li class="cat-item cat-item-207"><a
+                                                    href=""><?= $key?>
+                                                    <span><?=$value?></span></a></li>
+                                            <?php } ?>
+                                           
                                         </ul>
                                     </div>
                                 </div>
@@ -697,8 +688,7 @@
                                 </div>
                             </div>
                             <div class="widget block-8 widget_block">
-                                <div
-                                    class="wp-block-group is-layout-constrained wp-block-group-is-layout-constrained">
+                                <div class="wp-block-group is-layout-constrained wp-block-group-is-layout-constrained">
                                     <div class="wp-block-group__inner-container">
                                         <h2 class="wp-block-heading">Sponsored Ad</h2>
                                         <figure class="wp-block-image size-full is-resized"><img loading="lazy"
