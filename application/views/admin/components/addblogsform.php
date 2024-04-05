@@ -61,29 +61,40 @@
                                         placeholder="Alt Keyword">
                                 </div>
                             </div>
-                            <div class="col-lg-7">
-                                <!-- Tags -->
-                                <div class="mb-3">
-                                    <label class="form-label">Tags</label>
-                                    <textarea name="tags" class="form-control" rows="1" placeholder="Tags"></textarea>
+                            
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <!-- Message -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Category</label>
+                                        <select class="form-select" name="category" aria-label="Default select example">
+                                            <option selected>IPO</option>
+                                            <option value="Cryptocurrencies">Cryptocurrencies</option>
+                                            <option value="Investments">Investments</option>
+                                            <option value="Regulations">Regulations</option>
+                                            <option value="Market">Market</option>
+                                            <option value="Technology">Technology</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-5">
-                                <!-- Message -->
-                                <div class="mb-3">
-                                    <label class="form-label">Category</label>
-                                    <select class="form-select" name="category" aria-label="Default select example">
-                                        <option selected>IPO's</option>
-                                        <option value="Cryptocurrencies">Cryptocurrencies</option>
-                                        <option value="Investments">Investments</option>
-                                        <option value="Regulations">Regulations</option>
-                                        <option value="Market">Market</option>
-                                        <option value="Technology">Technology</option>
-                                    </select>
+                                <div class="col-lg-6">
+                                    <!-- Message -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Author</label>
+                                        <select class="form-select" name="author">
+                                            <option selected>Admin</option>
+                                            <option value="Cryptocurrencies">Harsh Gupta</option>
+                                            <option value="Investments">Ravi Gupta</option>
+                                            <option value="Regulations">Pankaj Gupta</option>
+                                            <option value="Market">Ronak Gupta</option>
+                                            <option value="Technology">Vishal Gupta</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
                                 <div class="mb-3">
                                     <label class="form-label">Meta title</label>
                                     <input required name="meta_title" type="text" class="form-control"
@@ -101,6 +112,14 @@
                                         <option value="noindex, follow">noindex, follow</option>
                                         <option selected value="index, follow">index, follow</option>
                                     </select>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <!-- Tags -->
+                                <div class="mb-3">
+                                    <label class="form-label">Tags</label>
+                                    <textarea name="tags" class="form-control" rows="1" placeholder="Tags"></textarea>
                                 </div>
                             </div>
                             <div class="row">

@@ -107,7 +107,7 @@
                   <div class="mb-3">
                     <label class="form-label">Category</label>
                     <select class="form-select" name="category" aria-label="Default select example">
-                      <option selected>IPO's</option>
+                      <option selected>IPO</option>
                       <option value="Cryptocurrencies">Cryptocurrencies</option>
                       <option value="Investments">Investments</option>
                       <option value="Regulations">Regulations</option>

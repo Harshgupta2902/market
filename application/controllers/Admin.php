@@ -259,6 +259,7 @@ class Admin extends CI_Controller
             $this->form_validation->set_rules('robots', 'Robots', 'required');
             $this->form_validation->set_rules('meta_title', 'Meta Title', 'required');
             $this->form_validation->set_rules('meta_keywords', 'Meta Keywords', 'required');
+            $this->form_validation->set_rules('author', 'Author', 'required');
 
             if ($this->form_validation->run() == true) {
                 $config['upload_path'] = './uploads/';
@@ -283,6 +284,7 @@ class Admin extends CI_Controller
                         'meta_title' => $this->input->post('meta_title'),
                         'robots' => $this->input->post('robots'),
                         'meta_keywords' => $this->input->post('meta_keywords'),
+                        'author' => $this->input->post('author'),
                     ];
                     $this->db->insert('blogs', $Blogdata);
                     $blog_id = $this->db->insert_id();
