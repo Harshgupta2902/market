@@ -337,7 +337,8 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </div> <a class="cs-overlay-link" href="<?= base_url('blogs/' . $latestblogs['slug']) ?>"
+                            </div> <a class="cs-overlay-link"
+                                href="<?= base_url('blogs/' . $latestblogs['category'] . '/' . $latestblogs['slug']) ?>"
                                 title="<?= $latestblogs['title'] ?>"></a>
                         </div>
                     </article>
@@ -351,7 +352,7 @@
                                         alt="Real Estate Investments: The Path to Financial Freedom?" decoding="async"
                                         srcset="<?= $blogs['image'] ?> 512w, <?= $blogs['image'] ?> 1024w"
                                         sizes="(max-width: 512px) 100vw, 512px"></div> <a class="cs-overlay-link"
-                                    href="<?= $blogs['slug'] ?>" title="<?= $blogs['title'] ?>"></a>
+                                    href="<?= base_url('blogs/' . $blogs['category'] . '/' . $blogs['slug']) ?>" title="<?= $blogs['title'] ?>"></a>
                             </div>
                             <div class="cs-entry__inner cs-entry__content">
                                 <div class="cs-entry__post-meta">
@@ -363,12 +364,12 @@
                                     </div>
 
                                 </div>
-                                <h2 class="cs-entry__title"> <a href="<?= $blogs['title'] ?>">
+                                <h2 class="cs-entry__title"> <a href="<?= base_url('blogs/' . $blogs['category'] . '/' . $blogs['slug']) ?>">
                                         <?= $blogs['title'] ?> </a></h2>
                                 <div class="cs-entry__post-meta">
                                     <div class="cs-meta-category">
                                         <ul class="post-categories">
-                                            <li><a href="https://swyft.codesupply.co/marketing/category/finance/"
+                                            <li><a href=""
                                                     rel="category tag"><?= $blogs['category'] ?></a></li>
                                         </ul>
                                     </div>
@@ -406,7 +407,7 @@
                                                         srcset="<?= $allblogs['image'] ?> 512w, <?= $allblogs['image'] ?> 1024w"
                                                         sizes="(max-width: 512px) 100vw, 512px"></div> <a
                                                     class="cs-overlay-link"
-                                                    href="<?= base_url('blogs/' . $latestblogs['slug']) ?>"
+                                                    href="<?= base_url('blogs/' . $latestblogs['category'] . '/' . $latestblogs['slug']) ?>"
                                                     title="<?= $allblogs['title'] ?>"></a>
                                             </div>
                                             <div class="cs-entry__inner cs-entry__content">
@@ -419,7 +420,7 @@
                                                         <?= date('M d, Y', strtotime($allblogs['created_at'])) ?></div>
                                                 </div>
                                                 <h2 class="cs-entry__title"><a
-                                                        href="<?= base_url('blogs/' . $latestblogs['slug']) ?>"><span>
+                                                        href="<?= base_url('blogs/' . $latestblogs['category'] . '/' . $latestblogs['slug']) ?>"><span>
                                                             <?= $allblogs['title'] ?>
                                                         </span></a></h2>
                                                 <div class="cs-entry__excerpt"><?= $allblogs['description'] ?></div>
@@ -654,11 +655,13 @@
                                         <h2 class="wp-block-heading is-style-default">Categories</h2>
                                         <ul class="wp-block-categories-list is-style-cs-tiles wp-block-categories">
                                             <?php foreach ($category as $key => $value) { ?>
-                                                <li class="cat-item cat-item-207"><a
-                                                    href=""><?= $key?>
-                                                    <span><?=$value?></span></a></li>
+                                            <li class="cat-item cat-item-207">
+                                                <a href="javascript:void(0);"><?= $key ?>
+                                                    <span><?= $value ?></span>
+                                                </a>
+                                            </li>
                                             <?php } ?>
-                                           
+
                                         </ul>
                                     </div>
                                 </div>
