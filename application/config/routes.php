@@ -70,5 +70,6 @@ $route['update'] = 'Admin/updateblog';
 // ///////////        Blogs Routes     //////////////////////
 // $route['blogs/(:any)'] = 'Blog/index/$1';
 $route['blogs/(:any)/(:any)'] = 'Blog/index/$1/$2';
+$route['comment'] = 'Blog/comment';
 
 $route['blogs'] = 'Blog/blogs';
