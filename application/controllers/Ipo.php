@@ -27,6 +27,8 @@ class Ipo extends CI_Controller
             'sme' => $this->sme,
             'nav' => $this->nav,
         ];
+        // echo "<pre>";
+        // print_r($this->nav);
         $this->ViewsModel->updatePageViews('home');
 
         $this->loadCommonView('home', $data);

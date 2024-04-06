@@ -49,7 +49,7 @@
                                  <td class="text-sm"><?= $data['created_at'] ?></td>
                                  <td class="text-sm"><?= $data['views'] ?></td>
                                  <td class="text-sm">
-                                    <a href="<?= base_url('blogs/'.$data['slug']) ?>" target="_blank" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
+                                    <a href="<?= base_url('blogs/'.$data['category'].'/'.$data['slug']) ?>" target="_blank" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
                                        <i class="me-2 fas fa-eye text-secondary" aria-hidden="true"></i>
                                     </a>
                                     <a href="<?= base_url('editblogs?id='.$data['id']) ?>" data-bs-toggle="tooltip" data-bs-original-title="Edit product">

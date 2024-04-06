@@ -11,7 +11,7 @@
 <meta name="Copyright" content="Copyright 2024 @ Crypo" />
 
 <meta name="robots" content="index, follow" />
-<meta name="Robots" content="noodp, noydir" />  
+<!-- <meta name="Robots" content="noodp, noydir" />   -->
 
 <title><?= $metaData['seo_title'] ?></title>
 

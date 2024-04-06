@@ -322,12 +322,12 @@
                     <div class="cs-entry__outer cs-entry__overlay cs-overlay-ratio cs-ratio-landscape-3-2">
                         <div class="cs-entry__inner cs-entry__thumbnail">
                             <div class="cs-overlay-background"> <img width="512" height="343"
-                                    src="https://swyft.codesupply.co/marketing/wp-content/uploads/sites/3/2023/10/demo-image-0020-512x343.webp"
+                                    src="<?=$data->image?>"
                                     class="attachment-csco-thumbnail-uncropped size-csco-thumbnail-uncropped wp-post-image"
                                     alt="Real Estate Investments: The Path to Financial Freedom?" decoding="async"
                                     fetchpriority="high" sizes="(max-width: 512px) 100vw, 512px">
                                 <img width="1920" height="1285"
-                                    src="https://swyft.codesupply.co/marketing/wp-content/uploads/sites/3/2023/10/demo-image-0020-1920x1285.webp"
+                                    src="<?=$data->image?>"
                                     class="attachment-csco-extra-large-uncropped size-csco-extra-large-uncropped wp-post-image"
                                     alt="Real Estate Investments: The Path to Financial Freedom?" decoding="async"
                                     sizes="(max-width: 1920px) 100vw, 1920px">
@@ -345,11 +345,10 @@
                                         </picture> -->
                                         <span class="cs-meta-author-name"><?= $data->author ?></span>
                                     </a></div>
-                                <div class="cs-meta-date">Aug 10, 2023</div>
+                                <div class="cs-meta-date"><?= date('M d, Y', strtotime($data->published_at)) ?></div>
                             </div>
-                            <h1 class="cs-entry__title"><span>Unlocking Wealth: Real Estate Mastery</span></h1>
-                            <div class="cs-entry__subtitle"> Anticipating a future where business meets technology,
-                                guided by wisdom and inspiration.</div>
+                            <h1 class="cs-entry__title"><span><?= $data->title ?></span></h1>
+                            <div class="cs-entry__subtitle"> <?= $data->description ?></div>
                         </div>
                     </div>
                 </div>
@@ -390,7 +389,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <section class="cs-read-next">
+                            <!-- <section class="cs-read-next">
                                 <div class="cs-read-next__heading">
                                     <h2> Read Next</h2>
                                 </div>
@@ -523,7 +522,7 @@
                                         </div>
                                     </article>
                                 </div>
-                            </section>
+                            </section> -->
                             <br><br><br><br>
                             <!-- <div class="p-4 form-access my-auto">
                                 <form>
@@ -558,7 +557,10 @@
                                 <div class="cs-entry__comments-inner">
                                     <div class="comment-respond">
                                         <h2 class="comment-reply-title">Leave a Reply </h2>
-                                        <form action="" method="post" class="comment-form">
+                                        <form action="<?= base_url('comment') ?>" method="post" class="comment-form">
+                                            <input type="hidden" name="blog_id" value="<?= $data->id ?>">
+                                            <input type="hidden" name="slug" value="<?= $data->slug ?>">
+                                            <input type="hidden" name="category" value="<?= $data->category ?>">
                                             <p class="comment-notes">
                                                 <span>Your email address will not be published.</span>
                                                 <span class="required-field-message">Required fields are marked <span
@@ -571,7 +573,7 @@
                                             <p class="comment-form-author">
                                                 <label for="author">Your Name <span
                                                         class="required">*</span></label>
-                                                <input class="form-control" name="author" type="text"
+                                                <input class="form-control" name="name" type="text"
                                                     value="" size="30" maxlength="245"
                                                     required="required">
                                             </p>
@@ -583,14 +585,14 @@
                                                     required="required">
                                             </p>
                                             <p class="comment-form-url">
-                                                <label for="url">Website</label>
-                                                <input name="url" type="url" value=""
+                                                <label for="url">Phone</label>
+                                                <input name="phone" type="tel" value=""
                                                     class="form-control" size="30" maxlength="200">
                                             </p>
                                             <p class="form-submit">
                                                 <button name="submit" type="submit" class="submit"
-                                                    value="Post Comment">Submit Comment</button>
-                                                <input type="hidden" name="post_id" value="<?= $data->id ?>">
+                                                    >Submit Comment</button>
+                                                
                                             </p>
                                         </form>
                                     </div>
