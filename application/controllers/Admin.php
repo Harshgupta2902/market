@@ -191,7 +191,7 @@ class Admin extends CI_Controller
             if ($this->form_validation->run() == true) {
                 $config['upload_path'] = './uploads/';
                 $config['allowed_types'] = 'jpg|jpeg|png';
-                $config['max_size'] = 4096;
+                $config['max_size'] = 26624;
                 $config['file_name'] = $this->input->post('alt_keyword');
                 $this->load->library('upload', $config);
 
@@ -264,7 +264,7 @@ class Admin extends CI_Controller
             if ($this->form_validation->run() == true) {
                 $config['upload_path'] = './uploads/';
                 $config['allowed_types'] = 'jpg|jpeg|png';
-                $config['max_size'] = 4096;
+                $config['max_size'] = 26624;
                 $config['file_name'] = $this->input->post('alt_keyword');
                 $this->load->library('upload', $config);
 
