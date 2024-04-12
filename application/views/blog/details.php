@@ -3,20 +3,26 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" id="powerkit-css"
+    <!-- <link rel="stylesheet" id="powerkit-css"
         href="https://caards.codesupply.co/caards/wp-content/plugins/powerkit/assets/css/powerkit.css?ver=2.9.0"
         media="all">
     <link rel="stylesheet" id="powerkit-share-buttons-css"
         href="https://caards.codesupply.co/caards/wp-content/plugins/powerkit/modules/share-buttons/public/css/public-powerkit-share-buttons.css?ver=2.9.0"
+        media="all"> -->
+
+
+    <link rel="stylesheet" href="https://caards.codesupply.co/caards/wp-content/themes/caards/style.css?ver=1.0.4"
         media="all">
-
-
-    <link rel="stylesheet" id="csco-styles-css"
-        href="https://caards.codesupply.co/caards/wp-content/themes/caards/style.css?ver=1.0.4" media="all">
     <script src="https://caards.codesupply.co/caards/wp-includes/js/jquery/jquery.min.js?ver=3.6.4" id="jquery-core-js">
     </script>
-
+    <link crossorigin="anonymous" rel="stylesheet" id="f70bb43469ae521931c67d0772304077-css"
+        href="https://fonts.googleapis.com/css?family=Manrope%3A400%2C700%2C600%2C500%2C800&amp;subset=latin%2Clatin-ext%2Ccyrillic%2Ccyrillic-ext%2Cvietnamese&amp;display=swap&amp;ver=1.0.4"
+        media="all">
     <style id="csco-inline-styles">
+        .entry-content:not(:first-child) {
+            margin-top: 0rem;
+        }
+
         :root {
 
             /* Base Font */
@@ -303,24 +309,19 @@
 <body
     class="post-template-default single single-post postid-261 single-format-gallery wp-embed-responsive cs-page-layout-right cs-navbar-smart-enabled cs-sticky-sidebar-enabled cs-stick-last cs-header-one-type cs-search-type-one"
     data-scheme="inverse" data-site-scheme="dark">
-
-
-
     <div id="page" class="cs-site">
-
-
         <div class="cs-site-inner">
-
-
-
             <div class="cs-header-before"></div>
-
             <header class="cs-header cs-header-one" data-scheme="inverse">
                 <div class="cs-container">
                     <div class="cs-header__wrapper">
-                        <div class="cs-header__inner cs-header__inner-desktop">
-                            <div class="cs-header__col cs-col-left">
-
+                        <div class="cs-header__inner">
+                            <div class="cs-header__col">
+                                <div class="cs-logo">
+                                    <a class="cs-header__logo" href="<?= base_url() ?>">
+                                        <img src="http://localhost/ipo/assets/img/logo-light.svg" alt="Caards">
+                                    </a>
+                                </div>
                                 <nav class="cs-header__nav">
                                     <ul id="menu-primary-1" class="cs-header__nav-inner">
                                         <?php foreach ($nav as $key => $value) { ?>
@@ -335,8 +336,7 @@
                                                 <?php foreach ($nav[$key] as $subnav) { ?>
                                                 <li
                                                     class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-578">
-                                                    <a href="<?php echo base_url($subnav['url']); ?>"
-                                                        previewlistener="true">
+                                                    <a href="<?php echo base_url($subnav['url']); ?>" previewlistener="true">
                                                         <?= $subnav['subnav'] ?>
                                                     </a>
                                                 </li>
@@ -351,693 +351,10 @@
 
                                     </ul>
                                 </nav>
-                                <div class="cs-header__multi-column cs-site-submenu">
-                                    <span class="cs-header__multi-column-toggle">
-                                        <i class="cs-icon cs-icon-more-horizontal"></i>
-                                    </span>
 
-                                    <div class="cs-header__multi-column-container" data-scheme="inverse">
-                                        <div class="cs-container">
-
-                                            <div class="cs-header__multi-column-posts-wrapper">
-                                                <div class="cs-header__multi-column-posts-title">
-                                                    Popular </div>
-
-                                                <div class="cs-header__multi-column-posts">
-                                                    <article
-                                                        class="mega-menu-item menu-post-item post-261 post type-post status-publish format-gallery has-post-thumbnail category-cybersecurity post_format-post-format-gallery cs-entry cs-video-wrap">
-                                                        <div class="cs-entry__outer">
-                                                            <div class="cs-entry__inner cs-entry__content">
-
-                                                                <h5 class="cs-entry__title"><a
-                                                                        href="https://caards.codesupply.co/caards/2023/02/27/how-ai-is-revolutionizing-the-tech-industry/"
-                                                                        previewlistener="true">How AI is
-                                                                        Revolutionizing
-                                                                        the Tech Industry</a></h5>
-                                                                <div class="cs-entry__post-meta">
-                                                                    <div class="cs-meta-date">February 27, 2023</div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="cs-entry__inner cs-entry__overlay cs-entry__thumbnail cs-overlay-ratio cs-ratio-landscape-16-9"
-                                                                data-scheme="inverse">
-
-                                                                <div
-                                                                    class="cs-overlay-background cs-overlay-transparent">
-                                                                    <img width="380" height="250"
-                                                                        src="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00001-380x250.jpg"
-                                                                        class="attachment-csco-thumbnail size-csco-thumbnail pk-lqip wp-post-image lazyautosizes ls-is-cached pk-lazyloaded"
-                                                                        alt="" decoding="async" loading="lazy"
-                                                                        data-pk-sizes="auto"
-                                                                        data-ls-sizes="(max-width: 380px) 100vw, 380px"
-                                                                        data-pk-src="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00001-380x250.jpg"
-                                                                        data-pk-srcset="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00001-380x250.jpg 380w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00001-1340x880.jpg 1340w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00001-230x150.jpg 230w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00001-260x170.jpg 260w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00001-80x52.jpg 80w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00001-2680x1760.jpg 2680w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00001-760x500.jpg 760w"
-                                                                        sizes="379px"
-                                                                        srcset="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00001-380x250.jpg 380w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00001-1340x880.jpg 1340w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00001-230x150.jpg 230w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00001-260x170.jpg 260w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00001-80x52.jpg 80w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00001-2680x1760.jpg 2680w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00001-760x500.jpg 760w">
-                                                                </div>
-
-                                                                <a href="https://caards.codesupply.co/caards/2023/02/27/how-ai-is-revolutionizing-the-tech-industry/"
-                                                                    class="cs-overlay-link" previewlistener="true"></a>
-                                                            </div>
-
-                                                            <div class="cs-entry__footer">
-                                                                <div class="cs-entry__footer-wrapper">
-                                                                    <div class="cs-entry__footer-item">
-                                                                        <div class="cs-entry__footer-inner">
-                                                                            <div class="cs-meta-reading-time">3 min
-                                                                                read
-                                                                            </div>
-                                                                            <div class="cs-meta-views">2.0K views</div>
-                                                                        </div>
-
-                                                                        <div class="cs-entry__footer-inner">
-                                                                            <div class="cs-meta-shares">
-                                                                                <div class="cs-meta-share-total">
-                                                                                    <div class="cs-total-number">
-                                                                                        Shares 521 </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div
-                                                                        class="cs-entry__footer-item cs-entry__footer-item-hidden">
-                                                                        <div class="cs-entry__footer-inner">
-                                                                            <div class="cs-entry__read-more">
-                                                                                <a href="https://caards.codesupply.co/caards/2023/02/27/how-ai-is-revolutionizing-the-tech-industry/"
-                                                                                    previewlistener="true">
-                                                                                    Read More </a>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="cs-entry__footer-inner">
-                                                                            <div class="cs-meta-shares">
-                                                                                <div class="cs-meta-share-links">
-                                                                                    <div class="pk-share-buttons-wrap pk-share-buttons-layout-simple pk-share-buttons-scheme-simple-light pk-share-buttons-has-counts pk-share-buttons-block-posts pk-share-buttons-mode-cached"
-                                                                                        data-post-id="261"
-                                                                                        data-share-url="https://caards.codesupply.co/caards/2023/02/27/how-ai-is-revolutionizing-the-tech-industry/">
-
-
-                                                                                        <div
-                                                                                            class="pk-share-buttons-items">
-
-                                                                                            <div class="pk-share-buttons-item pk-share-buttons-facebook pk-share-buttons-item-count"
-                                                                                                data-id="facebook">
-
-                                                                                                <a href="https://www.facebook.com/sharer.php?u=https://caards.codesupply.co/caards/2023/02/27/how-ai-is-revolutionizing-the-tech-industry/"
-                                                                                                    class="pk-share-buttons-link"
-                                                                                                    target="_blank"
-                                                                                                    previewlistener="true">
-
-                                                                                                    <i
-                                                                                                        class="pk-share-buttons-icon pk-icon pk-icon-facebook"></i>
-
-
-
-                                                                                                    <span
-                                                                                                        class="pk-share-buttons-count pk-font-secondary">165</span>
-                                                                                                </a>
-
-
-
-                                                                                            </div>
-                                                                                            <div class="pk-share-buttons-item pk-share-buttons-twitter pk-share-buttons-no-count"
-                                                                                                data-id="twitter">
-
-                                                                                                <a href="https://twitter.com/share?&amp;text=How%20AI%20is%20Revolutionizing%20the%20Tech%20Industry&amp;via=envato&amp;url=https://caards.codesupply.co/caards/2023/02/27/how-ai-is-revolutionizing-the-tech-industry/"
-                                                                                                    class="pk-share-buttons-link"
-                                                                                                    target="_blank"
-                                                                                                    previewlistener="true">
-
-                                                                                                    <i
-                                                                                                        class="pk-share-buttons-icon pk-icon pk-icon-twitter"></i>
-
-
-
-                                                                                                    <span
-                                                                                                        class="pk-share-buttons-count pk-font-secondary">0</span>
-                                                                                                </a>
-
-
-
-                                                                                            </div>
-                                                                                            <div class="pk-share-buttons-item pk-share-buttons-pinterest pk-share-buttons-item-count"
-                                                                                                data-id="pinterest">
-
-                                                                                                <a href="https://pinterest.com/pin/create/bookmarklet/?url=https://caards.codesupply.co/caards/2023/02/27/how-ai-is-revolutionizing-the-tech-industry/&amp;media=https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00001-683x1024.jpg"
-                                                                                                    class="pk-share-buttons-link"
-                                                                                                    target="_blank"
-                                                                                                    previewlistener="true">
-
-                                                                                                    <i
-                                                                                                        class="pk-share-buttons-icon pk-icon pk-icon-pinterest"></i>
-
-
-
-                                                                                                    <span
-                                                                                                        class="pk-share-buttons-count pk-font-secondary">356</span>
-                                                                                                </a>
-
-
-
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <a href="https://caards.codesupply.co/caards/2023/02/27/how-ai-is-revolutionizing-the-tech-industry/"
-                                                                class="cs-overlay-link" previewlistener="true"></a>
-                                                        </div>
-                                                    </article>
-                                                    <article
-                                                        class="mega-menu-item menu-post-item post-279 post type-post status-publish format-standard has-post-thumbnail category-gear cs-entry cs-video-wrap">
-                                                        <div class="cs-entry__outer">
-                                                            <div class="cs-entry__inner cs-entry__content">
-
-                                                                <h5 class="cs-entry__title"><a
-                                                                        href="https://caards.codesupply.co/caards/2023/02/26/why-cybersecurity-is-more-important-than-ever/"
-                                                                        previewlistener="true">Why Cybersecurity is
-                                                                        More
-                                                                        Important Than Ever</a></h5>
-                                                                <div class="cs-entry__post-meta">
-                                                                    <div class="cs-meta-date">February 26, 2023</div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="cs-entry__inner cs-entry__overlay cs-entry__thumbnail cs-overlay-ratio cs-ratio-landscape-16-9"
-                                                                data-scheme="inverse">
-
-                                                                <div
-                                                                    class="cs-overlay-background cs-overlay-transparent">
-                                                                    <img width="380" height="250"
-                                                                        src="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00002-380x250.jpg"
-                                                                        class="attachment-csco-thumbnail size-csco-thumbnail pk-lqip wp-post-image lazyautosizes ls-is-cached pk-lazyloaded"
-                                                                        alt="" decoding="async" loading="lazy"
-                                                                        data-pk-sizes="auto"
-                                                                        data-ls-sizes="(max-width: 380px) 100vw, 380px"
-                                                                        data-pk-src="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00002-380x250.jpg"
-                                                                        data-pk-srcset="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00002-380x250.jpg 380w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00002-1340x880.jpg 1340w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00002-230x150.jpg 230w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00002-260x170.jpg 260w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00002-80x52.jpg 80w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00002-2680x1760.jpg 2680w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00002-760x500.jpg 760w"
-                                                                        sizes="379px"
-                                                                        srcset="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00002-380x250.jpg 380w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00002-1340x880.jpg 1340w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00002-230x150.jpg 230w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00002-260x170.jpg 260w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00002-80x52.jpg 80w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00002-2680x1760.jpg 2680w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00002-760x500.jpg 760w">
-                                                                </div>
-
-                                                                <a href="https://caards.codesupply.co/caards/2023/02/26/why-cybersecurity-is-more-important-than-ever/"
-                                                                    class="cs-overlay-link" previewlistener="true"></a>
-                                                            </div>
-
-                                                            <div class="cs-entry__footer">
-                                                                <div class="cs-entry__footer-wrapper">
-                                                                    <div class="cs-entry__footer-item">
-                                                                        <div class="cs-entry__footer-inner">
-                                                                            <div class="cs-meta-reading-time">3 min
-                                                                                read
-                                                                            </div>
-                                                                            <div class="cs-meta-views">467 views</div>
-                                                                        </div>
-
-                                                                        <div class="cs-entry__footer-inner">
-                                                                            <div class="cs-meta-shares">
-                                                                                <div class="cs-meta-share-total">
-                                                                                    <div class="cs-total-number">
-                                                                                        Shares 1K </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div
-                                                                        class="cs-entry__footer-item cs-entry__footer-item-hidden">
-                                                                        <div class="cs-entry__footer-inner">
-                                                                            <div class="cs-entry__read-more">
-                                                                                <a href="https://caards.codesupply.co/caards/2023/02/26/why-cybersecurity-is-more-important-than-ever/"
-                                                                                    previewlistener="true">
-                                                                                    Read More </a>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="cs-entry__footer-inner">
-                                                                            <div class="cs-meta-shares">
-                                                                                <div class="cs-meta-share-links">
-                                                                                    <div class="pk-share-buttons-wrap pk-share-buttons-layout-simple pk-share-buttons-scheme-simple-light pk-share-buttons-has-counts pk-share-buttons-block-posts pk-share-buttons-mode-cached"
-                                                                                        data-post-id="279"
-                                                                                        data-share-url="https://caards.codesupply.co/caards/2023/02/26/why-cybersecurity-is-more-important-than-ever/">
-
-
-                                                                                        <div
-                                                                                            class="pk-share-buttons-items">
-
-                                                                                            <div class="pk-share-buttons-item pk-share-buttons-facebook pk-share-buttons-item-count"
-                                                                                                data-id="facebook">
-
-                                                                                                <a href="https://www.facebook.com/sharer.php?u=https://caards.codesupply.co/caards/2023/02/26/why-cybersecurity-is-more-important-than-ever/"
-                                                                                                    class="pk-share-buttons-link"
-                                                                                                    target="_blank"
-                                                                                                    previewlistener="true">
-
-                                                                                                    <i
-                                                                                                        class="pk-share-buttons-icon pk-icon pk-icon-facebook"></i>
-
-
-
-                                                                                                    <span
-                                                                                                        class="pk-share-buttons-count pk-font-secondary">539</span>
-                                                                                                </a>
-
-
-
-                                                                                            </div>
-                                                                                            <div class="pk-share-buttons-item pk-share-buttons-twitter pk-share-buttons-no-count"
-                                                                                                data-id="twitter">
-
-                                                                                                <a href="https://twitter.com/share?&amp;text=Why%20Cybersecurity%20is%20More%20Important%20Than%20Ever&amp;via=envato&amp;url=https://caards.codesupply.co/caards/2023/02/26/why-cybersecurity-is-more-important-than-ever/"
-                                                                                                    class="pk-share-buttons-link"
-                                                                                                    target="_blank"
-                                                                                                    previewlistener="true">
-
-                                                                                                    <i
-                                                                                                        class="pk-share-buttons-icon pk-icon pk-icon-twitter"></i>
-
-
-
-                                                                                                    <span
-                                                                                                        class="pk-share-buttons-count pk-font-secondary">0</span>
-                                                                                                </a>
-
-
-
-                                                                                            </div>
-                                                                                            <div class="pk-share-buttons-item pk-share-buttons-pinterest pk-share-buttons-item-count"
-                                                                                                data-id="pinterest">
-
-                                                                                                <a href="https://pinterest.com/pin/create/bookmarklet/?url=https://caards.codesupply.co/caards/2023/02/26/why-cybersecurity-is-more-important-than-ever/&amp;media=https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00002-683x1024.jpg"
-                                                                                                    class="pk-share-buttons-link"
-                                                                                                    target="_blank"
-                                                                                                    previewlistener="true">
-
-                                                                                                    <i
-                                                                                                        class="pk-share-buttons-icon pk-icon pk-icon-pinterest"></i>
-
-
-
-                                                                                                    <span
-                                                                                                        class="pk-share-buttons-count pk-font-secondary">544</span>
-                                                                                                </a>
-
-
-
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <a href="https://caards.codesupply.co/caards/2023/02/26/why-cybersecurity-is-more-important-than-ever/"
-                                                                class="cs-overlay-link" previewlistener="true"></a>
-                                                        </div>
-                                                    </article>
-                                                    <article
-                                                        class="mega-menu-item menu-post-item post-259 post type-post status-publish format-standard has-post-thumbnail category-artificial-intelligence cs-entry cs-video-wrap">
-                                                        <div class="cs-entry__outer">
-                                                            <div class="cs-entry__inner cs-entry__content">
-
-                                                                <h5 class="cs-entry__title"><a
-                                                                        href="https://caards.codesupply.co/caards/2023/02/25/the-future-of-virtual-reality-in-gaming-and-beyond/"
-                                                                        previewlistener="true">The Future of Virtual
-                                                                        Reality in Gaming and Beyond</a></h5>
-                                                                <div class="cs-entry__post-meta">
-                                                                    <div class="cs-meta-date">February 25, 2023</div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="cs-entry__inner cs-entry__overlay cs-entry__thumbnail cs-overlay-ratio cs-ratio-landscape-16-9"
-                                                                data-scheme="inverse">
-
-                                                                <div
-                                                                    class="cs-overlay-background cs-overlay-transparent">
-                                                                    <img width="380" height="250"
-                                                                        src="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00003-380x250.jpg"
-                                                                        class="attachment-csco-thumbnail size-csco-thumbnail pk-lqip wp-post-image lazyautosizes ls-is-cached pk-lazyloaded"
-                                                                        alt="" decoding="async" loading="lazy"
-                                                                        data-pk-sizes="auto"
-                                                                        data-ls-sizes="(max-width: 380px) 100vw, 380px"
-                                                                        data-pk-src="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00003-380x250.jpg"
-                                                                        data-pk-srcset="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00003-380x250.jpg 380w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00003-1340x880.jpg 1340w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00003-230x150.jpg 230w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00003-260x170.jpg 260w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00003-80x52.jpg 80w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00003-2680x1760.jpg 2680w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00003-760x500.jpg 760w"
-                                                                        sizes="379px"
-                                                                        srcset="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00003-380x250.jpg 380w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00003-1340x880.jpg 1340w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00003-230x150.jpg 230w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00003-260x170.jpg 260w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00003-80x52.jpg 80w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00003-2680x1760.jpg 2680w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00003-760x500.jpg 760w">
-                                                                </div>
-
-                                                                <a href="https://caards.codesupply.co/caards/2023/02/25/the-future-of-virtual-reality-in-gaming-and-beyond/"
-                                                                    class="cs-overlay-link" previewlistener="true"></a>
-                                                            </div>
-
-                                                            <div class="cs-entry__footer">
-                                                                <div class="cs-entry__footer-wrapper">
-                                                                    <div class="cs-entry__footer-item">
-                                                                        <div class="cs-entry__footer-inner">
-                                                                            <div class="cs-meta-reading-time">3 min
-                                                                                read
-                                                                            </div>
-                                                                            <div class="cs-meta-views">2.2K views</div>
-                                                                        </div>
-
-                                                                        <div class="cs-entry__footer-inner">
-                                                                            <div class="cs-meta-shares">
-                                                                                <div class="cs-meta-share-total">
-                                                                                    <div class="cs-total-number">
-                                                                                        Shares 630 </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div
-                                                                        class="cs-entry__footer-item cs-entry__footer-item-hidden">
-                                                                        <div class="cs-entry__footer-inner">
-                                                                            <div class="cs-entry__read-more">
-                                                                                <a href="https://caards.codesupply.co/caards/2023/02/25/the-future-of-virtual-reality-in-gaming-and-beyond/"
-                                                                                    previewlistener="true">
-                                                                                    Read More </a>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="cs-entry__footer-inner">
-                                                                            <div class="cs-meta-shares">
-                                                                                <div class="cs-meta-share-links">
-                                                                                    <div class="pk-share-buttons-wrap pk-share-buttons-layout-simple pk-share-buttons-scheme-simple-light pk-share-buttons-has-counts pk-share-buttons-block-posts pk-share-buttons-mode-cached"
-                                                                                        data-post-id="259"
-                                                                                        data-share-url="https://caards.codesupply.co/caards/2023/02/25/the-future-of-virtual-reality-in-gaming-and-beyond/">
-
-
-                                                                                        <div
-                                                                                            class="pk-share-buttons-items">
-
-                                                                                            <div class="pk-share-buttons-item pk-share-buttons-facebook pk-share-buttons-item-count"
-                                                                                                data-id="facebook">
-
-                                                                                                <a href="https://www.facebook.com/sharer.php?u=https://caards.codesupply.co/caards/2023/02/25/the-future-of-virtual-reality-in-gaming-and-beyond/"
-                                                                                                    class="pk-share-buttons-link"
-                                                                                                    target="_blank"
-                                                                                                    previewlistener="true">
-
-                                                                                                    <i
-                                                                                                        class="pk-share-buttons-icon pk-icon pk-icon-facebook"></i>
-
-
-
-                                                                                                    <span
-                                                                                                        class="pk-share-buttons-count pk-font-secondary">248</span>
-                                                                                                </a>
-
-
-
-                                                                                            </div>
-                                                                                            <div class="pk-share-buttons-item pk-share-buttons-twitter pk-share-buttons-no-count"
-                                                                                                data-id="twitter">
-
-                                                                                                <a href="https://twitter.com/share?&amp;text=The%20Future%20of%20Virtual%20Reality%20in%20Gaming%20and%20Beyond&amp;via=envato&amp;url=https://caards.codesupply.co/caards/2023/02/25/the-future-of-virtual-reality-in-gaming-and-beyond/"
-                                                                                                    class="pk-share-buttons-link"
-                                                                                                    target="_blank"
-                                                                                                    previewlistener="true">
-
-                                                                                                    <i
-                                                                                                        class="pk-share-buttons-icon pk-icon pk-icon-twitter"></i>
-
-
-
-                                                                                                    <span
-                                                                                                        class="pk-share-buttons-count pk-font-secondary">0</span>
-                                                                                                </a>
-
-
-
-                                                                                            </div>
-                                                                                            <div class="pk-share-buttons-item pk-share-buttons-pinterest pk-share-buttons-item-count"
-                                                                                                data-id="pinterest">
-
-                                                                                                <a href="https://pinterest.com/pin/create/bookmarklet/?url=https://caards.codesupply.co/caards/2023/02/25/the-future-of-virtual-reality-in-gaming-and-beyond/&amp;media=https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00003-683x1024.jpg"
-                                                                                                    class="pk-share-buttons-link"
-                                                                                                    target="_blank"
-                                                                                                    previewlistener="true">
-
-                                                                                                    <i
-                                                                                                        class="pk-share-buttons-icon pk-icon pk-icon-pinterest"></i>
-
-
-
-                                                                                                    <span
-                                                                                                        class="pk-share-buttons-count pk-font-secondary">382</span>
-                                                                                                </a>
-
-
-
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <a href="https://caards.codesupply.co/caards/2023/02/25/the-future-of-virtual-reality-in-gaming-and-beyond/"
-                                                                class="cs-overlay-link" previewlistener="true"></a>
-                                                        </div>
-                                                    </article>
-                                                    <article
-                                                        class="mega-menu-item menu-post-item post-277 post type-post status-publish format-gallery has-post-thumbnail category-cybersecurity post_format-post-format-gallery cs-entry cs-video-wrap">
-                                                        <div class="cs-entry__outer">
-                                                            <div class="cs-entry__inner cs-entry__content">
-
-                                                                <h5 class="cs-entry__title"><a
-                                                                        href="https://caards.codesupply.co/caards/2023/02/24/the-rise-of-cryptocurrency-exploring-the-pros-and-cons/"
-                                                                        previewlistener="true">The Rise of
-                                                                        Cryptocurrency: Exploring the Pros and Cons</a>
-                                                                </h5>
-                                                                <div class="cs-entry__post-meta">
-                                                                    <div class="cs-meta-date">February 24, 2023</div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="cs-entry__inner cs-entry__overlay cs-entry__thumbnail cs-overlay-ratio cs-ratio-landscape-16-9"
-                                                                data-scheme="inverse">
-
-                                                                <div
-                                                                    class="cs-overlay-background cs-overlay-transparent">
-                                                                    <img width="380" height="250"
-                                                                        src="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00004-380x250.jpg"
-                                                                        class="attachment-csco-thumbnail size-csco-thumbnail pk-lqip wp-post-image lazyautosizes ls-is-cached pk-lazyloaded"
-                                                                        alt="" decoding="async" loading="lazy"
-                                                                        data-pk-sizes="auto"
-                                                                        data-ls-sizes="(max-width: 380px) 100vw, 380px"
-                                                                        data-pk-src="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00004-380x250.jpg"
-                                                                        data-pk-srcset="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00004-380x250.jpg 380w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00004-1340x880.jpg 1340w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00004-230x150.jpg 230w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00004-260x170.jpg 260w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00004-80x52.jpg 80w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00004-2680x1760.jpg 2680w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00004-760x500.jpg 760w"
-                                                                        sizes="379px"
-                                                                        srcset="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00004-380x250.jpg 380w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00004-1340x880.jpg 1340w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00004-230x150.jpg 230w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00004-260x170.jpg 260w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00004-80x52.jpg 80w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00004-2680x1760.jpg 2680w, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00004-760x500.jpg 760w">
-                                                                </div>
-
-                                                                <a href="https://caards.codesupply.co/caards/2023/02/24/the-rise-of-cryptocurrency-exploring-the-pros-and-cons/"
-                                                                    class="cs-overlay-link" previewlistener="true"></a>
-                                                            </div>
-
-                                                            <div class="cs-entry__footer">
-                                                                <div class="cs-entry__footer-wrapper">
-                                                                    <div class="cs-entry__footer-item">
-                                                                        <div class="cs-entry__footer-inner">
-                                                                            <div class="cs-meta-reading-time">3 min
-                                                                                read
-                                                                            </div>
-                                                                            <div class="cs-meta-views">2.4K views
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="cs-entry__footer-inner">
-                                                                            <div class="cs-meta-shares">
-                                                                                <div class="cs-meta-share-total">
-                                                                                    <div class="cs-total-number">
-                                                                                        Shares 933 </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div
-                                                                        class="cs-entry__footer-item cs-entry__footer-item-hidden">
-                                                                        <div class="cs-entry__footer-inner">
-                                                                            <div class="cs-entry__read-more">
-                                                                                <a href="https://caards.codesupply.co/caards/2023/02/24/the-rise-of-cryptocurrency-exploring-the-pros-and-cons/"
-                                                                                    previewlistener="true">
-                                                                                    Read More </a>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="cs-entry__footer-inner">
-                                                                            <div class="cs-meta-shares">
-                                                                                <div class="cs-meta-share-links">
-                                                                                    <div class="pk-share-buttons-wrap pk-share-buttons-layout-simple pk-share-buttons-scheme-simple-light pk-share-buttons-has-counts pk-share-buttons-block-posts pk-share-buttons-mode-cached"
-                                                                                        data-post-id="277"
-                                                                                        data-share-url="https://caards.codesupply.co/caards/2023/02/24/the-rise-of-cryptocurrency-exploring-the-pros-and-cons/">
-
-
-                                                                                        <div
-                                                                                            class="pk-share-buttons-items">
-
-                                                                                            <div class="pk-share-buttons-item pk-share-buttons-facebook pk-share-buttons-item-count"
-                                                                                                data-id="facebook">
-
-                                                                                                <a href="https://www.facebook.com/sharer.php?u=https://caards.codesupply.co/caards/2023/02/24/the-rise-of-cryptocurrency-exploring-the-pros-and-cons/"
-                                                                                                    class="pk-share-buttons-link"
-                                                                                                    target="_blank"
-                                                                                                    previewlistener="true">
-
-                                                                                                    <i
-                                                                                                        class="pk-share-buttons-icon pk-icon pk-icon-facebook"></i>
-
-
-
-                                                                                                    <span
-                                                                                                        class="pk-share-buttons-count pk-font-secondary">414</span>
-                                                                                                </a>
-
-
-
-                                                                                            </div>
-                                                                                            <div class="pk-share-buttons-item pk-share-buttons-twitter pk-share-buttons-no-count"
-                                                                                                data-id="twitter">
-
-                                                                                                <a href="https://twitter.com/share?&amp;text=The%20Rise%20of%20Cryptocurrency%3A%20Exploring%20the%20Pros%20and%20Cons&amp;via=envato&amp;url=https://caards.codesupply.co/caards/2023/02/24/the-rise-of-cryptocurrency-exploring-the-pros-and-cons/"
-                                                                                                    class="pk-share-buttons-link"
-                                                                                                    target="_blank"
-                                                                                                    previewlistener="true">
-
-                                                                                                    <i
-                                                                                                        class="pk-share-buttons-icon pk-icon pk-icon-twitter"></i>
-
-
-
-                                                                                                    <span
-                                                                                                        class="pk-share-buttons-count pk-font-secondary">0</span>
-                                                                                                </a>
-
-
-
-                                                                                            </div>
-                                                                                            <div class="pk-share-buttons-item pk-share-buttons-pinterest pk-share-buttons-item-count"
-                                                                                                data-id="pinterest">
-
-                                                                                                <a href="https://pinterest.com/pin/create/bookmarklet/?url=https://caards.codesupply.co/caards/2023/02/24/the-rise-of-cryptocurrency-exploring-the-pros-and-cons/&amp;media=https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00004-1024x683.jpg"
-                                                                                                    class="pk-share-buttons-link"
-                                                                                                    target="_blank"
-                                                                                                    previewlistener="true">
-
-                                                                                                    <i
-                                                                                                        class="pk-share-buttons-icon pk-icon pk-icon-pinterest"></i>
-
-
-
-                                                                                                    <span
-                                                                                                        class="pk-share-buttons-count pk-font-secondary">519</span>
-                                                                                                </a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </article>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
-
-                        <div class="cs-header__inner cs-header__inner-mobile">
-                            <div class="cs-header__col cs-col-left">
-                                <span class="cs-header__offcanvas-toggle cs-d-lg-none" role="button">
-                                    <span></span>
-                                </span>
-                            </div>
-                            <div class="cs-header__col cs-col-center">
-                                <div class="cs-logo">
-                                    <a class="cs-header__logo cs-logo-default "
-                                        href="https://caards.codesupply.co/caards/" previewlistener="true">
-                                        <img src="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/2022/07/logo.png"
-                                            alt="Caards"
-                                            srcset="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/2022/07/logo.png 1x, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/2022/07/logo@2x.png 2x">
-                                    </a>
-
-                                    <a class="cs-header__logo cs-logo-dark " href="https://caards.codesupply.co/caards/"
-                                        previewlistener="true">
-                                        <img src="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/2022/07/logo-dark.png"
-                                            alt="Caards"
-                                            srcset="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/2022/07/logo-dark.png 1x, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/2022/07/logo-dark@2x.png 2x">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="cs-header__col cs-col-right">
-                                <span role="button"
-                                    class="cs-header__scheme-toggle cs-header__scheme-toggle-mobile cs-site-scheme-toggle">
-                                    <i class="cs-header__scheme-toggle-icon cs-icon cs-icon-light-mode"></i>
-                                    <i class="cs-header__scheme-toggle-icon cs-icon cs-icon-dark-mode"></i>
-                                </span>
-                                <span class="cs-header__search-toggle" role="button">
-                                    <i class="cs-icon cs-icon-search"></i>
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="cs-search cs-search-one" data-scheme="dark">
-
-
-                            <div class="cs-search__wrapper">
-                                <form role="search" method="get" class="cs-search__nav-form"
-                                    action="https://caards.codesupply.co/caards/">
-                                    <div class="cs-search__group">
-                                        <input data-swpparentel=".cs-header .cs-search-live-result" required=""
-                                            class="cs-search__input" data-swplive="true" type="search" value="" name="s"
-                                            placeholder="Enter keyword" autocomplete="off"
-                                            aria-owns="searchwp_live_search_results_66178b6a4c035"
-                                            aria-autocomplete="both"
-                                            aria-label="When autocomplete results are available use up and down arrows to review and enter to go to the desired page. Touch device users, explore by touch or with swipe gestures.">
-
-                                        <button class="cs-search__submit" type="submit">
-                                            <i class="cs-icon cs-icon-search"></i>
-                                        </button>
-
-                                        <button class="cs-search__close">
-                                            <span></span>
-                                        </button>
-                                    </div>
-                                </form>
-
-                                <div class="cs-search-live-container">
-                                    <div class="cs-search-live-result">
-                                        <div aria-expanded="false" class="searchwp-live-search-results"
-                                            id="searchwp_live_search_results_66178b6a4c035" role="listbox" tabindex="0">
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-                        </div>
                     </div>
                 </div>
             </header>
@@ -1123,7 +440,8 @@
                                                 <div class="cs-entry__metabar-item">
 
                                                     <div class="cs-entry__post-meta">
-                                                        <div class="cs-meta-reading-time"><span class="cs-meta-icon"><i
+                                                        <div class="cs-meta-reading-time"><span
+                                                                class="cs-meta-icon"><i
                                                                     class="cs-icon cs-icon-clock"></i></span>
                                                             <?= ceil(strlen($data->blog) / 225) ?>
                                                             min Read
@@ -1237,11 +555,36 @@
 
 
                                             <div class="cs-entry__content-container">
+                                                <style>
+                                                    #blog img {
+                                                        border-radius: var(--cs-image-border-radius);
+                                                    }
 
-                                                <div class="entry-content">
-                                                    <?= $data->blog ?>
+                                                    #blog h2:(:first-child) {
+                                                        margin-top: 64px;
+                                                    }
+                                                </style>
+                                                <div class="entry-content" id="blog">
+                                                    <?php
+                                                        $doc = new DOMDocument();
+                                                        $doc->loadHTML($data->blog);
+                                                        $h3_tags = $doc->getElementsByTagName('h3');
+                                                        foreach ($h3_tags as $h3_tag) {
+                                                            $child_node = $h3_tag->firstChild;
+                                                            $h3_tag->parentNode->replaceChild($child_node, $h3_tag);
+                                                        }
+                                                        $images = $doc->getElementsByTagName('img');
+                                                        foreach ($images as $image) {
+                                                            $figure = $doc->createElement('figure');
+                                                            $figure->setAttribute('class', 'wp-block-image alignwide size-large is-style-rounded pk-pin-it-container');
+                                                            $image->parentNode->replaceChild($figure, $image);
+                                                            $figure->appendChild($image);
+                                                        }
+                                                        $modified_html = $doc->saveHTML();
+                                                        echo $modified_html;
+                                                    ?>
+
                                                 </div>
-
                                             </div>
 
                                             <div class="cs-entry__after-share-buttons">
@@ -1249,11 +592,12 @@
                                                     <h5>Share this article</h5>
                                                 </div>
 
-                                                
+
                                                 <div class="cs-entry__after-share-buttons-link">
                                                     <div class="cs-entry__after-share-buttons-input-group">
-                                                        <input class="cs-entry__after-share-buttons-text" type="text"
-                                                            value="<?=base_url('blogs/' . $data->category . '/' . $data->slug)?>">
+                                                        <input class="cs-entry__after-share-buttons-text"
+                                                            type="text"
+                                                            value="<?= base_url('blogs/' . $data->category . '/' . $data->slug) ?>">
                                                         <button class="cs-entry__after-share-buttons-copy">
                                                             <span class="cs-icon cs-icon-copy"></span>
                                                         </button>
@@ -1263,7 +607,7 @@
                                                 </div>
                                             </div>
 
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -1292,12 +636,14 @@
                                                                                     src="<?= $blogs->image ?>"
                                                                                     class="attachment-csco-smaller size-csco-smaller pk-lqip wp-post-image lazyautosizes ls-is-cached pk-lazyloaded"
                                                                                     alt="" decoding="async"
-                                                                                    loading="lazy" data-pk-sizes="auto"
+                                                                                    loading="lazy"
+                                                                                    data-pk-sizes="auto"
                                                                                     sizes="48px">
                                                                             </div>
                                                                         </div>
 
-                                                                        <div class="cs-entry__inner cs-entry__content ">
+                                                                        <div
+                                                                            class="cs-entry__inner cs-entry__content ">
                                                                             <div class="cs-entry__content-inner">
                                                                                 <div class="cs-entry__post-meta">
                                                                                     <div class="cs-meta-author"><a
@@ -1490,7 +836,8 @@
                             <div class="cs-footer__col cs-col-center">
                                 <div class="cs-footer__inner">
                                     <nav class="cs-footer__nav">
-                                        <div class="cs-footer__nav-item"><span class="cs-footer__nav-label">Demos</span>
+                                        <div class="cs-footer__nav-item"><span
+                                                class="cs-footer__nav-label">Demos</span>
                                             <ul class="cs-footer__nav-inner ">
                                                 <li id="menu-item-3986"
                                                     class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-3986">
@@ -1588,7 +935,8 @@
                                                         previewlistener="true">
                                                         <i class="pk-social-links-icon pk-icon pk-icon-twitter"></i>
 
-                                                        <span class="pk-social-links-count pk-font-secondary">71K</span>
+                                                        <span
+                                                            class="pk-social-links-count pk-font-secondary">71K</span>
 
 
                                                     </a>
