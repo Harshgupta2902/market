@@ -3,14 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <!-- <link rel="stylesheet" id="powerkit-css"
-        href="https://caards.codesupply.co/caards/wp-content/plugins/powerkit/assets/css/powerkit.css?ver=2.9.0"
-        media="all">
-    <link rel="stylesheet" id="powerkit-share-buttons-css"
-        href="https://caards.codesupply.co/caards/wp-content/plugins/powerkit/modules/share-buttons/public/css/public-powerkit-share-buttons.css?ver=2.9.0"
-        media="all"> -->
-
-
     <link rel="stylesheet" href="https://caards.codesupply.co/caards/wp-content/themes/caards/style.css?ver=1.0.4"
         media="all">
     <script src="https://caards.codesupply.co/caards/wp-includes/js/jquery/jquery.min.js?ver=3.6.4" id="jquery-core-js">
@@ -21,6 +13,14 @@
     <style id="csco-inline-styles">
         .entry-content:not(:first-child) {
             margin-top: 0rem;
+        }
+
+        #blog img {
+            border-radius: var(--cs-image-border-radius);
+        }
+
+        #blog h2:(:first-child) {
+            margin-top: 64px;
         }
 
         :root {
@@ -302,17 +302,15 @@
         }
     </style>
 
-
 </head>
 
 
-<body
-    class="post-template-default single single-post postid-261 single-format-gallery wp-embed-responsive cs-page-layout-right cs-navbar-smart-enabled cs-sticky-sidebar-enabled cs-stick-last cs-header-one-type cs-search-type-one"
+<body class="post-template-default single single-post postid-261 single-format-gallery wp-embed-responsive cs-page-layout-right cs-navbar-smart-enabled cs-sticky-sidebar-enabled cs-stick-last cs-header-one-type cs-search-type-one"
     data-scheme="inverse" data-site-scheme="dark">
     <div id="page" class="cs-site">
         <div class="cs-site-inner">
             <div class="cs-header-before"></div>
-            <header class="cs-header cs-header-one" data-scheme="inverse">
+            <header class="cs-header cs-header-one " data-scheme="inverse">
                 <div class="cs-container">
                     <div class="cs-header__wrapper">
                         <div class="cs-header__inner">
@@ -389,15 +387,13 @@
                                                 <div class="cs-entry__header-category-inner">
 
                                                     <div class="cs-entry__category">
-                                                        <a href="https://caards.codesupply.co/caards/category/cybersecurity/"
-                                                            class="cs-entry__category-letter"
+                                                        <a href="" class="cs-entry__category-letter"
                                                             style="--cs-color-category-letter-contrast: #ffffff;"
                                                             previewlistener="true">
                                                             <?= $data->category[0] ?>
                                                         </a>
 
-                                                        <a href="https://caards.codesupply.co/caards/category/cybersecurity/"
-                                                            class="cs-entry__category-label"
+                                                        <a href="" class="cs-entry__category-label"
                                                             previewlistener="true"><strong>
                                                                 <?= $data->category ?>
                                                             </strong></a>
@@ -411,12 +407,10 @@
                                                         <?= $data->title ?>
                                                     </span></h1>
                                                 <div class="cs-entry__post-meta">
-                                                    <div class="cs-meta-author"><a class="cs-meta-author-inner url fn n"
-                                                            href="https://caards.codesupply.co/caards/author/elliot/"
-                                                            title="View all posts by Elliot Alderson"
-                                                            previewlistener="true"><span class="cs-author">
+                                                    <div class="cs-meta-author">
+                                                    <span class="cs-author">
                                                                 <?= $data->author ?>
-                                                            </span></a></div>
+                                                            </span></div>
                                                     <div class="cs-meta-date">
                                                         <?= date('M d, Y', strtotime($data->published_at)) ?>
                                                     </div>
@@ -454,134 +448,28 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div class="cs-entry__metabar-inner" style="top: 20px; opacity: 1;">
-                                                <div class="cs-entry__metabar-item">
-                                                    <div class="pk-share-buttons-wrap pk-share-buttons-layout-simple pk-share-buttons-scheme-simple-light pk-share-buttons-has-counts pk-share-buttons-has-total-counts pk-share-buttons-metabar-post pk-share-buttons-mode-cached"
-                                                        data-post-id="261"
-                                                        data-share-url="https://caards.codesupply.co/caards/2023/02/27/how-ai-is-revolutionizing-the-tech-industry/">
-
-                                                        <div class="pk-share-buttons-total">
-                                                            <div class="pk-share-buttons-count pk-font-primary">521
-                                                            </div>
-                                                            <div class="pk-share-buttons-label pk-font-primary">Share
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="pk-share-buttons-items">
-
-                                                            <div class="pk-share-buttons-item pk-share-buttons-facebook pk-share-buttons-item-count"
-                                                                data-id="facebook">
-
-                                                                <a href="https://www.facebook.com/sharer.php?u=https://caards.codesupply.co/caards/2023/02/27/how-ai-is-revolutionizing-the-tech-industry/"
-                                                                    class="pk-share-buttons-link" target="_blank"
-                                                                    previewlistener="true">
-
-                                                                    <i
-                                                                        class="pk-share-buttons-icon pk-icon pk-icon-facebook"></i>
-
-
-
-                                                                    <span
-                                                                        class="pk-share-buttons-count pk-font-secondary">165</span>
-                                                                </a>
-
-
-
-                                                            </div>
-                                                            <div class="pk-share-buttons-item pk-share-buttons-pinterest pk-share-buttons-item-count"
-                                                                data-id="pinterest">
-
-                                                                <a href="https://pinterest.com/pin/create/bookmarklet/?url=https://caards.codesupply.co/caards/2023/02/27/how-ai-is-revolutionizing-the-tech-industry/&amp;media=https://caards.codesupply.co/caards/wp-content/uploads/sites/2/demo-image-00001-683x1024.jpg"
-                                                                    class="pk-share-buttons-link" target="_blank"
-                                                                    previewlistener="true">
-
-                                                                    <i
-                                                                        class="pk-share-buttons-icon pk-icon pk-icon-pinterest"></i>
-
-
-
-                                                                    <span
-                                                                        class="pk-share-buttons-count pk-font-secondary">356</span>
-                                                                </a>
-
-
-
-                                                            </div>
-                                                            <div class="pk-share-buttons-item pk-share-buttons-twitter pk-share-buttons-no-count"
-                                                                data-id="twitter">
-
-                                                                <a href="https://twitter.com/share?&amp;text=How%20AI%20is%20Revolutionizing%20the%20Tech%20Industry&amp;via=envato&amp;url=https://caards.codesupply.co/caards/2023/02/27/how-ai-is-revolutionizing-the-tech-industry/"
-                                                                    class="pk-share-buttons-link" target="_blank"
-                                                                    previewlistener="true">
-
-                                                                    <i
-                                                                        class="pk-share-buttons-icon pk-icon pk-icon-twitter"></i>
-
-
-
-                                                                    <span
-                                                                        class="pk-share-buttons-count pk-font-secondary">0</span>
-                                                                </a>
-
-
-
-                                                            </div>
-                                                            <div class="pk-share-buttons-item pk-share-buttons-mail pk-share-buttons-no-count"
-                                                                data-id="mail">
-
-                                                                <a href="mailto:?subject=How%20AI%20is%20Revolutionizing%20the%20Tech%20Industry&amp;body=How%20AI%20is%20Revolutionizing%20the%20Tech%20Industry%20https://caards.codesupply.co/caards/2023/02/27/how-ai-is-revolutionizing-the-tech-industry/"
-                                                                    class="pk-share-buttons-link" target="_blank">
-
-                                                                    <i
-                                                                        class="pk-share-buttons-icon pk-icon pk-icon-mail"></i>
-
-
-
-                                                                    <span
-                                                                        class="pk-share-buttons-count pk-font-secondary">0</span>
-                                                                </a>
-
-
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
 
                                         <div class="cs-entry__content-wrap">
-
-
                                             <div class="cs-entry__content-container">
-                                                <style>
-                                                    #blog img {
-                                                        border-radius: var(--cs-image-border-radius);
-                                                    }
-
-                                                    #blog h2:(:first-child) {
-                                                        margin-top: 64px;
-                                                    }
-                                                </style>
                                                 <div class="entry-content" id="blog">
                                                     <?php
-                                                        $doc = new DOMDocument();
-                                                        $doc->loadHTML($data->blog);
-                                                        $h3_tags = $doc->getElementsByTagName('h3');
-                                                        foreach ($h3_tags as $h3_tag) {
-                                                            $child_node = $h3_tag->firstChild;
-                                                            $h3_tag->parentNode->replaceChild($child_node, $h3_tag);
-                                                        }
-                                                        $images = $doc->getElementsByTagName('img');
-                                                        foreach ($images as $image) {
-                                                            $figure = $doc->createElement('figure');
-                                                            $figure->setAttribute('class', 'wp-block-image alignwide size-large is-style-rounded pk-pin-it-container');
-                                                            $image->parentNode->replaceChild($figure, $image);
-                                                            $figure->appendChild($image);
-                                                        }
-                                                        $modified_html = $doc->saveHTML();
-                                                        echo $modified_html;
+                                                    $doc = new DOMDocument();
+                                                    $doc->loadHTML($data->blog);
+                                                    $h3_tags = $doc->getElementsByTagName('h3');
+                                                    foreach ($h3_tags as $h3_tag) {
+                                                        $child_node = $h3_tag->firstChild;
+                                                        $h3_tag->parentNode->replaceChild($child_node, $h3_tag);
+                                                    }
+                                                    $images = $doc->getElementsByTagName('img');
+                                                    foreach ($images as $image) {
+                                                        $figure = $doc->createElement('figure');
+                                                        $figure->setAttribute('class', 'wp-block-image alignwide size-large is-style-rounded pk-pin-it-container');
+                                                        $image->parentNode->replaceChild($figure, $image);
+                                                        $figure->appendChild($image);
+                                                    }
+                                                    $modified_html = $doc->saveHTML();
+                                                    echo $modified_html;
                                                     ?>
 
                                                 </div>
@@ -617,8 +505,7 @@
                                     <div class="widget block-26 widget_block">
                                         <div class="wp-block-group is-style-default is-layout-flow">
                                             <div class="wp-block-group__inner-container">
-                                                <h2 class="wp-block-heading is-style-cs-heading-sidebar">Top on the
-                                                    week</h2>
+                                                <h2 class="wp-block-heading is-style-cs-heading-sidebar">Top on the week</h2>
                                                 <div class="cnvs-block-posts cnvs-block-posts-1660142664321 cnvs-block-posts-layout-horizontal-type-5"
                                                     data-layout="horizontal-type-5" data-min-height="">
                                                     <div class="cs-posts-area" data-posts-area="">
@@ -646,20 +533,15 @@
                                                                             class="cs-entry__inner cs-entry__content ">
                                                                             <div class="cs-entry__content-inner">
                                                                                 <div class="cs-entry__post-meta">
-                                                                                    <div class="cs-meta-author"><a
-                                                                                            class="cs-meta-author-inner url fn n"
-                                                                                            href="https://caards.codesupply.co/caards/author/elliot/"
-                                                                                            title="View all posts by Elliot Alderson"
-                                                                                            previewlistener="true"><span
-                                                                                                class="cs-author">
-                                                                                                <?= $blogs->author ?>
-                                                                                            </span></a>
+                                                                                    <div class="cs-meta-author">
+                                                                                        <span class="cs-author">
+                                                                                            <?= $blogs->author ?>
+                                                                                        </span>
                                                                                     </div>
-                                                                                    <div class="cs-meta-date">February
-                                                                                        27, 2023</div>
+                                                                                    <div class="cs-meta-date"><?= date('M d, Y', strtotime($blogs->published_at)) ?></div>
                                                                                 </div>
                                                                                 <h2 class="cs-entry__title ">
-                                                                                    <a href="https://caards.codesupply.co/caards/2023/02/27/how-ai-is-revolutionizing-the-tech-industry/"
+                                                                                    <a href="<?= base_url('blogs/' . $blogs->category . '/' . $blogs->slug) ?>"
                                                                                         previewlistener="true">
                                                                                         <?= $blogs->title ?>
                                                                                     </a>
@@ -678,125 +560,7 @@
                                             </div>
                                         </div>
                                     </div>
-
-
-                                    <div class="widget block-29 widget_block">
-                                        <div class="wp-block-group is-style-default is-layout-flow">
-                                            <div class="wp-block-group__inner-container">
-                                                <h2 class="wp-block-heading is-style-cs-heading-sidebar">Let`s Get
-                                                    Social</h2>
-
-
-                                                <div
-                                                    class="cnvs-block-social-links cnvs-block-social-links-1658222626196">
-                                                    <div
-                                                        class="pk-social-links-wrap pk-social-links-template-vertical pk-social-links-align-default pk-social-links-scheme-gutenberg-block pk-social-links-titles-enabled pk-social-links-counts-enabled pk-social-links-labels-enabled pk-social-links-mode-php pk-social-links-mode-rest">
-                                                        <div class="pk-social-links-items">
-                                                            <div class="pk-social-links-item pk-social-links-facebook pk-social-links-item-count"
-                                                                data-id="facebook">
-                                                                <a href="https://facebook.com/codesupplyco"
-                                                                    class="pk-social-links-link" target="_blank"
-                                                                    rel="nofollow noopener" aria-label="Facebook"
-                                                                    previewlistener="true">
-                                                                    <i
-                                                                        class="pk-social-links-icon pk-icon pk-icon-facebook"></i>
-                                                                    <span
-                                                                        class="pk-social-links-title pk-font-heading">Facebook</span>
-
-                                                                    <span
-                                                                        class="pk-social-links-count pk-font-secondary">53</span>
-
-
-                                                                    <span
-                                                                        class="pk-social-links-label pk-font-secondary">Likes</span>
-                                                                </a>
-                                                            </div>
-                                                            <div class="pk-social-links-item pk-social-links-twitter pk-social-links-item-count"
-                                                                data-id="twitter">
-                                                                <a href="https://twitter.com/envato"
-                                                                    class="pk-social-links-link" target="_blank"
-                                                                    rel="nofollow noopener" aria-label="Twitter"
-                                                                    previewlistener="true">
-                                                                    <i
-                                                                        class="pk-social-links-icon pk-icon pk-icon-twitter"></i>
-                                                                    <span
-                                                                        class="pk-social-links-title pk-font-heading">Twitter</span>
-
-                                                                    <span
-                                                                        class="pk-social-links-count pk-font-secondary">71K</span>
-
-
-                                                                    <span
-                                                                        class="pk-social-links-label pk-font-secondary">Followers</span>
-                                                                </a>
-                                                            </div>
-                                                            <div class="pk-social-links-item pk-social-links-instagram pk-social-links-item-count"
-                                                                data-id="instagram">
-                                                                <a href="https://www.instagram.com/codesupply.co"
-                                                                    class="pk-social-links-link" target="_blank"
-                                                                    rel="nofollow noopener" aria-label="Instagram"
-                                                                    previewlistener="true">
-                                                                    <i
-                                                                        class="pk-social-links-icon pk-icon pk-icon-instagram"></i>
-                                                                    <span
-                                                                        class="pk-social-links-title pk-font-heading">Instagram</span>
-
-                                                                    <span
-                                                                        class="pk-social-links-count pk-font-secondary">51</span>
-
-
-                                                                    <span
-                                                                        class="pk-social-links-label pk-font-secondary">Followers</span>
-                                                                </a>
-                                                            </div>
-                                                            <div class="pk-social-links-item pk-social-links-pinterest pk-social-links-item-count"
-                                                                data-id="pinterest">
-                                                                <a href="https://pinterest.com/envato"
-                                                                    class="pk-social-links-link" target="_blank"
-                                                                    rel="nofollow noopener" aria-label="Pinterest"
-                                                                    previewlistener="true">
-                                                                    <i
-                                                                        class="pk-social-links-icon pk-icon pk-icon-pinterest"></i>
-                                                                    <span
-                                                                        class="pk-social-links-title pk-font-heading">Pinterest</span>
-
-                                                                    <span
-                                                                        class="pk-social-links-count pk-font-secondary">15K</span>
-
-
-                                                                    <span
-                                                                        class="pk-social-links-label pk-font-secondary">Followers</span>
-                                                                </a>
-                                                            </div>
-                                                            <div class="pk-social-links-item pk-social-links-youtube pk-social-links-item-count"
-                                                                data-id="youtube">
-                                                                <a href="https://www.youtube.com/user/envato"
-                                                                    class="pk-social-links-link" target="_blank"
-                                                                    rel="nofollow noopener" aria-label="YouTube"
-                                                                    previewlistener="true">
-                                                                    <i
-                                                                        class="pk-social-links-icon pk-icon pk-icon-youtube"></i>
-                                                                    <span
-                                                                        class="pk-social-links-title pk-font-heading">YouTube</span>
-
-                                                                    <span
-                                                                        class="pk-social-links-count pk-font-secondary">201K</span>
-
-
-                                                                    <span
-                                                                        class="pk-social-links-label pk-font-secondary">Subscribers</span>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-                                </div>
+                                 </div>
                             </aside>
                         </div>
                     </div>
@@ -812,18 +576,8 @@
                             <div class="cs-footer__col cs-col-left">
                                 <div class="cs-footer__inner">
                                     <div class="cs-logo">
-                                        <a class="cs-footer__logo cs-logo-default"
-                                            href="https://caards.codesupply.co/caards/" previewlistener="true">
-                                            <img src="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/2022/07/logo.png"
-                                                alt="Caards"
-                                                srcset="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/2022/07/logo.png 1x, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/2022/07/logo@2x.png 2x">
-                                        </a>
-
-                                        <a class="cs-footer__logo cs-logo-dark"
-                                            href="https://caards.codesupply.co/caards/" previewlistener="true">
-                                            <img src="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/2022/07/logo-dark.png"
-                                                alt="Caards"
-                                                srcset="https://caards.codesupply.co/caards/wp-content/uploads/sites/2/2022/07/logo-dark.png 1x, https://caards.codesupply.co/caards/wp-content/uploads/sites/2/2022/07/logo-dark@2x.png 2x">
+                                        <a class="cs-header__logo" href="<?= base_url() ?>">
+                                            <img src="http://localhost/ipo/assets/img/logo-light.svg" alt="Caards">
                                         </a>
                                     </div>
                                     <div class="cs-footer__info">
@@ -909,103 +663,11 @@
                                     </nav>
                                 </div>
                             </div>
-                            <div class="cs-footer__col cs-col-right">
-                                <div class="cs-footer__inner">
-                                    <div class="cs-footer-social-links">
-                                        <div
-                                            class="pk-social-links-wrap pk-social-links-template-nav pk-social-links-align-default pk-social-links-scheme-default pk-social-links-titles-disabled pk-social-links-counts-enabled pk-social-links-labels-disabled pk-social-links-mode-php pk-social-links-mode-rest">
-                                            <div class="pk-social-links-items">
-                                                <div class="pk-social-links-item pk-social-links-facebook pk-social-links-item-count"
-                                                    data-id="facebook">
-                                                    <a href="https://facebook.com/codesupplyco"
-                                                        class="pk-social-links-link" target="_blank"
-                                                        rel="nofollow noopener" aria-label="Facebook"
-                                                        previewlistener="true">
-                                                        <i class="pk-social-links-icon pk-icon pk-icon-facebook"></i>
 
-                                                        <span class="pk-social-links-count pk-font-secondary">53</span>
-
-
-                                                    </a>
-                                                </div>
-                                                <div class="pk-social-links-item pk-social-links-twitter pk-social-links-item-count"
-                                                    data-id="twitter">
-                                                    <a href="https://twitter.com/envato" class="pk-social-links-link"
-                                                        target="_blank" rel="nofollow noopener" aria-label="Twitter"
-                                                        previewlistener="true">
-                                                        <i class="pk-social-links-icon pk-icon pk-icon-twitter"></i>
-
-                                                        <span
-                                                            class="pk-social-links-count pk-font-secondary">71K</span>
-
-
-                                                    </a>
-                                                </div>
-                                                <div class="pk-social-links-item pk-social-links-instagram pk-social-links-item-count"
-                                                    data-id="instagram">
-                                                    <a href="https://www.instagram.com/codesupply.co"
-                                                        class="pk-social-links-link" target="_blank"
-                                                        rel="nofollow noopener" aria-label="Instagram"
-                                                        previewlistener="true">
-                                                        <i class="pk-social-links-icon pk-icon pk-icon-instagram"></i>
-
-                                                        <span class="pk-social-links-count pk-font-secondary">51</span>
-
-
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="cs-footer__bottom">
-                    <div class="cs-container">
-                        <div class="cs-footer__item">
-                            <div class="cs-footer__col cs-col-left">
-                                <div class="cs-footer__inner">
-                                    <nav class="cs-footer__nav cs-footer__nav-horizontal">
-                                        <div class="cs-footer__nav-item">
-                                            <ul id="menu-main-1" class="cs-footer__nav-inner ">
-                                                <li
-                                                    class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-3881">
-                                                    <a href="https://caards.codesupply.co/caards/blog/"
-                                                        previewlistener="true">Blog</a>
-                                                </li>
-                                                <li
-                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-875">
-                                                    <a href="https://caards.codesupply.co/caards/contact-form/"
-                                                        previewlistener="true">Contacts</a>
-                                                </li>
-                                                <li
-                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2434">
-                                                    <a href="https://caards.codesupply.co/caards/privacy-policy/"
-                                                        previewlistener="true">Privacy Policy</a>
-                                                </li>
-                                                <li
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2432">
-                                                    <a target="_blank" rel="noopener"
-                                                        href="https://1.envato.market/buy-caards"
-                                                        previewlistener="true">Buy Now</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </nav>
-                                </div>
-                            </div>
-                            <div class="cs-footer__col cs-col-right">
-                                <div class="cs-footer__inner">
-                                    <div class="cs-footer__copyright">
-                                        Designed &amp; Developed by <a href="https://codesupply.co/" target="_blank"
-                                            previewlistener="true">Code Supply Co.</a> </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </footer>
 
 

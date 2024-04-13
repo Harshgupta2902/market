@@ -39,13 +39,12 @@ class Blog extends CI_Controller {
         $data['metaData'] = $this->ViewsModel->getSeoDetails('Blogs');
         $data['nav'] = $this->nav;
 
-        $query = $this->db->select('id, title, created_at, category, image, slug, alt_keyword, description')->where('published', 1)->order_by('views', 'DESC')->get('blogs')->result_array();
+        $query = $this->db->select('id, title, created_at, category, image, slug, alt_keyword, description, author')->where('published', 1)->order_by('views', 'DESC')->get('blogs')->result_array();
         $data['latestblogs'] = $query[0];
         $data['featuredblogs'] = array_slice($query, 1,3);
         $data['otherblogs'] = array_slice($query, 4);
-        $data['otherblogs'] = $query;
+        $data['otherblogss'] = $query;
         $data['category'] = $this->getCategoryCount();
-
 
 		$this->load->view('blog/home', $data);
 	}
