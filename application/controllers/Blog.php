@@ -43,7 +43,7 @@ class Blog extends CI_Controller {
         $data['latestblogs'] = $query[0];
         $data['featuredblogs'] = array_slice($query, 1,3);
         $data['otherblogs'] = array_slice($query, 4);
-        $data['otherblogss'] = $query;
+        $data['otherblogs'] = $query;
         $data['category'] = $this->getCategoryCount();
 
 		$this->load->view('blog/home', $data);
