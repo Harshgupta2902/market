@@ -1,6 +1,4 @@
-
-<!-- FAQ 3 - Bootstrap Brain Component -->
-<section class="bsb-faq-3 py-3 py-md-5 py-xl-8" style="margin-top: 20rem;">
+<section class="bsb-faq-3 py-3 py-md-5 py-xl-8" style="margin-top: 2rem;">
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
@@ -11,8 +9,6 @@
         </div>
     </div>
 
-
-    <!-- FAQs: My Account --> 
     <div class="mb-8">
         <div class="container">
             <div class="row justify-content-center">

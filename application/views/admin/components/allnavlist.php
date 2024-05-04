@@ -49,7 +49,9 @@
                                  </td>
                                  <td>
                                  <div class="custom-control custom-switch">
-                                    <input <?= $data['status'] == 1 ? 'checked' : ''; ?> name="status" type="checkbox" class="custom-control-input" id="notification1">
+                                 <input <?= $data['status'] == 1 ? 'checked' : '' ?> name="status" type="checkbox" class="custom-control-input" data-nav-id="<?= $data['id'] ?>" onchange='updateFeaturedStatus(this)'>
+
+                                    <!-- <input <?= $data['status'] == 1 ? 'checked' : ''; ?> name="status" type="checkbox" class="custom-control-input" id="notification1"> -->
                                  </div>
                                  </td>
                                  <td class="text-sm">
@@ -61,6 +63,34 @@
                                     </a>
                                  </td>
                               </tr>
+                              <script>
+                                    function updateFeaturedStatus(checkboxElement) {
+                                       var navId = checkboxElement.getAttribute('data-nav-id');
+                                       var isFeatured = checkboxElement.checked ? 1 : 0; // 1 if checked, 0 if not
+                                          console.log(isFeatured);
+                                          console.log(navId);
+                                       var url = `<?= base_url('Admin/makeEnabled/') ?>` + navId + '/' + isFeatured;
+                                       fetch(url, {
+                                          method: 'POST',
+                                          headers: {
+                                                'Content-Type': 'application/json',
+                                          },
+                                          body: JSON.stringify({
+                                             navId: navId,
+                                             featured: isFeatured
+                                          })
+                                       })
+                                       .then(response => response)
+                                       .then(data => {
+                                          console.log('Success:', data);
+                                          // Optionally, show a success message or update the UI accordingly
+                                       })
+                                       .catch((error) => {
+                                          console.error('Error:', error);
+                                          // Optionally, show an error message
+                                       });
+                                    }
+                                    </script>
                            <?php }?>
                           
                         </tbody>
