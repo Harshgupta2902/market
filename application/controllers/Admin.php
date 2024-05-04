@@ -80,6 +80,21 @@ class Admin extends CI_Controller
         }
     }
 
+
+    public function makeEnabled($navId, $featured)
+    {
+        // $postId = $this->input->post('blogId');
+        // $featured = $this->input->post('featured');
+        if (!empty($navId)) {
+            $data = ['status' => $featured];
+            $this->db->where('id', $navId);
+            $this->db->update('nav', $data);
+            redirect('allnavs');
+        } else {
+            echo 'Nav ID is required.';
+        }
+    }
+
     public function allnavs()
     {
         $this->check_admin_session();

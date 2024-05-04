@@ -52,11 +52,13 @@ class Tools extends CI_Controller {
         } else {
             $periods = range(1, $time * 12);
             $futureValues = array_map(function ($month) use ($sipAmount, $rate) {
-                return $sipAmount * ((pow(1 + $rate / (12 * 100), $month) - 1) / ($rate / (12 * 100)));
+                $value = $sipAmount * ((pow(1 + $rate / (12 * 100), $month) - 1) / ($rate / (12 * 100)));
+                return number_format($value, 2 ,'.', ''); 
             }, $periods);
 
             $result = [
-                'futureValues' => array_map('number_format', $futureValues, array_fill(0, count($futureValues), 2)),
+                'futureValues' => $futureValues,
+                // 'futureValues' => array_map('number_format', $futureValues, array_fill(0, count($futureValues), 2)),
                 'totalEarnings' => number_format(end($futureValues) - ($sipAmount * count($periods)), 2),
                 'totalDeposited' => number_format($sipAmount * count($periods), 2),
             ];
@@ -68,21 +70,14 @@ class Tools extends CI_Controller {
 
 
 	public function calculate_lumpsum() {
-        // Get parameters from the URL
         $rate = $this->input->get('rate');
         $time = $this->input->get('time');
         $lumpsumAmount = $this->input->get('lumpsumAmount');
-
-        // Validate input parameters (add more validation as needed)
         if (!is_numeric($rate) || !is_numeric($time) || !is_numeric($lumpsumAmount)) {
-            // Handle invalid input
             $result = ['error' => 'Invalid input parameters'];
         } else {
-            // Perform lumpsum calculations
             $futureValue = $lumpsumAmount * pow((1 + $rate / 100), $time);
             $totalEarnings = $futureValue - $lumpsumAmount;
-
-            // Prepare result data
             $result = [
                 'futureValue' => number_format($futureValue, 2),
                 'totalEarnings' => number_format($totalEarnings, 2),

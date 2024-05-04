@@ -64,18 +64,24 @@ class ViewsModel extends CI_Model
         return $this->db->get($table)->result_array();
     }
 
-    public function getWhere($table, $col, $type)
+
+    public function getWhere($table, $col, $type){
+		return $this->db->where($col, $type)->get($table)->result_array();
+	}
+
+    public function getWhereNav($table, $col, $type)
     {
-        return $this->db->where($col, $type)->get($table)->result_array();
+        return $this->db->where($col, $type)->where('status', 1)->get($table)->result_array();
     }
 
     public function nav()
     {
-        $nav['Ipo'] = $this->getWhere('nav', 'nav', 'Ipo');
-        $nav['Crypto'] = $this->getWhere('nav', 'nav', 'Crypto');
-        $nav['Calculators'] = $this->getWhere('nav', 'nav', 'Calculators');
-        $nav['Tools'] = $this->getWhere('nav', 'nav', 'Tools');
-        $nav['Blogs'] = $this->getWhere('nav', 'nav', 'Blogs');
+        $data = $this->db->query('SELECT DISTINCT nav FROM nav WHERE status = 1')->result_array();
+        $nav = [];
+        foreach ($data as $row) {
+            $category = $row['nav'];
+            $nav[$category] = $this->getWhereNav('nav', 'nav', $category);
+        }
         return $nav;
     }
 }
