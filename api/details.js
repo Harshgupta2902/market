@@ -3,6 +3,7 @@ const axios = require('axios');
 const { json } = require('express');
 const cheerio = require('cheerio');
 const mysql = require('mysql2/promise'); 
+const url = require('url');
 
 
 const dbConfig = {
@@ -56,7 +57,7 @@ async function details(link) {
     const detailsText = targetText.split(':')[1].trim();
     return detailsText;   
   } catch (error) {
-    return { error: `Failed to retrieve the webpage: ${error.message}` };
+    return "";
   }
 }
 
@@ -206,45 +207,41 @@ async function main() {
   try {
   
     const results = await fetchUrlsFromDatabase();
-    // const results = ['https://ipowatch.in/juniper-hotels-ipo-date-review-price-allotment-details/'];
     await createTables();
 
     for (const link of results) {
       if (link == null) {
         continue; 
       }
-      // let slug = link.split('/').pop();
       try {
-      console.log(link);
-
         const detailText = await details(link);
         const priceBandResult = await PriceBandtable(link);
         const ulAfterHeadingsResult = await fetchAllUlAfterHeadings(link);
 
+        const parsedUrl = url.parse(link);
+        const pathParts = parsedUrl.pathname.split('/');
+        const slug = pathParts[pathParts.length - 2]; // Get the second last part
+
+        console.log(slug);
         const organizedData = {
           detailText: detailText,
           ulAfterHeadingsResult :ulAfterHeadingsResult,
           tables : priceBandResult,
-          slug: link.split('/').pop()
+          slug: slug
           
         };
 
-        console.log(organizedData);
+        // console.log(organizedData);
         
         console.log(`Data fetched successfully for IPO ${link}:`);
+        console.log(organizedData);
+
       } catch (error) {
         console.error(`An error occurred while fetching data for IPO with ID: ${error.message}`);
       }
     }
 
-    // // Write allData array to a JSON file
-    // fs.writeFile('ipo_data.json', JSON.stringify(allData, null, 2), (err) => {
-    //   if (err) {
-    //     console.error('Error writing JSON file:', err);
-    //   } else {
-    //     console.log('Data has been written to ipo_data.json');
-    //   }
-    // });
+  
   } catch (error) {
     console.error(`An error occurred: ${error.message}`);
   }
