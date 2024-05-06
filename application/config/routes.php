@@ -15,6 +15,7 @@ $route['smeMarketIpo'] = 'Ipo/smeMarketIpo';
 $route['subscriptionStatus'] = 'Ipo/subscriptionStatus';
 $route['ipoForms'] = 'Ipo/ipoForms';
 $route['sharesBuyBack'] = 'Ipo/sharesBuyBack';
+$route['detail'] = 'Ipo/details';
 
 
 

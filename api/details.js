@@ -184,30 +184,13 @@ async function fetchAllUlAfterHeadings(link) {
   }
 }
 
-async function createTables() {
-  try {
-    const connection = await mysql.createConnection(dbConfig);
-
-    await connection.query(`
-      CREATE TABLE IF NOT EXISTS details (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        slug VARCHAR(255),
-        details JSON
-      );
-    `);
-    console.log('Tables created successfully.');
-
-    await connection.end();``
-  } catch (error) {
-    console.error(`Error creating tables: ${error.message}`);
-  }
-}
-
 async function main() {
   try {
   
     const results = await fetchUrlsFromDatabase();
-    await createTables();
+
+    const connection = await mysql.createConnection(dbConfig);
+
 
     for (const link of results) {
       if (link == null) {
@@ -224,24 +207,26 @@ async function main() {
 
         console.log(slug);
         const organizedData = {
-          detailText: detailText,
+          // detailText: detailText,
           ulAfterHeadingsResult :ulAfterHeadingsResult,
           tables : priceBandResult,
-          slug: slug
-          
+          slug: slug,
+          link: link     
         };
-
-        // console.log(organizedData);
-        
         console.log(`Data fetched successfully for IPO ${link}:`);
         console.log(organizedData);
+
+
+        const insertQuery = `INSERT INTO details (slug, tables, link, lists) VALUES (?, ?, ?, ?)`;
+        const insertValues = [slug, JSON.stringify(priceBandResult), link, JSON.stringify(ulAfterHeadingsResult)];
+        await connection.execute(insertQuery, insertValues);
+        console.log(`Data inserted successfully for IPO ${link}`);
+
 
       } catch (error) {
         console.error(`An error occurred while fetching data for IPO with ID: ${error.message}`);
       }
     }
-
-  
   } catch (error) {
     console.error(`An error occurred: ${error.message}`);
   }
@@ -251,3 +236,11 @@ async function main() {
 
 
 main();
+
+
+
+// CREATE TABLE IF NOT EXISTS details (
+//   id INT AUTO_INCREMENT PRIMARY KEY,
+//   slug VARCHAR(255),
+//   details JSON
+// );
