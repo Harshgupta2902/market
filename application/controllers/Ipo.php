@@ -143,7 +143,7 @@ class Ipo extends CI_Controller
     public function details(){
         $slug = $this->input->get('slug');
         $response = $this->db->query("SELECT * FROM details WHERE slug = '$slug'")->row(); 
-        
+        echo "<pre>";
         print_r($response);
         
     }
