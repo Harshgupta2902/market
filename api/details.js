@@ -2,7 +2,7 @@ const sanitizeHtml = require('sanitize-html');
 const axios = require('axios');
 const { json } = require('express');
 const cheerio = require('cheerio');
-const mysql = require('mysql2/promise'); 
+const mysql = require('mysql2/promise');
 const url = require('url');
 
 
@@ -16,30 +16,29 @@ const dbConfig = {
 async function fetchUrlsFromDatabase() {
   try {
     const connection = await mysql.createConnection(dbConfig);
-    const query = `SELECT link FROM ipos AS all_links; `;
-    // const query = `
-    //   SELECT link FROM (
-    //     SELECT link FROM buyback 
-    //     UNION
-    //     SELECT link FROM forms 
-    //     UNION
-    //     SELECT link FROM gmp 
-    //     UNION
-    //     SELECT link FROM ipos 
-    //     UNION
-    //     SELECT link FROM recents 
-    //     UNION
-    //     SELECT link FROM sme 
-    //     UNION
-    //     SELECT link FROM old_gmp 
-    //   ) AS all_links; `;
-    
+    // const query = `SELECT link, 'ipos' AS source_table FROM ipos ; `;
+    const query = `
+      SELECT link, 'buyback' AS source_table FROM buyback
+      UNION ALL
+      SELECT link, 'forms' AS source_table FROM forms
+      UNION ALL
+      SELECT link, 'ipos' AS source_table FROM ipos
+      UNION ALL
+      SELECT link, 'recents' AS source_table FROM recents
+      UNION ALL
+      SELECT link, 'sme' AS source_table FROM sme
+      UNION ALL
+      SELECT link, 'gmp' AS source_table FROM sme
+      UNION ALL
+      SELECT link, 'old_gmp' AS source_table FROM old_gmp;
+    `;
     const [rows] = await connection.query(query);
-    const allUrls = rows.map(row => row.link);
+    const allLinks = rows.map(row => ({ link: row.link, source_table: row.source_table }));
 
     await connection.end();
+    console.log(allLinks);
+    return allLinks;
 
-    return allUrls;
   } catch (error) {
     console.error(`Error fetching URLs from the tables: ${error.message}`);
     return [];
@@ -55,41 +54,11 @@ async function details(link) {
 
     const targetText = $('[data-id="e2b564b"]').text().trim();
     const detailsText = targetText.split(':')[1].trim();
-    return detailsText;   
+    return detailsText;
   } catch (error) {
     return "";
   }
 }
-
-// async function PriceBandtable(link) {
-//   try {
-//     const response = await axios.get(link);
-//     const html = response.data;
-//     const $ = cheerio.load(html);
-
-//     const tables = $('table');
-//     const jsonData = [];
-
-//     tables.each((index, table) => {
-//       const tableName = `Table ${index + 1}`;
-
-//       const tableObject = {
-//         name: tableName,
-//         data: `<table>${$(table).html()}</table>`,
-//       };
-//       jsonData.push(tableObject);
-//     });
-//     // await insertPriceBandData({ data: jsonData[0].data });
-//     // await insertMarketLotData(jsonData[1].data);
-//     // await insertTimeline(jsonData[2].data);
-//     // await insertRevenueData(jsonData[3].data);
-//     // await insertValuation(jsonData[4].data);
-//     // console.log(jsonData[3].data);
-//     return jsonData;
-//   } catch (error) {
-//     return { error: `Error fetching the page: ${error.message}` };
-//   }
-// }
 
 function findHeading($, element) {
   let heading = $(element).prev('h2').text();
@@ -119,10 +88,10 @@ async function PriceBandtable(link) {
       const tableName = heading ? heading : '';
 
       const cleanedHtml = cleanHtml($(table).html());
-      
+
       const tableObject = {
         name: tableName,
-        data: `<table>${cleanedHtml}</table>`,
+        data: `${cleanedHtml}`,
       };
       jsonData.push(tableObject);
     });
@@ -186,15 +155,18 @@ async function fetchAllUlAfterHeadings(link) {
 
 async function main() {
   try {
-  
+
     const results = await fetchUrlsFromDatabase();
 
     const connection = await mysql.createConnection(dbConfig);
 
 
-    for (const link of results) {
+    for (const result of results) {
+      const link = result.link;
+      const source_table = result.source_table;
+
       if (link == null) {
-        continue; 
+        continue;
       }
       try {
         const detailText = await details(link);
@@ -208,17 +180,17 @@ async function main() {
         console.log(slug);
         const organizedData = {
           // detailText: detailText,
-          ulAfterHeadingsResult :ulAfterHeadingsResult,
-          tables : priceBandResult,
+          ulAfterHeadingsResult: ulAfterHeadingsResult,
+          tables: priceBandResult,
           slug: slug,
-          link: link     
+          link: link
         };
         console.log(`Data fetched successfully for IPO ${link}:`);
         console.log(organizedData);
 
 
-        const insertQuery = `INSERT INTO details (slug, tables, link, lists) VALUES (?, ?, ?, ?)`;
-        const insertValues = [slug, JSON.stringify(priceBandResult), link, JSON.stringify(ulAfterHeadingsResult)];
+        const insertQuery = `INSERT INTO details (slug, tables, link, lists, source_table) VALUES (?, ?, ?, ?, ?)`;
+        const insertValues = [slug, JSON.stringify(priceBandResult), link, JSON.stringify(ulAfterHeadingsResult) ,source_table];
         await connection.execute(insertQuery, insertValues);
         console.log(`Data inserted successfully for IPO ${link}`);
 

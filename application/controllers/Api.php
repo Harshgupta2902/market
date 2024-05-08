@@ -12,6 +12,15 @@ class Api extends CI_Controller {
     }
 
 
+    public function generate_slug_from_url($url) {
+        $path = parse_url($url, PHP_URL_PATH);
+        $path = trim($path, '/');
+        $path = str_replace('/', ' ', $path);
+        $path = preg_replace('/[^a-zA-Z0-9]+/', '-', $path);
+        $slug = strtolower($path);
+        return $slug;
+    }
+
     public function insertIpo() {
         $response = file_get_contents('http://ixorainfotech.in/api/ipo');
         $ipos = json_decode($response, true);
@@ -23,7 +32,8 @@ class Api extends CI_Controller {
                 'size' => str_replace('â‚¹', '₹', $ipo['size']),
                 'price' => str_replace('â‚¹', '₹', $ipo['price']),
                 'status' => $ipo['status'],
-                'link' => $ipo['link']
+                'link' => $ipo['link'],
+                'slug' => $this->generate_slug_from_url($ipo['link'])
             );
             $this->db->insert('ipos', $data);
         }
@@ -47,7 +57,8 @@ class Api extends CI_Controller {
                 'open' => $buyback['Column_3'],
                 'link' => $buyback['link'] ?? null,
                 'close' => $buyback['Column_4'],
-                'price' => $buyback['Column_5']
+                'price' => $buyback['Column_5'],
+                'slug' => $this->generate_slug_from_url($buyback['link'])
             );
             // print_r($data);
             $this->db->insert('buyback', $data);
@@ -74,7 +85,9 @@ class Api extends CI_Controller {
                 'bse' => $form[4],
                 'bse_link' => $form[5],
                 'nse' => $form[6],
-                'nse_link' => $form[7]
+                'nse_link' => $form[7],
+                'slug' => $this->generate_slug_from_url($form[1])
+
             );
             // print_r($data);
             $this->db->insert('forms', $data);
@@ -106,7 +119,9 @@ class Api extends CI_Controller {
                     'price' => $rowData[5],
                     'gain' => $rowData[6],
                     'kostak' => $rowData[7],
-                    'link' => $rowData[8]
+                    'subject' => $rowData[8],
+                    'slug' => $this->generate_slug_from_url($rowData[1])
+
                 );
                 $this->db->insert('gmp', $insertData);
             }
@@ -125,7 +140,9 @@ class Api extends CI_Controller {
                     'price' => $additionalList[2],
                     'ipo_gmp' => $additionalList[3],
                     'listed' => $additionalList[4],
-                    'link' => $additionalList[1]
+                    'link' => $additionalList[1],
+                    'slug' => $this->generate_slug_from_url($additionalList[1])
+
                 );
                 $this->db->insert('old_gmp', $insertData);
             }
@@ -151,7 +168,9 @@ class Api extends CI_Controller {
                 'Dates' => $sme['Column_2'],
                 'Price' => $sme['Column_3'],
                 'Platform' => $sme['Column_4'],
-                'link' => $sme['link']
+                'link' => $sme['link'],
+                'slug' => $this->generate_slug_from_url($sme['link'])
+
             );
             // print_r($data);
             $this->db->insert('sme', $data);
@@ -239,7 +258,9 @@ class Api extends CI_Controller {
                     'Company' => $table1Data["Company"],
                     'link' => $table1Data["link"],
                     'Open' => $table1Data["Open"],
-                    'Close' => $table1Data["Close"]
+                    'Close' => $table1Data["Close"],
+                    'slug' => $this->generate_slug_from_url($table1Data["link"])
+
                 );
                 $this->db->insert('recents', $insertData);
             }
@@ -257,7 +278,9 @@ class Api extends CI_Controller {
                     'Company' => $table2Data["Company"],
                     'link' => $table2Data["link"],
                     'Open' => $table2Data["Open"],
-                    'Close' => $table2Data["Close"]
+                    'Close' => $table2Data["Close"],
+                    'slug' => $this->generate_slug_from_url($table2Data["link"])
+
                 );
                 $this->db->insert('recents', $insertData);
             }
@@ -513,30 +536,3 @@ class Api extends CI_Controller {
     }
     
 }
-
-
-// CREATE TABLE IF NOT EXISTS stock_data (
-//     id INT AUTO_INCREMENT PRIMARY KEY,
-//     token INT NULL,
-//     exchange VARCHAR(50) NULL,
-//     company VARCHAR(255) NULL,
-//     symbol VARCHAR(50) NULL,
-//     trading_symbol VARCHAR(50) NULL,
-//     display_name VARCHAR(100) NULL,
-//     score DECIMAL(10, 6) NULL,
-//     isin VARCHAR(20) NULL,
-//     close_price DECIMAL(10, 2) NULL,
-//     is_tradable BOOLEAN NULL,
-//     segment VARCHAR(50) NULL,
-//     tag VARCHAR(100) NULL,
-//     expiry VARCHAR(50) NULL,
-//     alternate_token INT NULL,
-//     alternate_exchange VARCHAR(50) NULL,
-//     alternate_company VARCHAR(255) NULL,
-//     alternate_symbol VARCHAR(50) NULL,
-//     alternate_trading_symbol VARCHAR(50) NULL,
-//     alternate_display_name VARCHAR(100) NULL,
-//     alternate_isin VARCHAR(20) NULL,
-//     alternate_close_price DECIMAL(10, 2) NULL,
-//     alternate_segment VARCHAR(50) NULL
-// );

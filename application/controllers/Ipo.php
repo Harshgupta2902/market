@@ -31,7 +31,7 @@ class Ipo extends CI_Controller
         // print_r($this->nav);
         $this->ViewsModel->updatePageViews('home');
 
-        $this->loadCommonView('home', $data);
+        $this->loadCommonView('ipo/home', $data);
     }
 
     public function greyMarketIpo()
@@ -140,12 +140,30 @@ class Ipo extends CI_Controller
 
     }
 
-    public function details(){
+    public function details() {
         $slug = $this->input->get('slug');
-        $response = $this->db->query("SELECT * FROM details WHERE slug = '$slug'")->row(); 
-        echo "<pre>";
-        print_r($response);
-        
+        $slug = $this->db->escape_str($slug);
+        $metaData = $this->ViewsModel->getSeoDetails('upcomingIpo');
+        $query = $this->db->query("SELECT * FROM details WHERE slug = ?", array($slug));
+        $response = $query->row(); 
+        // if (!$response) {
+        //     redirect('error');
+        // }
+
+        $tableName = $response->source_table;
+        $link = $response->link;
+        $joinedData = $this->db->query("SELECT * FROM details JOIN $tableName ON details.link = $tableName.link WHERE details.link = ?", array($link));
+    
+        $data = [
+            'metaData' => $metaData,
+            'nav' => $this->nav,
+            'response' => $joinedData->row(),
+
+        ];
+        // echo "<pre>";
+        // print_r($data);
+    
+        $this->loadCommonView('ipo/details', $data);
     }
 
 
