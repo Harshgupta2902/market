@@ -27,6 +27,7 @@
                     <th>Price</th>
                     <th>Gain</th>
                     <th>Kostak</th>
+                    <th>Subject</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -52,6 +53,9 @@
                     </td>
                     <td>
                       <?php echo $gmp['kostak'] ?>
+                    </td>
+                    <td>
+                      <?php echo $gmp['subject'] ?>
                     </td>
                   </tr>
                   <?php } ?>
