@@ -11,14 +11,12 @@ class Api extends CI_Controller {
 
     }
 
-
     public function generate_slug_from_url($url) {
         $path = parse_url($url, PHP_URL_PATH);
         $path = trim($path, '/');
-        $path = str_replace('/', ' ', $path);
-        $path = preg_replace('/[^a-zA-Z0-9]+/', '-', $path);
-        $slug = strtolower($path);
-        return $slug;
+        $parts = explode('/', $path);
+        $last_part = end($parts);
+        return $last_part;
     }
 
     public function insertIpo() {
@@ -535,4 +533,48 @@ class Api extends CI_Controller {
         echo "Data inserted successfully!";
     }
     
+    public function insertDetails() {
+        $this->db->truncate('details');
+        $query = "
+            SELECT link, 'buyback' AS source_table FROM buyback
+            UNION ALL
+            SELECT link, 'forms' AS source_table FROM forms
+            UNION ALL
+            SELECT link, 'ipos' AS source_table FROM ipos
+            UNION ALL
+            SELECT link, 'recents' AS source_table FROM recents
+            UNION ALL
+            SELECT link, 'sme' AS source_table FROM sme
+            UNION ALL
+            SELECT link, 'gmp' AS source_table FROM sme
+            UNION ALL
+            SELECT link, 'old_gmp' AS source_table FROM old_gmp  
+           
+        ";
+
+        $data = $this->db->query($query)->result_array();
+        foreach ($data as $row) {
+            $link = $row['link'];
+            $table = $row['source_table'];
+            // print_r($link);
+
+            $response = file_get_contents("http://ixorainfotech.in/api/getDetails?link=$link&source_table=$table");
+            $main = json_decode($response, true);
+            $finalDataToInsert =  array(
+                'source_table' => $table,
+                'slug' => $main['slug'],
+                'link' => $link,
+                'tables' => json_encode($main['tables']), // Convert array to JSON string
+                'lists' => json_encode($main['ulAfterHeadingsResult']), // Convert array to JSON string
+            );
+
+            $this->db->insert('details',$finalDataToInsert);
+
+            $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode(array('message' => 'Data filled for the url', 'data' => $main)));
+
+        }
+        
+    }
 }
