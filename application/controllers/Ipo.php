@@ -31,7 +31,7 @@ class Ipo extends CI_Controller
         // print_r($this->nav);
         $this->ViewsModel->updatePageViews('home');
 
-        $this->loadCommonView('home', $data);
+        $this->loadCommonView('ipo/home', $data);
     }
 
     public function greyMarketIpo()
@@ -140,17 +140,30 @@ class Ipo extends CI_Controller
 
     }
 
-    public function details(){
-        $username = 'Entero Healthcare Solutions'; 
-        $data['details'] = $this->ViewsModel->getWhere('details', 'cname', $username);
-        $data['faq'] = $this->ViewsModel->getWhere('faq', 'cname', $username);
-        $data['financial_data'] = $this->ViewsModel->getWhere('financial_data', 'cname', $username);
-        $data['market_lot'] = $this->ViewsModel->getWhere('market_lot', 'cname', $username);
-        $data['price_band'] = $this->ViewsModel->getWhere('price_band', 'cname', $username);
-        $data['timeline'] = $this->ViewsModel->getWhere('timeline', 'cname', $username);
-        $data['valuation'] = $this->ViewsModel->getWhere('valuation', 'cname', $username);
-        echo"<pre>";
-        print_r($data);
+    public function details() {
+        $slug = $this->input->get('slug');
+        $slug = $this->db->escape_str($slug);
+        $metaData = $this->ViewsModel->getSeoDetails('upcomingIpo');
+        $query = $this->db->query("SELECT * FROM details WHERE slug = ?", array($slug));
+        $response = $query->row(); 
+        // if (!$response) {
+        //     redirect('error');
+        // }
+
+        $tableName = $response->source_table;
+        $link = $response->link;
+        $joinedData = $this->db->query("SELECT * FROM details JOIN $tableName ON details.link = $tableName.link WHERE details.link = ?", array($link));
+    
+        $data = [
+            'metaData' => $metaData,
+            'nav' => $this->nav,
+            'response' => $joinedData->row(),
+
+        ];
+        // echo "<pre>";
+        // print_r($data);
+    
+        $this->loadCommonView('ipo/details', $data);
     }
 
 
