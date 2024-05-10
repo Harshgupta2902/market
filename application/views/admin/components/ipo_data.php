@@ -1,7 +1,6 @@
 <style>
     .nav-pills .nav-link.active {
-        color: blue !important; /* Set the color to blue for the active tab */
-        text-decoration: underline; /* Add underline for the active tab */
+        font-weight: bold; 
     }
 </style>
 
@@ -142,6 +141,7 @@
                                         <th>Price</th>
                                         <th>Gain</th>
                                         <th>Kostak</th>
+                                        <th>Subject</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -158,6 +158,7 @@
                                             <td class="text-sm"><?= $data['price'] ?></td>
                                             <td class="text-sm"><?= $data['gain'] ?></td>
                                             <td class="text-sm"><?= $data['kostak'] ?></td>
+                                            <td class="text-sm"><?= $data['subject'] ?></td>
                                         </tr>
                                     <?php }?>
                                     
