@@ -11,7 +11,6 @@
 <meta name="Copyright" content="Copyright 2024 @ Crypo" />
 
 <meta name="robots" content="index, follow" />
-<!-- <meta name="Robots" content="noodp, noydir" />   -->
 
 <title><?= $metaData['seo_title'] ?></title>
 
@@ -21,11 +20,11 @@
 
 <link rel="canonical" href="<?= $metaData['seo_canonicals']?>">
 
-<link rel="stylesheet" href="<?php echo base_url('assets/css/style.css') ?>">
-<link rel="stylesheet" href="<?php echo base_url('assets/css/accordion.css') ?>">
-
 <link rel="dns-prefetch" href="<?= base_url() ?>">
 <link rel="dns-prefetch" href="https://www.google.com/">
 <link rel="dns-prefetch" href="https://www.google-analytics.com/">
 <link rel="dns-prefetch" href="https://www.googletagmanager.com/">
 <link rel="dns-prefetch" href="https://ajax.googleapis.com/">
+
+<link rel="stylesheet" href="<?php echo base_url('assets/css/style.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/css/accordion.css') ?>">

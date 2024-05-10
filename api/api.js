@@ -9,11 +9,11 @@ const gmpService = require('./gmp');
 const mainService = require('./main'); 
 const smeService = require('./sme'); 
 const subsService = require('./subs'); 
-const mf = require('./mf'); 
-const seachStocks = require('./stocks'); 
+const details = require('./details'); 
 
 
 const app = express();
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -25,10 +25,10 @@ app.use('/api/ipo', ipoService);
 app.use('/api/main', mainService); 
 app.use('/api/sme', smeService); 
 app.use('/api/subs', subsService); 
-app.use('/api/mf', mf); 
-app.use('/api/stocks', seachStocks); 
+app.use('/api/getDetails', details); 
 
 const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

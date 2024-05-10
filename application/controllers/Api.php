@@ -11,6 +11,13 @@ class Api extends CI_Controller {
 
     }
 
+    public function generate_slug_from_url($url) {
+        $path = parse_url($url, PHP_URL_PATH);
+        $path = trim($path, '/');
+        $parts = explode('/', $path);
+        $last_part = end($parts);
+        return $last_part;
+    }
 
     public function insertIpo() {
         $response = file_get_contents('http://ixorainfotech.in/api/ipo');
@@ -23,7 +30,8 @@ class Api extends CI_Controller {
                 'size' => str_replace('â‚¹', '₹', $ipo['size']),
                 'price' => str_replace('â‚¹', '₹', $ipo['price']),
                 'status' => $ipo['status'],
-                'link' => $ipo['link']
+                'link' => $ipo['link'],
+                'slug' => $this->generate_slug_from_url($ipo['link'])
             );
             $this->db->insert('ipos', $data);
         }
@@ -47,7 +55,8 @@ class Api extends CI_Controller {
                 'open' => $buyback['Column_3'],
                 'link' => $buyback['link'] ?? null,
                 'close' => $buyback['Column_4'],
-                'price' => $buyback['Column_5']
+                'price' => $buyback['Column_5'],
+                'slug' => $this->generate_slug_from_url($buyback['link'])
             );
             // print_r($data);
             $this->db->insert('buyback', $data);
@@ -74,7 +83,9 @@ class Api extends CI_Controller {
                 'bse' => $form[4],
                 'bse_link' => $form[5],
                 'nse' => $form[6],
-                'nse_link' => $form[7]
+                'nse_link' => $form[7],
+                'slug' => $this->generate_slug_from_url($form[1])
+
             );
             // print_r($data);
             $this->db->insert('forms', $data);
@@ -106,7 +117,9 @@ class Api extends CI_Controller {
                     'price' => $rowData[5],
                     'gain' => $rowData[6],
                     'kostak' => $rowData[7],
-                    'link' => $rowData[8]
+                    'subject' => $rowData[8],
+                    'slug' => $this->generate_slug_from_url($rowData[1])
+
                 );
                 $this->db->insert('gmp', $insertData);
             }
@@ -125,7 +138,9 @@ class Api extends CI_Controller {
                     'price' => $additionalList[2],
                     'ipo_gmp' => $additionalList[3],
                     'listed' => $additionalList[4],
-                    'link' => $additionalList[1]
+                    'link' => $additionalList[1],
+                    'slug' => $this->generate_slug_from_url($additionalList[1])
+
                 );
                 $this->db->insert('old_gmp', $insertData);
             }
@@ -151,7 +166,9 @@ class Api extends CI_Controller {
                 'Dates' => $sme['Column_2'],
                 'Price' => $sme['Column_3'],
                 'Platform' => $sme['Column_4'],
-                'link' => $sme['link']
+                'link' => $sme['link'],
+                'slug' => $this->generate_slug_from_url($sme['link'])
+
             );
             // print_r($data);
             $this->db->insert('sme', $data);
@@ -239,7 +256,9 @@ class Api extends CI_Controller {
                     'Company' => $table1Data["Company"],
                     'link' => $table1Data["link"],
                     'Open' => $table1Data["Open"],
-                    'Close' => $table1Data["Close"]
+                    'Close' => $table1Data["Close"],
+                    'slug' => $this->generate_slug_from_url($table1Data["link"])
+
                 );
                 $this->db->insert('recents', $insertData);
             }
@@ -257,7 +276,9 @@ class Api extends CI_Controller {
                     'Company' => $table2Data["Company"],
                     'link' => $table2Data["link"],
                     'Open' => $table2Data["Open"],
-                    'Close' => $table2Data["Close"]
+                    'Close' => $table2Data["Close"],
+                    'slug' => $this->generate_slug_from_url($table2Data["link"])
+
                 );
                 $this->db->insert('recents', $insertData);
             }
@@ -511,129 +532,49 @@ class Api extends CI_Controller {
         // Print success message
         echo "Data inserted successfully!";
     }
-
-    // public function insertMf() {
-    //       $apiUrl = 'http://ixorainfotech.in/api/mf/';
-
-    //       $headers = array(
-    //           'X-Device-Id: 123456789',
-    //           'X-Device-Type: web',
-    //           'User-Agent: ' . $_SERVER['HTTP_USER_AGENT']
-    //       );
-  
-    //       $contextOptions = array(
-    //           'http' => array(
-    //               'method' => 'GET',
-    //               'header' => implode("\r\n", $headers)
-    //           )
-    //       );
-    //       $context = stream_context_create($contextOptions);
-    //       $jsonData = file_get_contents($apiUrl, false, $context);
-    //       if ($jsonData === false) {
-    //           echo 'Error fetching data from API';
-    //       } else {
-    //         header('Content-Type: application/json');
-    //         echo $jsonData;
-    //       }
-    // }
     
-    // public function insertStocksData() {
-    //     $data = $this->db->get('symbols')->result_array();
+    public function insertDetails() {
+        $this->db->truncate('details');
+        $query = "
+            SELECT link, 'buyback' AS source_table FROM buyback
+            UNION ALL
+            SELECT link, 'forms' AS source_table FROM forms
+            UNION ALL
+            SELECT link, 'ipos' AS source_table FROM ipos
+            UNION ALL
+            SELECT link, 'recents' AS source_table FROM recents
+            UNION ALL
+            SELECT link, 'sme' AS source_table FROM sme
+            UNION ALL
+            SELECT link, 'gmp' AS source_table FROM sme
+            UNION ALL
+            SELECT link, 'old_gmp' AS source_table FROM old_gmp  
+           
+        ";
+
+        $data = $this->db->query($query)->result_array();
+        foreach ($data as $row) {
+            $link = $row['link'];
+            $table = $row['source_table'];
+            // print_r($link);
+
+            $response = file_get_contents("http://ixorainfotech.in/api/getDetails?link=$link&source_table=$table");
+            $main = json_decode($response, true);
+            $finalDataToInsert =  array(
+                'source_table' => $table,
+                'slug' => $main['slug'],
+                'link' => $link,
+                'tables' => json_encode($main['tables']), // Convert array to JSON string
+                'lists' => json_encode($main['ulAfterHeadingsResult']), // Convert array to JSON string
+            );
+
+            $this->db->insert('details',$finalDataToInsert);
+
+            $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode(array('message' => 'Data filled for the url', 'data' => $main)));
+
+        }
         
-    //     foreach ($data as $symbol_data) {
-    //         $symbol = str_replace(' ', '+', $symbol_data['symbol']);
-    //         // $symbol = 'TATA';
-    //         $apiUrl = "http://ixorainfotech.in/api/stocks?key=$symbol";
-    
-    //         $ch = curl_init();
-    //         curl_setopt($ch, CURLOPT_URL, $apiUrl);
-    //         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    //         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Disable SSL certificate verification
-    //         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-    
-    //         // Set headers
-    //         $headers = [
-    //             'X-Device-Id: 123456789',
-    //             'X-Device-Type: web',
-    //             'User-Agent: ' . $_SERVER['HTTP_USER_AGENT'] // Forward user agent from client
-    //             // Add any other headers if needed
-    //         ];
-    //         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-    //         $jsonData = curl_exec($ch);
-    
-    //         if (curl_errno($ch)) {
-    //             echo 'Error fetching data from API: ' . curl_error($ch);
-    //         } else {
-    //             $response = json_decode($jsonData, true);
-    //             foreach ($response['result'] as $result) {
-    //                 echo"<pre>";
-    //                 print_r($result);
-    //                 // print_r("Expiry:=>". $result['expiry'] ."Company:=>".$result['company']);
-    //                 $mainData = [
-    //                     'token' => $result['token'],
-    //                     'exchange' => $result['exchange'],
-    //                     'company' => $result['company'],
-    //                     'symbol' => $result['symbol'],
-    //                     'trading_symbol' => $result['trading_symbol'],
-    //                     'display_name' => $result['display_name'],
-    //                     'score' => $result['score'],
-    //                     'isin' => $result['isin'],
-    //                     'close_price' => $result['close_price'],
-    //                     'is_tradable' => $result['is_tradable'],
-    //                     'segment' => $result['segment'],
-    //                     'tag' => $result['tag'],
-    //                     // 'expiry' => $result['expiry'],
-    //                     'token' => $result['alternate']['token'],
-    //                     'exchange' => $result['alternate']['exchange'],
-    //                     'company' => $result['alternate']['company'],
-    //                     'symbol' => $result['alternate']['symbol'],
-    //                     'trading_symbol' => $result['alternate']['trading_symbol'],
-    //                     'display_name' => $result['alternate']['display_name'],
-    //                     'isin' => $result['alternate']['isin'],
-    //                     'close_price' => $result['alternate']['close_price'],
-    //                     'segment' => $result['alternate']['segment']
-    //                 ];
-    //                 $this->db->insert('stock_data', $mainData);
-    //             }
-    //             echo 'Data inserted successfully!';
-    //         }
-    
-    //         curl_close($ch);
-
-    //         // break;
-    //     }
-    
-    //     // $this->output
-    //     //     ->set_content_type('application/json')
-    //     //     ->set_output(json_encode($data));
-    // }
-    
+    }
 }
-
-
-// CREATE TABLE IF NOT EXISTS stock_data (
-//     id INT AUTO_INCREMENT PRIMARY KEY,
-//     token INT NULL,
-//     exchange VARCHAR(50) NULL,
-//     company VARCHAR(255) NULL,
-//     symbol VARCHAR(50) NULL,
-//     trading_symbol VARCHAR(50) NULL,
-//     display_name VARCHAR(100) NULL,
-//     score DECIMAL(10, 6) NULL,
-//     isin VARCHAR(20) NULL,
-//     close_price DECIMAL(10, 2) NULL,
-//     is_tradable BOOLEAN NULL,
-//     segment VARCHAR(50) NULL,
-//     tag VARCHAR(100) NULL,
-//     expiry VARCHAR(50) NULL,
-//     alternate_token INT NULL,
-//     alternate_exchange VARCHAR(50) NULL,
-//     alternate_company VARCHAR(255) NULL,
-//     alternate_symbol VARCHAR(50) NULL,
-//     alternate_trading_symbol VARCHAR(50) NULL,
-//     alternate_display_name VARCHAR(100) NULL,
-//     alternate_isin VARCHAR(20) NULL,
-//     alternate_close_price DECIMAL(10, 2) NULL,
-//     alternate_segment VARCHAR(50) NULL
-// );

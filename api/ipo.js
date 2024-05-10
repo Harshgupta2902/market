@@ -1,10 +1,9 @@
-// ipo.js
-
 const express = require('express');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
 const router = express.Router();
+
 
 router.get('/', async (req, res) => {
   try {
@@ -22,18 +21,16 @@ router.get('/', async (req, res) => {
 
       const columns = $(row).find("td");
       const companyName = columns.eq(0).text().trim();
-      let link = columns.eq(0).find('a').attr('href');
+      const link = columns.eq(0).find('a').attr('href');
       const date = columns.eq(1).text().trim();
       const size = columns.eq(2).text().trim();
       const price = columns.eq(3).text().trim();
       const status = "Upcoming";
       
-      if (link) { 
-        if (link.startsWith('/')) {
-          link = link.substring(1);
-          fullLink = `https://ipowatch.in/${link}`;
-        }
-        fullLink = link.startsWith('http') ? link : `https://ipowatch.in/${link}`;
+      let fullLink = link;
+
+      if (fullLink && !fullLink.startsWith('http')) {
+        fullLink = `https://ipowatch.in/${fullLink}`;
       }
 
       const ipoEntry = {
@@ -44,7 +41,10 @@ router.get('/', async (req, res) => {
         status,
         link: fullLink
       };
-      ipos.push(ipoEntry);
+
+      if (link) { // Only push IPO entry if link exists
+        ipos.push(ipoEntry);
+      }
     });
 
     res.json(ipos);
@@ -53,5 +53,6 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 module.exports = router;
