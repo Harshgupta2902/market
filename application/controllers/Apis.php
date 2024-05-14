@@ -12,10 +12,10 @@ class Apis extends CI_Controller
         $this->load->helper('form');
         $this->load->model('ViewsModel');
 
-        $this->metaData = $this->ViewsModel->getSeoDetails('Ipo');
-        $this->upcoming = $this->ViewsModel->getRecentsByType('Upcoming');
-        $this->sme = $this->ViewsModel->getRecentsByType('SME');
-        $this->nav = $this->ViewsModel->nav();
+        // Enable CORS
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type");
 
     }
 
