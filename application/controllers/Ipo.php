@@ -146,11 +146,15 @@ class Ipo extends CI_Controller
         $metaData = $this->ViewsModel->getSeoDetails('upcomingIpo');
         $query = $this->db->query("SELECT * FROM details WHERE slug = ?", array($slug));
         $response = $query->row(); 
-        // if (!$response) {
-        //     redirect('error');
-        // }
+        if (!$response) {
+            redirect('error');
+        }
+        // echo "<pre>";
+        // print_r($response);
+        // die;
 
         $tableName = $response->source_table;
+
         $link = $response->link;
         $joinedData = $this->db->query("SELECT * FROM details JOIN $tableName ON details.link = $tableName.link WHERE details.link = ?", array($link));
     
@@ -160,8 +164,7 @@ class Ipo extends CI_Controller
             'response' => $joinedData->row(),
 
         ];
-        // echo "<pre>";
-        // print_r($data);
+        
     
         $this->loadCommonView('ipo/details', $data);
     }
