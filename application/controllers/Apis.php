@@ -18,7 +18,26 @@ class Apis extends CI_Controller
         header("Access-Control-Allow-Headers: Content-Type");
 
     }
+    public function getMetaData() {
+        $route = $this->input->get('route');
+        if (empty($route)) {
+            $metaData['error'] = "No route found";
+            return $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode($metaData));
+        }
 
+            $query = $this->db->get_where('seo_details', array('seo_page' => $route));
+        if ($query->num_rows() > 0) {
+            $metaData['metaData'] = $query->row();
+        } else {
+            $metaData['error'] = "No data found for the specified route";
+        }
+
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($metaData));
+    }
     public function getNav()
     {
         $nav['message'] = "success";
