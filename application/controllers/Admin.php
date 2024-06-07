@@ -218,7 +218,7 @@ class Admin extends CI_Controller
                         'type' => $this->input->post('poll'),
                         'description' => $this->input->post('short_description'),
                         'blog' => $this->input->post('description'),
-                        'image' => base_url() . 'uploads/' . $this->input->post('alt_keyword') . $image_data['file_ext'],
+                        'image' => base_url() . 'uploads/' . str_replace(' ', '_', $this->input->post('alt_keyword')) . $image_data['file_ext'],
                         'alt_keyword' => $this->input->post('alt_keyword'),
                         'tags' => $this->input->post('tags'),
                         'category' => $this->input->post('category'),
