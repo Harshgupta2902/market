@@ -187,6 +187,20 @@ class Apis extends CI_Controller
             print_r($data);
         }
     }
+
+
+    public function getBlogDetails($category,$slug){
+
+            $data['data'] = $this->db->where('slug', $slug)->get('blogs')->row(); 
+            if ($data['data']) {
+                $this->db->set('views', 'views+1', FALSE)->where('slug', $slug)->update('blogs');
+            }
+            // $data['category'] = $this->getCategoryCount();
+            // $data['featured'] = $this->getFeatured($category, $slug);
+            echo "<pre>";
+            print_r($data);
+            // $this->load->view('blog/details', $data);
+    }
     
 
     
