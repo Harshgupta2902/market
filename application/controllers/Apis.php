@@ -134,7 +134,6 @@ class Apis extends CI_Controller
 
     public function ipoDetails()
     {
-
         $slug = $this->input->get('slug');
         $slug = $this->db->escape_str($slug);
         if (!$slug) {
@@ -167,6 +166,28 @@ class Apis extends CI_Controller
         ->set_content_type('application/json')
         ->set_output(json_encode($data));
     }
+
+    public function getBlogs() {
+        $query = $this->db
+            ->select('id, title, created_at, category, image, slug, alt_keyword, description, author')
+            ->where('published', 1)
+            ->order_by('views', 'DESC')
+            ->get('blogs')
+            ->result_array();
+    
+        if (!empty($query)) {
+            $data['latestblogs'] = $query[0];
+            $data['otherblogs'] = [];
+            for ($i = 1; $i < count($query); $i++) {
+                if ($query[$i]['id'] !== $data['latestblogs']['id']) {
+                    $data['otherblogs'][] = $query[$i];
+                }
+            }
+            echo "<pre>";
+            print_r($data);
+        }
+    }
+    
 
     
 
