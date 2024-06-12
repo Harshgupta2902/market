@@ -194,7 +194,7 @@ class Admin extends CI_Controller
         if ($id) {
             $this->form_validation->set_rules('post_name', 'Post Name', 'required');
             $this->form_validation->set_rules('short_description', 'Short Description', 'required');
-            $this->form_validation->set_rules('description', 'Post Body', 'required');
+            $this->form_validation->set_rules('description', 'Post Body','required');
             $this->form_validation->set_rules('tags', 'Tags', 'required');
             $this->form_validation->set_rules('category', 'Category', 'required');
             $this->form_validation->set_rules('alt_keyword', 'Alt Keyword', 'required');
@@ -210,28 +210,65 @@ class Admin extends CI_Controller
                 $config['file_name'] = $this->input->post('alt_keyword');
                 $this->load->library('upload', $config);
 
+                $current_blog = $this->db->where('id', $id)->get('blogs')->row_array();
+                $current_image_path = $current_blog['image'];
+
+                if ($current_image_path) {
+                    $image_path = str_replace(base_url(), './', $current_image_path);
+                    if (file_exists($image_path)) {
+                        unlink($image_path); // Delete the file
+                    }
+                }
+
                 if ($this->upload->do_upload('image')) {
                     $image_data = $this->upload->data();
 
-                    $Blogdata = [
-                        'title' => $this->input->post('post_name'),
-                        'type' => $this->input->post('poll'),
-                        'description' => $this->input->post('short_description'),
-                        'blog' => $this->input->post('description'),
-                        'image' => base_url() . 'uploads/' . str_replace(' ', '_', $this->input->post('alt_keyword')) . $image_data['file_ext'],
-                        'alt_keyword' => $this->input->post('alt_keyword'),
-                        'tags' => $this->input->post('tags'),
-                        'category' => $this->input->post('category'),
-                        'featured' => $this->input->post('featured'),
-                        'slug' => $this->create_slug($this->input->post('post_name')),
-                        'meta_description' => $this->input->post('meta_description'),
-                        'meta_title' => $this->input->post('meta_title'),
-                        'robots' => $this->input->post('robots'),
-                        'meta_keywords' => $this->input->post('meta_keywords'),
-                    ];
-                    $this->db->where('id', $id); // Assuming 'id' is the primary key column
-                    $this->db->update('blogs', $Blogdata);
+
+                    $config_resize['image_library'] = 'gd2';
+                    $config_resize['source_image'] = $image_data['full_path'];
+                    $config_resize['create_thumb'] = FALSE;
+                    $config_resize['maintain_ratio'] = TRUE;
+                    $config_resize['width'] = 800; // Set your desired width
+                    $config_resize['height'] = 600; // Set your desired height
+                    $this->load->library('image_lib', $config_resize);
+                    
+                    if(!$this->image_lib->resize()){
+                        echo $this->image_lib->display_errors();
+                    }
+                    else{
+                        // Compress the image
+                        $config_compress['image_library'] = 'gd2';
+                        $config_compress['source_image'] = $image_data['full_path'];
+                        $config_compress['quality'] = '90%';
+                        $this->image_lib->initialize($config_compress);
+
+                        if (!$this->image_lib->resize()) {
+                            echo $this->image_lib->display_errors();
+                        }
+
+                        $Blogdata = [
+                            'title' => $this->input->post('post_name'),
+                            'type' => $this->input->post('poll'),
+                            'description' => $this->input->post('short_description'),
+                            'blog' => $this->input->post('description'),
+                            'image' => base_url() . 'uploads/' . str_replace(' ', '_', $this->input->post('alt_keyword')) . $image_data['file_ext'],
+                            'alt_keyword' => $this->input->post('alt_keyword'),
+                            'tags' => $this->input->post('tags'),
+                            'category' => $this->input->post('category'),
+                            'featured' => $this->input->post('featured'),
+                            'slug' => $this->create_slug($this->input->post('post_name')),
+                            'meta_description' => $this->input->post('meta_description'),
+                            'meta_title' => $this->input->post('meta_title'),
+                            'robots' => $this->input->post('robots'),
+                            'meta_keywords' => $this->input->post('meta_keywords'),
+                        ];
+                        $this->db->where('id', $id); // Assuming 'id' is the primary key column
+                        $this->db->update('blogs', $Blogdata);
+                    }
+
+                    $this->image_lib->clear();
                     redirect('allblogs');
+
                 } else {
                     $Blogdata = [
                         'title' => $this->input->post('post_name'),
@@ -286,23 +323,46 @@ class Admin extends CI_Controller
                 if ($this->upload->do_upload('image')) {
                     $image_data = $this->upload->data();
 
-                    $Blogdata = [
-                        'title' => $this->input->post('post_name'),
-                        'description' => $this->input->post('short_description'),
-                        'blog' => $this->input->post('description'),
-                        'image' => base_url() . 'uploads/' . str_replace(' ', '_', $this->input->post('alt_keyword')) . $image_data['file_ext'],
-                        'alt_keyword' => $this->input->post('alt_keyword'),
-                        'tags' => $this->input->post('tags'),
-                        'category' => $this->input->post('category'),
-                        'slug' => $this->create_slug($this->input->post('post_name')),
-                        'meta_description' => $this->input->post('meta_description'),
-                        'meta_title' => $this->input->post('meta_title'),
-                        'robots' => $this->input->post('robots'),
-                        'meta_keywords' => $this->input->post('meta_keywords'),
-                        'author' => $this->input->post('author'),
-                    ];
-                    $this->db->insert('blogs', $Blogdata);
-                    $blog_id = $this->db->insert_id();
+                    $config_resize['image_library'] = 'gd2';
+                    $config_resize['source_image'] = $image_data['full_path'];
+                    $config_resize['create_thumb'] = FALSE;
+                    $config_resize['maintain_ratio'] = TRUE;
+                    $config_resize['width'] = 800; // Set your desired width
+                    $config_resize['height'] = 600; // Set your desired height
+                    $this->load->library('image_lib', $config_resize);
+                    
+                    if(!$this->image_lib->resize()){
+                        echo $this->image_lib->display_errors();
+                    }
+                    else{
+                        // Compress the image
+                        $config_compress['image_library'] = 'gd2';
+                        $config_compress['source_image'] = $image_data['full_path'];
+                        $config_compress['quality'] = '90%';
+                        $this->image_lib->initialize($config_compress);
+
+                        if (!$this->image_lib->resize()) {
+                            echo $this->image_lib->display_errors();
+                        }
+                        $Blogdata = [
+                            'title' => $this->input->post('post_name'),
+                            'description' => $this->input->post('short_description'),
+                            'blog' => $this->input->post('description'),
+                            'image' => base_url() . 'uploads/' . str_replace(' ', '_', $this->input->post('alt_keyword')) . $image_data['file_ext'],
+                            'alt_keyword' => $this->input->post('alt_keyword'),
+                            'tags' => $this->input->post('tags'),
+                            'category' => $this->input->post('category'),
+                            'slug' => $this->create_slug($this->input->post('post_name')),
+                            'meta_description' => $this->input->post('meta_description'),
+                            'meta_title' => $this->input->post('meta_title'),
+                            'robots' => $this->input->post('robots'),
+                            'meta_keywords' => $this->input->post('meta_keywords'),
+                            'author' => $this->input->post('author'),
+                        ];
+                        $this->db->insert('blogs', $Blogdata);
+                        $blog_id = $this->db->insert_id();
+                    }
+                    $this->image_lib->clear();
                     redirect('allblogs');
                 } else {
                     $upload_error = $this->upload->display_errors();

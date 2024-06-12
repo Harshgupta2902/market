@@ -59,7 +59,7 @@
                           <h6 class="my-2">Edit blog image</h6>
                           <label class="w-100" style="cursor:pointer;">
                             <span>
-                              <input class="form-control stretched-link" type="file" name="image" id="my-image"
+                              <input class="form-control stretched-link" type="file" name="image" id="image"
                                 accept="image/gif, image/jpeg, image/png" value="<?= $blog['image'] ?>">
                             </span>
                           </label>
@@ -69,7 +69,7 @@
                   </div>
                   <script>
                     document.addEventListener('DOMContentLoaded', function () {
-                      const imageInput = document.getElementById('my-image');
+                      const imageInput = document.getElementById('image');
                       const imagePreview = document.getElementById('image-preview');
 
                       imageInput.addEventListener('change', function (event) {
