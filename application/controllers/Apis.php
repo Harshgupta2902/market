@@ -183,8 +183,9 @@ class Apis extends CI_Controller
                     $data['otherblogs'][] = $query[$i];
                 }
             }
-            echo "<pre>";
-            print_r($data);
+            return $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($data));
         }
     }
 
@@ -195,12 +196,66 @@ class Apis extends CI_Controller
             if ($data['data']) {
                 $this->db->set('views', 'views+1', FALSE)->where('slug', $slug)->update('blogs');
             }
-            // $data['category'] = $this->getCategoryCount();
-            // $data['featured'] = $this->getFeatured($category, $slug);
-            echo "<pre>";
-            print_r($data);
-            // $this->load->view('blog/details', $data);
+              return $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($data));
     }
+
+    public function getIndices() {
+        $url = "https://analyze.api.tickertape.in/homepage/indices";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        if ($response === FALSE) {
+            $error = curl_error($ch);
+            curl_close($ch);
+            $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode(array('error' => $error)));
+            return;
+        }
+        curl_close($ch);
+        $data = json_decode($response, true);
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($data));
+    }
+
+    public function getTrendData() {
+        $type = $this->input->get('type');
+        $dataCount = $this->input->get('dataCount', TRUE) ?: 5;
+        $offset = $this->input->get('offset', TRUE) ?: 0;
+
+        $base_url = "https://analyze.api.tickertape.in/homepage/stocks?universe=Market&type=";
+
+        if (in_array($type, ['gainers', 'losers', 'active', 'approachingHigh', 'approachingLow'])) {
+            $url = $base_url . $type . "&dataCount=" . $dataCount . "&offset=" . $offset;
+        } else {
+            $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode(array('error' => 'Invalid type parameter')));
+            return;
+        }
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        if ($response === FALSE) {
+            $error = curl_error($ch);
+            curl_close($ch);
+            $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode(array('error' => $error)));
+            return;
+        }
+        curl_close($ch);
+        $data = json_decode($response, true);
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($data));
+    }
+
     
 
     
