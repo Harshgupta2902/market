@@ -14,7 +14,7 @@ class Apis extends CI_Controller
 
         // Enable CORS
         header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
         header("Access-Control-Allow-Headers: Content-Type");
 
     }
@@ -256,6 +256,32 @@ class Apis extends CI_Controller
             ->set_output(json_encode($data));
     }
 
+    public function getIpoDetails() {
+        $slug = $this->input->get('slug');
+        $slug = $this->db->escape_str($slug);
+        $query = $this->db->query("SELECT * FROM details WHERE slug = ?", array($slug));
+        $response = $query->row(); 
+        if (!$response) {
+            redirect('error');
+        }
+
+        $tableName = $response->source_table;
+
+        $link = $response->link;
+        $joinedData = $this->db->query("SELECT * FROM details JOIN $tableName ON details.link = $tableName.link WHERE details.link = ?", array($link));
+    
+        $data = [
+            'response' => $joinedData->row(),
+
+        ];
+
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($data));
+        
+    
+        // $this->loadCommonView('ipo/details', $data);
+    }
     
 
     
