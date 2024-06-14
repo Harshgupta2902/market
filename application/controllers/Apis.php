@@ -257,10 +257,11 @@ class Apis extends CI_Controller
     }
 
     public function getAdditionalIpos(){
-        $data['upcomingData'] = $this->db->where('Type', "Upcoming")->limit(6)->get('recents')->result_array();
-        $data['smeData'] = $this->db->where('Type', "SME")->limit(6)->get('recents')->result_array();
-        $data['gmpData'] = $this->db->limit(6)->get('gmp')->result_array();
-        $data['buyBackData'] = $this->db->limit(6)->get('buyback')->result_array();
+        $data['upcomingData'] = $this->db->select('Company, slug, Open, Close')->where('Type', "Upcoming")->limit(6)->get('recents')->result_array();
+        $data['smeData'] = $this->db->select('Company, slug, Open, Close')->where('Type', "SME")->limit(6)->get('recents')->result_array();
+        $data['gmpData'] = $this->db->select('ipo_name, date, slug')->limit(6)->get('gmp')->result_array();
+        $data['buyBackData'] = $this->db->select('company_name, open,close, slug')->limit(6)->get('buyback')->result_array();
+
         $this->output
         ->set_content_type('application/json')
         ->set_output(json_encode($data));
