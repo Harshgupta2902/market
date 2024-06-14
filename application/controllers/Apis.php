@@ -256,34 +256,14 @@ class Apis extends CI_Controller
             ->set_output(json_encode($data));
     }
 
-    public function getIpoDetails() {
-        $slug = $this->input->get('slug');
-        $slug = $this->db->escape_str($slug);
-        $query = $this->db->query("SELECT * FROM details WHERE slug = ?", array($slug));
-        $response = $query->row(); 
-        if (!$response) {
-            redirect('error');
-        }
-
-        $tableName = $response->source_table;
-
-        $link = $response->link;
-        $joinedData = $this->db->query("SELECT * FROM details JOIN $tableName ON details.link = $tableName.link WHERE details.link = ?", array($link));
-    
-        $data = [
-            'response' => $joinedData->row(),
-
-        ];
-
+    public function getAdditionalIpos(){
+        $data['upcomingData'] = $this->db->where('Type', "Upcoming")->limit(6)->get('recents')->result_array();
+        $data['smeData'] = $this->db->where('Type', "SME")->limit(6)->get('recents')->result_array();
+        $data['gmpData'] = $this->db->limit(6)->get('gmp')->result_array();
+        $data['buyBackData'] = $this->db->limit(6)->get('buyback')->result_array();
         $this->output
-            ->set_content_type('application/json')
-            ->set_output(json_encode($data));
-        
-    
-        // $this->loadCommonView('ipo/details', $data);
+        ->set_content_type('application/json')
+        ->set_output(json_encode($data));
     }
     
-
-    
-
 }
