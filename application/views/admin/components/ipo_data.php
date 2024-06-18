@@ -77,10 +77,10 @@
                                     <tbody>
                                     <?php foreach ($main as $data) {?>
                                         <tr>
-                                            <td><div class="d-flex"><h6 class="my-auto"><?= $data['Company'] ?></h6></div></td>
+                                            <td><div class="d-flex"><h6 class="my-auto"><?= $data['company_name'] ?></h6></div></td>
                                             <td class="text-sm"><?= $data['Type'] ?></td>
-                                            <td class="text-sm"><?= $data['Open'] ?></td>
-                                            <td class="text-sm"><?= $data['Close'] ?></td>
+                                            <td class="text-sm"><?= $data['open'] ?></td>
+                                            <td class="text-sm"><?= $data['close'] ?></td>
                                         </tr>
                                     <?php }?>
                                     
@@ -110,7 +110,7 @@
                                         <tr>
                                             <td>
                                                 <div class="d-flex">
-                                                <h6 class="my-auto"><?= $data['companyName'] ?></h6>
+                                                <h6 class="my-auto"><?= $data['company_name'] ?></h6>
                                                 </div>
                                             </td>
                                             <td class="text-sm"><?= $data['date'] ?></td>
@@ -149,7 +149,7 @@
                                         <tr>
                                             <td>
                                                 <div class="d-flex">
-                                                <h6 class="my-auto"><?= $data['ipo_name'] ?></h6>
+                                                <h6 class="my-auto"><?= $data['company_name'] ?></h6>
                                                 </div>
                                             </td>
                                             <td class="text-sm"><?= $data['date'] ?></td>
@@ -186,7 +186,7 @@
                                         <tr>
                                             <td>
                                                 <div class="d-flex">
-                                                <h6 class="my-auto"><?= $data['ipo_name'] ?></h6>
+                                                <h6 class="my-auto"><?= $data['company_name'] ?></h6>
                                                 </div>
                                             </td>
                                             <td class="text-sm"><?= $data['price'] ?></td>
@@ -220,11 +220,11 @@
                                         <tr>
                                             <td>
                                                 <div class="d-flex">
-                                                <h6 class="my-auto"><?= $data['name'] ?></h6>
+                                                <h6 class="my-auto"><?= $data['company_name'] ?></h6>
                                                 </div>
                                             </td>
-                                            <td class="text-sm"><?= $data['Dates'] ?></td>
-                                            <td class="text-sm"><?= $data['Price'] ?></td>
+                                            <td class="text-sm"><?= $data['date'] ?></td>
+                                            <td class="text-sm"><?= $data['price'] ?></td>
                                             <td class="text-sm"><?= $data['Platform'] ?></td>
                                             <td class="text-sm"><?= $data['link'] ?></td>
                                         </tr>
@@ -265,7 +265,7 @@
                                                 <h6 class="my-auto"><?= $data['company_name'] ?></h6>
                                                 </div>
                                             </td>
-                                            <td class="text-sm"><?= $data['close_date'] ?></td>
+                                            <td class="text-sm"><?= $data['close'] ?></td>
                                             <td class="text-sm"><?= $data['size_rs_cr'] ?></td>
                                             <td class="text-sm"><?= $data['qib_x'] ?></td>
                                             <td class="text-sm"><?= $data['snii_x'] ?></td>
@@ -310,7 +310,7 @@
                                                 <h6 class="my-auto"><?= $data['company_name'] ?></h6>
                                                 </div>
                                             </td>
-                                            <td class="text-sm"><?= $data['close_date'] ?></td>
+                                            <td class="text-sm"><?= $data['close'] ?></td>
                                             <td class="text-sm"><?= $data['size_rs_cr'] ?></td>
                                             <td class="text-sm"><?= $data['qib_x'] ?></td>
                                             <td class="text-sm"><?= $data['nii_x'] ?></td>
@@ -346,7 +346,7 @@
                                         <tr>
                                             <td>
                                                 <div class="d-flex">
-                                                <h6 class="my-auto"><?= $data['name'] ?></h6>
+                                                <h6 class="my-auto"><?= $data['company_name'] ?></h6>
                                                 </div>
                                             </td>
                                             <td class="text-sm"><?= $data['date'] ?></td>
@@ -390,7 +390,7 @@
                                                 <h6 class="my-auto"><?= $data['company_name'] ?></h6>
                                                 </div>
                                             </td>
-                                            <td class="text-sm"><?= $data['record_date'] ?></td>
+                                            <td class="text-sm"><?= $data['date'] ?></td>
                                             <td class="text-sm"><?= $data['open'] ?></td>
                                             <td class="text-sm"><?= $data['close'] ?></td>
                                             <td class="text-sm"><?= $data['price'] ?></td>
