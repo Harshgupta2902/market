@@ -12,28 +12,28 @@ class Apis extends CI_Controller
         $this->load->helper('form');
         $this->load->model('ViewsModel');
 
-        $allowedOrigins = [
-            'http://localhost',
-            'http://node.onlineinfotech.net',
-            'https://node.onlineinfotech.net'
-        ];
+        // $allowedOrigins = [
+        //     'http://localhost',
+        //     'http://node.onlineinfotech.net',
+        //     'https://node.onlineinfotech.net'
+        // ];
 
-        if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $allowedOrigins)) {
-            header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
-            header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-            header("Access-Control-Allow-Headers: Content-Type, Authorization");
-            header("Access-Control-Allow-Credentials: true");
-        }
+        // if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $allowedOrigins)) {
+        //     header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
+        //     header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        //     header("Access-Control-Allow-Headers: Content-Type, Authorization");
+        //     header("Access-Control-Allow-Credentials: true");
+        // }
 
-        // Handle preflight requests
-        if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-            header("HTTP/1.1 200 OK");
-            exit;
-        }
+        // // Handle preflight requests
+        // if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+        //     header("HTTP/1.1 200 OK");
+        //     exit;
+        // }
         // // Enable CORS
-        // header("Access-Control-Allow-Origin: *");
-        // header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-        // header("Access-Control-Allow-Headers: Content-Type");
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type");
 
     }
     public function getMetaData() {
