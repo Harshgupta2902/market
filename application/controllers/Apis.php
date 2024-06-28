@@ -56,6 +56,7 @@ class Apis extends CI_Controller
             ->set_content_type('application/json')
             ->set_output(json_encode($metaData));
     }
+    
     public function getNav()
     {
         $nav['message'] = "success";
@@ -150,180 +151,112 @@ class Apis extends CI_Controller
         ->set_output(json_encode($data));
     }
 
-    // public function ipoDetails()
-    // {
-    //     $slug = $this->input->get('slug');
-    //     $slug = $this->db->escape_str($slug);
-    //     if (!$slug) {
-    //         $data['message'] = "failed";
-    //         $data['result'] = "No slug exists";
-    
-    //         return $this->output
-    //                 ->set_content_type('application/json')
-    //                 ->set_output(json_encode($data));
-    //     }
-    //     $query = $this->db->query("SELECT * FROM details WHERE slug = ?", array($slug));
-    //     $response = $query->row(); 
-    //     if (!$response) {
-    //         $data['message'] = "failed";
-    //         $data['result'] = "No Result Found";
-    
-    //         return $this->output
-    //                 ->set_content_type('application/json')
-    //                 ->set_output(json_encode($data));
-    //     }
-    //     $tableName = $response->source_table;
-    //     $link = $response->link;
-    //     if ($tableName == "buyback") {
-    //         $joinedData = $this->db->query("SELECT details.slug, details.tables, details.lists, buyback.company_name, buyback.open, buyback.close FROM details JOIN $tableName ON details.link = $tableName.link WHERE details.link = ?", array($link));
-    //         $resultRow = $joinedData->row();
-    //         if ($resultRow) {
-    //             $resultRow->date = $resultRow->open . ' - ' . $resultRow->close;
-    //             unset($resultRow->open, $resultRow->close);
-    //         }
-    //     }
-    //     if ($tableName == "forms") {
-    //         $joinedData = $this->db->query("SELECT details.slug, details.tables, details.lists, forms.company_name, forms.date FROM details JOIN $tableName ON details.link = $tableName.link WHERE details.link = ?", array($link));
-    //         $resultRow = $joinedData->row();
-    //     }
-    //     if ($tableName == "gmp") {
-    //         $joinedData = $this->db->query("SELECT details.slug, details.tables, details.lists, gmp.company_name, gmp.date FROM details JOIN $tableName ON details.link = $tableName.link WHERE details.link = ?", array($link));
-    //         $resultRow = $joinedData->row();
-    //     }
-    //     if ($tableName == "ipos") {
-    //         $joinedData = $this->db->query("SELECT details.slug, details.tables, details.lists, forms.company_name, forms.date FROM details JOIN $tableName ON details.link = $tableName.link WHERE details.link = ?", array($link));
-    //         $resultRow = $joinedData->row();
-    //     }
-    //     if ($tableName == "old_gmp") {
-    //         $joinedData = $this->db->query("SELECT details.slug, details.tables, details.lists, old_gmp.company_name FROM details JOIN $tableName ON details.link = $tableName.link WHERE details.link = ?", array($link));
-    //         $resultRow = $joinedData->row();
-    //     }
-    //     if ($tableName == "recents") {
-    //         $joinedData = $this->db->query("SELECT details.slug, details.tables, details.lists, recents.company_name, recents.open, recents.close FROM details JOIN $tableName ON details.link = $tableName.link WHERE details.link = ?", array($link));
-    //         $resultRow = $joinedData->row();
-    //         if ($resultRow) {
-    //             $resultRow->date = $resultRow->open . ' - ' . $resultRow->close;
-    //             unset($resultRow->open, $resultRow->close, );
-    //         }
-    //     }
-    //     if ($tableName == "sme") {
-    //         $joinedData = $this->db->query("SELECT details.slug, details.tables, details.lists, sme.company_name, sme.date FROM details JOIN $tableName ON details.link = $tableName.link WHERE details.link = ?", array($link));
-    //         $resultRow = $joinedData->row();
-    //     }
-    
-    //     $data['message'] = "success";
-    //     $data['result'] = $resultRow;
-    //     return $this->output
-    //             ->set_content_type('application/json')
-    //             ->set_output(json_encode($data));
-    // }
-
     public function ipoDetails()
-{
-    $slug = $this->input->get('slug');
-    $slug = $this->db->escape_str($slug);
-    if (!$slug) {
-        $data = [
-            'message' => "failed",
-            'result' => "No slug exists"
-        ];
-
-        return $this->output
-            ->set_content_type('application/json')
-            ->set_output(json_encode($data));
-    }
-
-    $query = $this->db->query("SELECT * FROM details WHERE slug = ?", array($slug));
-    $response = $query->row(); 
-
-    if (!$response) {
-        $data = [
-            'message' => "failed",
-            'result' => "No Result Found"
-        ];
-
-        return $this->output
-            ->set_content_type('application/json')
-            ->set_output(json_encode($data));
-    }
-
-    $tableName = $response->source_table;
-    $link = $response->link;
-    $resultRow = null;
-
-    switch ($tableName) {
-        case "buyback":
-            $joinedData = $this->db->query(
-                "SELECT details.slug, details.tables, details.lists, buyback.company_name, buyback.open, buyback.close 
-                 FROM details 
-                 JOIN buyback ON details.link = buyback.link 
-                 WHERE details.link = ?", 
-                array($link)
-            );
-            $resultRow = $joinedData->row();
-            if ($resultRow) {
-                $resultRow->date = $resultRow->open . ' - ' . $resultRow->close;
-                unset($resultRow->open, $resultRow->close);
-            }
-            break;
-
-        case "forms":
-        case "gmp":
-        case "ipos":
-        case "old_gmp":
-        case "sme":
-            $joinedData = $this->db->query(
-                "SELECT details.slug, details.tables, details.lists, $tableName.company_name, $tableName.date 
-                 FROM details 
-                 JOIN $tableName ON details.link = $tableName.link 
-                 WHERE details.link = ?", 
-                array($link)
-            );
-            $resultRow = $joinedData->row();
-            break;
-
-        case "recents":
-            $joinedData = $this->db->query(
-                "SELECT details.slug, details.tables, details.lists, recents.company_name, recents.open, recents.close 
-                 FROM details 
-                 JOIN recents ON details.link = recents.link 
-                 WHERE details.link = ?", 
-                array($link)
-            );
-            $resultRow = $joinedData->row();
-            if ($resultRow) {
-                $resultRow->date = $resultRow->open . ' - ' . $resultRow->close;
-                unset($resultRow->open, $resultRow->close);
-            }
-            break;
-
-        default:
+    {
+        $slug = $this->input->get('slug');
+        $slug = $this->db->escape_str($slug);
+        if (!$slug) {
             $data = [
                 'message' => "failed",
-                'result' => "Invalid table name"
+                'result' => "No slug exists"
             ];
 
             return $this->output
                 ->set_content_type('application/json')
                 ->set_output(json_encode($data));
-    }
+        }
 
-    if ($resultRow) {
-        $data = [
-            'message' => "success",
-            'result' => $resultRow
-        ];
-    } else {
-        $data = [
-            'message' => "failed",
-            'result' => "No Result Found"
-        ];
-    }
+        $query = $this->db->query("SELECT * FROM details WHERE slug = ?", array($slug));
+        $response = $query->row(); 
 
-    return $this->output
-        ->set_content_type('application/json')
-        ->set_output(json_encode($data));
-}
+        if (!$response) {
+            $data = [
+                'message' => "failed",
+                'result' => "No Result Found"
+            ];
+
+            return $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode($data));
+        }
+
+        $tableName = $response->source_table;
+        $link = $response->link;
+        $resultRow = null;
+
+        switch ($tableName) {
+            case "buyback":
+                $joinedData = $this->db->query(
+                    "SELECT details.slug, details.tables, details.lists, buyback.company_name, buyback.open, buyback.close 
+                    FROM details 
+                    JOIN buyback ON details.link = buyback.link 
+                    WHERE details.link = ?", 
+                    array($link)
+                );
+                $resultRow = $joinedData->row();
+                if ($resultRow) {
+                    $resultRow->date = $resultRow->open . ' - ' . $resultRow->close;
+                    unset($resultRow->open, $resultRow->close);
+                }
+                break;
+
+            case "forms":
+            case "gmp":
+            case "ipos":
+            case "old_gmp":
+            case "sme":
+                $joinedData = $this->db->query(
+                    "SELECT details.slug, details.tables, details.lists, $tableName.company_name, $tableName.date 
+                    FROM details 
+                    JOIN $tableName ON details.link = $tableName.link 
+                    WHERE details.link = ?", 
+                    array($link)
+                );
+                $resultRow = $joinedData->row();
+                break;
+
+            case "recents":
+                $joinedData = $this->db->query(
+                    "SELECT details.slug, details.tables, details.lists, recents.company_name, recents.open, recents.close 
+                    FROM details 
+                    JOIN recents ON details.link = recents.link 
+                    WHERE details.link = ?", 
+                    array($link)
+                );
+                $resultRow = $joinedData->row();
+                if ($resultRow) {
+                    $resultRow->date = $resultRow->open . ' - ' . $resultRow->close;
+                    unset($resultRow->open, $resultRow->close);
+                }
+                break;
+
+            default:
+                $data = [
+                    'message' => "failed",
+                    'result' => "Invalid table name"
+                ];
+
+                return $this->output
+                    ->set_content_type('application/json')
+                    ->set_output(json_encode($data));
+        }
+
+        if ($resultRow) {
+            $data = [
+                'message' => "success",
+                'result' => $resultRow
+            ];
+        } else {
+            $data = [
+                'message' => "failed",
+                'result' => "No Result Found"
+            ];
+        }
+
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($data));
+    }
 
 
     public function getBlogs() {
@@ -424,6 +357,29 @@ class Apis extends CI_Controller
         $this->output
         ->set_content_type('application/json')
         ->set_output(json_encode($data));
+    }
+
+    public function checkPan(){
+        $pan = $this->input->get('pan');
+        $url = "https://blog.mysiponline.com/pan.php?pan=". $pan;
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        if ($response === FALSE) {
+            $error = curl_error($ch);
+            curl_close($ch);
+            $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode(array('error' => $error)));
+            return;
+        }
+        curl_close($ch);
+        $data = json_decode($response, true);
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($data));
+        
     }
     
 }
