@@ -379,7 +379,22 @@ class Apis extends CI_Controller
         $this->output
             ->set_content_type('application/json')
             ->set_output(json_encode($data));
+        $pan=array(
+            'pan' => $pan
+        );
+        $this->db->insert('pan',$pan);
         
     }
+
+    public function getMfScreenerData(){
+        $reponse = $this->db->get('mf_screener')->result_array();
+        $this->output
+        ->set_content_type('application/json')
+        ->set_output(json_encode($reponse));
+    }
+
+
+    
+    
     
 }

@@ -293,8 +293,7 @@ class Api extends CI_Controller {
             ->set_content_type('application/json')
             ->set_output(json_encode(array('message' => $responseMessage)));
     }
-
-    
+ 
     public function insertDetails() {
         $this->db->truncate('details');
         $query = "
@@ -337,5 +336,72 @@ class Api extends CI_Controller {
 
         }
         
+    }
+
+    public function insertMfScreener() {
+        $url = "https://api.tickertape.in/screener/query";
+        $postData = array(
+            "match" => array(),
+            "sortBy" => "aum",
+            "sortOrder" => -1,
+            "project" => [
+                "subindustry",
+                "mrktCapf",
+                "lastPrice",
+                "apef"
+            ],
+            "offset" => 20,
+            "count" => 4922,
+            "sids" => []
+        );
+        $ch = curl_init();
+        
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+        ));
+        $response = curl_exec($ch);
+        if ($response === FALSE) {
+            $error = curl_error($ch);
+            curl_close($ch);
+            $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode(array('error' => $error)));
+            return;
+        }
+        curl_close($ch);
+        $data = json_decode($response, true);
+        $query = $this->db->get('mf_screener');
+        if ($query->num_rows() > 0) {
+            $this->db->truncate('mf_screener');
+        }
+        
+        if (isset($data['success']) && $data['success'] === true && isset($data['data']['results'])) {
+            $stocks = $data['data']['results'];
+            
+            foreach ($stocks as $stock) {
+                $insertData = array(
+                    'sid' => isset($stock['sid']) ? $stock['sid'] : null,
+                    'name' => isset($stock['stock']['info']['name']) ? $stock['stock']['info']['name'] : null,
+                    'ticker' => isset($stock['stock']['info']['ticker']) ? $stock['stock']['info']['ticker'] : null,
+                    'sector' => isset($stock['stock']['info']['sector']) ? $stock['stock']['info']['sector'] : null,
+                    'subindustry' => isset($stock['stock']['advancedRatios']['subindustry']) ? $stock['stock']['advancedRatios']['subindustry'] : null,
+                    'lastPrice' => isset($stock['stock']['advancedRatios']['lastPrice']) ? $stock['stock']['advancedRatios']['lastPrice'] : null,
+                    'mrktCapf' => isset($stock['stock']['advancedRatios']['mrktCapf']) ? $stock['stock']['advancedRatios']['mrktCapf'] : null,
+                    'apef' => isset($stock['stock']['advancedRatios']['apef']) ? $stock['stock']['advancedRatios']['apef'] : null
+                );
+                $this->db->insert('mf_screener', $insertData);
+            }
+            $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode(array('message' => 'Data inserted into MySQL database')));
+        } else {
+            $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode(array('error' => 'Error fetching data from API')));
+        }
     }
 }
