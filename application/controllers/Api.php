@@ -374,10 +374,7 @@ class Api extends CI_Controller {
         }
         curl_close($ch);
         $data = json_decode($response, true);
-        $query = $this->db->get('mf_screener');
-        if ($query->num_rows() > 0) {
-            $this->db->truncate('mf_screener');
-        }
+        $this->db->truncate('mf_screener');
         
         if (isset($data['success']) && $data['success'] === true && isset($data['data']['results'])) {
             $stocks = $data['data']['results'];
