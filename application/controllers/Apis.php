@@ -405,6 +405,7 @@ class Apis extends CI_Controller
             $info = $this->getMfInfo($mf);
             $summary = $this->getMfSummary($mf);
             $fundManager = $this->getMfFundManagers($mf);
+            $invChecklist = $this->getMfInvCheckList($mf);
     
             // Check for errors
             if (isset($info['error']) || isset($summary['error']) || isset($fundManager['error'])) {
@@ -412,12 +413,14 @@ class Apis extends CI_Controller
                     'info' => isset($info['error']) ? $info['error'] : $info,
                     'summary' => isset($summary['error']) ? $summary['error'] : $summary,
                     'fundmanager' => isset($fundManager['error']) ? $fundManager['error'] : $fundManager,
+                    'inv_checkList' => isset($invChecklist['error']) ? $invChecklist['error'] : $invChecklist,
                 );
             } else {
                 $data = array(
                     'info' => $info['data'],
                     'summary' => $summary['data'],
-                    'fundmanager' => $fundManager['data']
+                    'fundmanager' => $fundManager['data'],
+                    'inv_checkList' => $invChecklist['data']
                 );
             }
     
@@ -439,6 +442,10 @@ class Apis extends CI_Controller
         return $this->fetchData("https://api.tickertape.in/mutualfunds/$mf/fundmanagers");
     }
     
+    private function getMfInvCheckList($mf) {
+        return $this->fetchData("https://api.tickertape.in/mutualfunds/$mf/investmentChecklists");
+    }
+
     private function fetchData($url) {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
