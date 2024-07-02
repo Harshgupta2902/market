@@ -447,7 +447,7 @@ class Apis extends CI_Controller
                 );
             } else {
                 $data = array(
-                    'chart' => $chart['data']
+                    'chart' => $chart['data'][0]
                 );
             }
     
