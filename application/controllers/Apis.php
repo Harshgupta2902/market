@@ -429,6 +429,33 @@ class Apis extends CI_Controller
                 ->set_output(json_encode($data));
         }
     }
+
+    public function getMfHomeChart(){
+        $mf = $this->input->get('mf');
+        if (empty($mf)) {
+            $data = null;
+            return $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode($data));
+        } else {
+            $chart = $this->getMfChart($mf);
+    
+            // Check for errors
+            if (isset($chart['error'])) {
+                $data = array(
+                    'chart' => isset($chart['error']) ? $chart['error'] : $chart,
+                );
+            } else {
+                $data = array(
+                    'chart' => $chart['data']
+                );
+            }
+    
+            return $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode($data));
+        }
+    }
     
     private function getMfInfo($mf) {
         return $this->fetchData("https://api.tickertape.in/mutualfunds/$mf/info");
@@ -445,6 +472,11 @@ class Apis extends CI_Controller
     private function getMfInvCheckList($mf) {
         return $this->fetchData("https://api.tickertape.in/mutualfunds/$mf/investmentChecklists");
     }
+
+    private function getMfChart($mf) {
+        return $this->fetchData("https://api.tickertape.in/mutualfunds/$mf/charts/inter?duration=max");
+    }
+
 
     private function fetchData($url) {
         $ch = curl_init();
