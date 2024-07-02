@@ -394,6 +394,70 @@ class Apis extends CI_Controller
     }
 
 
+    public function getMfData() {
+        $mf = $this->input->get('mf');
+        if (empty($mf)) {
+            $data = null;
+            return $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode($data));
+        } else {
+            $info = $this->getMfInfo($mf);
+            $summary = $this->getMfSummary($mf);
+            $fundManager = $this->getMfFundManagers($mf);
+    
+            // Check for errors
+            if (isset($info['error']) || isset($summary['error']) || isset($fundManager['error'])) {
+                $data = array(
+                    'info' => isset($info['error']) ? $info['error'] : $info,
+                    'summary' => isset($summary['error']) ? $summary['error'] : $summary,
+                    'fundmanager' => isset($fundManager['error']) ? $fundManager['error'] : $fundManager,
+                );
+            } else {
+                $data = array(
+                    'info' => $info['data'],
+                    'summary' => $summary['data'],
+                    'fundmanager' => $fundManager['data']
+                );
+            }
+    
+            return $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode($data));
+        }
+    }
+    
+    private function getMfInfo($mf) {
+        return $this->fetchData("https://api.tickertape.in/mutualfunds/$mf/info");
+    }
+    
+    private function getMfSummary($mf) {
+        return $this->fetchData("https://api.tickertape.in/mutualfunds/$mf/summary");
+    }
+    
+    private function getMfFundManagers($mf) {
+        return $this->fetchData("https://api.tickertape.in/mutualfunds/$mf/fundmanagers");
+    }
+    
+    private function fetchData($url) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        if ($response === FALSE) {
+            $error = curl_error($ch);
+            curl_close($ch);
+            return array('error' => $error);
+        }
+        curl_close($ch);
+        $data = json_decode($response, true);
+        return $data;
+    }
+
+
+
+    
+
     
     
     
