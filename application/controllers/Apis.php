@@ -394,7 +394,7 @@ class Apis extends CI_Controller
     }
 
 
-    public function getMfData() {
+    public function getMfHomePage() {
         $mf = $this->input->get('mf');
         if (empty($mf)) {
             $data = null;
