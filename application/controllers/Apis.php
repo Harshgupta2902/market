@@ -393,7 +393,6 @@ class Apis extends CI_Controller
         ->set_output(json_encode($reponse));
     }
 
-
     public function getMfHomePage() {
         $mf = $this->input->get('mf');
         if (empty($mf)) {
