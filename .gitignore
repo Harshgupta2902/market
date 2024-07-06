@@ -2,3 +2,6 @@ node_modules
 package-lock.json
 package.json
 
+application/controllers/serviceAccountKey.json
+
+api/serviceAccountKey.json
