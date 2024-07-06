@@ -28,26 +28,19 @@ router.get("/:isin", async (req, res) => {
 const getNavData = async (isin) => {
   const navData = [];
   try {
-    const snapshot = await db
-      .collection("ISINs")
-      .doc(isin)
-      .collection("NAVs")
-      .get();
+    const docRef = db.collection("ISINs").doc(isin);
+    const doc = await docRef.get();
 
-    snapshot.forEach((doc) => {
-      navData.push({
-        navDate: doc.id,
-        navValue: doc.data().navValue,
-      });
-    });
-
-    console.log("Nav Data fetched successfully for ISIN:", isin);
-    return navData;
+    if (doc.exists) {
+      console.log("Document data:", doc.data());
+      return doc.data();
+    } else {
+      console.log("No such document!");
+    }
   } catch (error) {
     console.error("Error fetching Nav Data:", error);
     throw error;
   }
 };
-
 
 module.exports = router;
