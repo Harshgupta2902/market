@@ -10,6 +10,7 @@ const smeService = require("./sme");
 const subsService = require("./subs");
 const details = require("./details");
 const getNav = require("./getNav");
+const insertNav = require("./insertNav");
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use("/api/sme", smeService);
 app.use("/api/subs", subsService);
 app.use("/api/getDetails", details);
 app.use("/api/getNav", getNav);
+app.use("/api/insertNav", insertNav);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

@@ -373,7 +373,7 @@ class Api extends CI_Controller {
         ->set_content_type('application/json')
         ->set_output(json_encode($data));
         $mutualFunds = $data['data']['result'];
-                $this->db->truncate('mutual_funds');
+        $this->db->truncate('mutual_funds');
         foreach ($mutualFunds as $mutualFund) {
             $data = array(
                 'mfId' => $mutualFund['mfId'],
@@ -387,36 +387,19 @@ class Api extends CI_Controller {
                 'sector' => $mutualFund['sector']
             );
 
-            // Insert data into database
             $this->db->insert('mutual_funds', $data);
         }
-        // $this->db->truncate('mf_screener');
-        
-        // if (isset($data['success']) && $data['success'] === true && isset($data['data']['results'])) {
-        //     $stocks = $data['data']['results'];
-            
-        //     foreach ($stocks as $stock) {
-        //         $insertData = array(
-        //             'sid' => isset($stock['sid']) ? $stock['sid'] : null,
-        //             'name' => isset($stock['stock']['info']['name']) ? $stock['stock']['info']['name'] : null,
-        //             'ticker' => isset($stock['stock']['info']['ticker']) ? $stock['stock']['info']['ticker'] : null,
-        //             'sector' => isset($stock['stock']['info']['sector']) ? $stock['stock']['info']['sector'] : null,
-        //             'subindustry' => isset($stock['stock']['advancedRatios']['subindustry']) ? $stock['stock']['advancedRatios']['subindustry'] : null,
-        //             'lastPrice' => isset($stock['stock']['advancedRatios']['lastPrice']) ? $stock['stock']['advancedRatios']['lastPrice'] : null,
-        //             'mrktCapf' => isset($stock['stock']['advancedRatios']['mrktCapf']) ? $stock['stock']['advancedRatios']['mrktCapf'] : null,
-        //             'apef' => isset($stock['stock']['advancedRatios']['apef']) ? $stock['stock']['advancedRatios']['apef'] : null
-        //         );
-        //         $this->db->insert('mf_screener', $insertData);
-        //     }
-        //     $this->output
-        //         ->set_content_type('application/json')
-        //         ->set_output(json_encode(array('message' => 'Data inserted into MySQL database')));
-        // } else {
-        //     $this->output
-        //         ->set_content_type('application/json')
-        //         ->set_output(json_encode(array('error' => 'Error fetching data from API')));
-        // }
     }
 
-    
+    public function insertNav(){
+        $response = file_get_contents('http://ixorainfotech.in/api/insertNav');
+        print_r($response);
+    }
+
+    public function getisin() {
+        $response = $this->db->query('SELECT isin FROM mutual_funds')->result_array();
+        $this->output
+        ->set_content_type('application/json')
+        ->set_output(json_encode($response));
+    }
 }
