@@ -394,7 +394,7 @@ class Api extends CI_Controller {
     public function insertNav(){
         $response = file_get_contents('http://ixorainfotech.in/api/insertNav');
         print_r($response);
-    }
+    }   
 
     public function getisin() {
         $response = $this->db->query('SELECT isin FROM mutual_funds')->result_array();
@@ -402,4 +402,12 @@ class Api extends CI_Controller {
         ->set_content_type('application/json')
         ->set_output(json_encode($response));
     }
+
+    public function getMfData() {
+        $response = $this->db->select('mfId, isin ,slug, name')->get('mutual_funds')->result_array();
+        $this->output
+        ->set_content_type('application/json')
+        ->set_output(json_encode($response));
+    }
+
 }
