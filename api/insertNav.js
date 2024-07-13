@@ -4,10 +4,6 @@ const admin = require("firebase-admin");
 const axios = require("axios");
 const serviceAccount = require("./serviceAccountKey.json"); // Update this path
 
-// admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount),
-// });
-
 const router = express.Router();
 const db = admin.firestore();
 router.use(express.json());
@@ -54,7 +50,7 @@ const insertData = async (isin, navData) => {
     const docRef = db.collection("ISINs").doc(isin);
     const doc = await docRef.get();
     if (doc.exists) {
-      await docRef.update({ isin: navData }); // Use update instead of delete-insert if needed
+      await docRef.update({ isin: navData });
       console.log(`Existing data for ISIN ${isin} updated`);
     } else {
       await docRef.set({ isin: navData });
@@ -73,7 +69,13 @@ const fetchAndInsertData = async (isin) => {
     );
     const apiData = response.data.g1;
 
-    await insertData(isin, apiData);
+    if (apiData && apiData.error_code && apiData.error_msg) {
+      console.error(`API Error for ISIN ${isin}: ${apiData[0].error_msg}`);
+      return;
+    } else {
+      await insertData(isin, apiData);
+    }
+
     console.log(`API data fetched and inserted for ISIN ${isin}`);
   } catch (error) {
     console.error(`Error fetching or inserting data for ISIN ${isin}:`, error);
