@@ -37,7 +37,7 @@
     <meta name="author" content="<?= htmlspecialchars(base_url()) ?>" />
     <meta name="Copyright" content="Copyright 2024 @ Crypo" />
 
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="noindex, nofollow" />
 
     <link rel="dns-prefetch" href="<?= htmlspecialchars(base_url()) ?>">
 <link rel="dns-prefetch" href="https://www.google.com/">
